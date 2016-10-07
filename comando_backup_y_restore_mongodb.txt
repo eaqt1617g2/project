@@ -1,0 +1,6 @@
+Ejemplo: La DB se llama "project" y contiene varias colecciones
+
+Escribir los comandos en la ruta de "Project" >
+
+Realizar BACKUP: mongodump --db project
+Realizar RESTORE: mongorestore dump
