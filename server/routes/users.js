@@ -1,51 +1,20 @@
+var app = require('express');
+var router = app.Router();
 
+var User = require('../models/user');
 
-app.get('/api/users', function(req, res) {
-    UserModel.find(function(err, users) {
-        if(err) {
-            res.send(err);
-        }
-        res.json(users);
-    });
+router.get('/', function(req, res,next) {
+
+    var users=[{"name":"joan"}, {"name":"pepe"}];
+    res.json(users);
+
 });
 
+router.get('/:id', function(req, res,next) {
 
-app.post('/api/users', function(req, res) {
-    UserModel.create({
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        alumno_id: req.body.alumno_id,
-        email: req.body.email,        
-        done: false
-    }, function(err, user){
-        if(err) {
-            res.send(err);
-        }
+    var users=[{"name":"XXXX"}];
+    res.json(users);
 
-        UserModel.find(function(err, users) {
-            if(err){
-                res.send(err);
-            }
-            res.json(users);
-        });
-    });
 });
 
-
-app.delete('/api/users/:user', function(req, res) {
-    UserModel.remove({
-        _id: req.params.user
-    }, function(err, user) {
-        if(err){
-            res.send(err);
-        }
-
-        UserModel.find(function(err, users) {
-            if(err){
-                res.send(err);
-            }
-            res.json(users);
-        });
-
-    })
-});
+module.exports = router;
