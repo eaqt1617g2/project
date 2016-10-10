@@ -27,7 +27,7 @@ router.get('/:id', function(req, res,next) {
 
 router.put('/api/users/:user', function(req, res) {
     User.update({
-        id: req.params.user
+        id: req.params.user,
         //loginid: req.body.loginid
         password: req.body.password,
         name: req.body.name,
@@ -52,8 +52,8 @@ router.put('/api/users/:user', function(req, res) {
 
 router.post('/api/users', function(req, res) {
     User.create({
-        id: req.body.id
-        loginid: req.body.loginid
+        id: req.body.id,
+        loginid: req.body.loginid,
         password: req.body.password,
         name: req.body.name,
         last_name: req.body.last_name,
