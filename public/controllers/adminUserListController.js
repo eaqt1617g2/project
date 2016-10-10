@@ -45,6 +45,42 @@ adminApp.controller("adminUserListController", function($scope, $http) {
                 console.log('Error:' + data);
             });
     };
+
+
+
+
+
+
+
+    $scope.formVisibility=false;
+    $scope.ShowForm=function(){
+        $scope.formVisibility=true;
+        console.log($scope.formVisibility)
+    }
+
+
+    $scope.changeUser = function(user){
+        $scope.formVisibility=false;
+        console.log($scope.formVisibility)
+        $http.put('http://localhost:2709/api/users'+ user._id, user)
+            .success(function(data) {
+                user = {};
+                $scope.users = data;
+            })
+            .error(function(data) {
+            });
+    };
+
+
+    $scope.getUser = function(id) {
+        $http.get('http://localhost:2709/api/users' + id)
+            .success(function(data) {
+                $scope.user = data;
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
     
 
 });
