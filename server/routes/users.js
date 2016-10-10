@@ -5,8 +5,15 @@ var User = require('../models/user');
 
 router.get('/', function(req, res,next) {
 
-    var users=[{"name":"joan"}, {"name":"pepe"}];
-    res.json(users);
+  //  var users=[{"name":"joan"}, {"name":"pepe"}];
+   // res.json(users);
+
+    User.find(function(err, todos) {
+        if(err) {
+            res.send(err);
+        }
+        res.json(todos);
+    });
 
 });
 
