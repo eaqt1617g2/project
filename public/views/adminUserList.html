@@ -18,24 +18,22 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>E-Mail</th>
-                            <th>Fecha de registro</th>
-                            <th>Última conexión</th>
+                            <th>Loginid</th>
+                            <th>Name</th>
+                            <th>Lasname</th>
+                            <th>E-mail</th>
+                            <th>Creation date</th>
+                            <th>Last login date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="user in users">
-                            <td>1</td>
+                            <td>{{user.loginid}}</td>
                             <td>{{user.name}}</td>
-                            <td>Carlos</td>
-                            <td>Santiago Roldán</td>
-                            <td class="center">{{user.email}}</td>
-                            <td class="center">02/10/2016</td>
-                            <td class="center">02/10/2016</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.creation_date}}</td>
+                            <td>{{user.last_login_date}}</td>                            
                         </tr>                                       
                     </tbody>
                 </table>
