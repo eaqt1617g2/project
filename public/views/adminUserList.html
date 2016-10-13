@@ -36,7 +36,7 @@
                             <td>{{user.email}}</td>
                             <td>{{user.creation_date}}</td>
                             <td>{{user.last_login_date}}</td> 
-                            <td><button type="button" class="btn btn-warning" ng-click = "ShowForm(); getUser(user._id)" ng-hide="formVisibility" >Editar</button></td>
+                            <td><button type="button" class="btn btn-warning" ng-click = "getUser(user._id)" ng-hide="formVisibility" >Editar</button></td>
 
 
                             <form ng-show="formVisibility" class="simple-form">
@@ -65,7 +65,7 @@
                                     <input type="text" class="form-control" id="user-email" placeholder="Dirección de correo electrónico" ng-model="user.email">
                                 </div>
 
-                                <input type="submit" ng-click="changeUser(userx)" value="Modificar usuario" class="btn btn-warning">
+                                <input type="submit" ng-click="changeUser(user)" value="Modificar usuario" class="btn btn-warning">
                             </form>
 
                         </tr>                                       

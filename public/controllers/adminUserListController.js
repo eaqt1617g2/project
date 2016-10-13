@@ -9,6 +9,11 @@ adminApp.controller("adminUserListController", function($scope, $http) {
         {name:'Jordi',email:'jordi@gmail.com'}
     ];
     */
+    $scope.formVisibility=false;
+    /*$scope.ShowForm=function(){
+        $scope.formVisibility=true;
+        console.log($scope.formVisibility)
+    }*/
 
     
     $http.get('http://localhost:2709/users')
@@ -49,16 +54,6 @@ adminApp.controller("adminUserListController", function($scope, $http) {
 
 
 
-
-
-
-    $scope.formVisibility=false;
-    $scope.ShowForm=function(){
-        $scope.formVisibility=true;
-        console.log($scope.formVisibility)
-    }
-
-
     $scope.changeUser = function(user){
         $scope.formVisibility=false;
         console.log($scope.formVisibility)
@@ -73,6 +68,7 @@ adminApp.controller("adminUserListController", function($scope, $http) {
 
 
     $scope.getUser = function(id) {
+        $scope.formVisibility=true;
         $http.get('http://localhost:2709/api/users' + id)
             .success(function(data) {
                 $scope.user = data;
