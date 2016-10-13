@@ -9,8 +9,8 @@ adminApp.controller("adminUserListController", function($scope, $http) {
         {name:'Jordi',email:'jordi@gmail.com'}
     ];
     */
-    $scope.formVisibility=false;
-    /*$scope.ShowForm=function(){
+    /* $scope.formVisibility=false;
+    $scope.ShowForm=function(){
         $scope.formVisibility=true;
         console.log($scope.formVisibility)
     }*/
@@ -32,7 +32,6 @@ adminApp.controller("adminUserListController", function($scope, $http) {
             .success(function(data) {
                 user = {};
                 $scope.users = data;
-
             })
             .error(function(data) {
 

@@ -7,7 +7,15 @@ adminApp.config(function($routeProvider) {
         controller: "adminUserListController"
     })
     .when("/items", {
-        templateUrl : "/views/adminItemList.html"        
+        templateUrl : "/views/adminItemList.html"
+    })
+    .when("/create", {
+        templateUrl:  "/views/adminCreateUser.html",
+        controller: "adminUserListController"
+    })
+    .when("/modify", {
+        templateUrl:  "/views/adminModifyUser.html",
+        controller: "adminUserListController"
     });
     
 }); 

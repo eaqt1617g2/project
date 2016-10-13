@@ -25,9 +25,9 @@ router.get('/:id', function(req, res,next) {
 });
 
 
-router.put('/api/users/:user', function(req, res) {
+router.put('/api/users/:id', function(req, res) {
     User.update({
-        id: req.params.user,
+        _id: req.params.user,
         //loginid: req.body.loginid
         password: req.body.password,
         name: req.body.name,
@@ -50,9 +50,27 @@ router.put('/api/users/:user', function(req, res) {
 });
 
 
+router.delete('/api/users/:user', function(req, res) {
+    User.remove({
+        email: req.params.user
+    }, function(err, user) {
+        if(err){
+            res.send(err);
+        }
+
+        User.find(function(err, users) {
+            if(err){
+                res.send(err);
+            }
+            res.json(users);
+        });
+
+    })
+});
+
+
 router.post('/api/users', function(req, res) {
     User.create({
-        id: req.body.id,
         loginid: req.body.loginid,
         password: req.body.password,
         name: req.body.name,

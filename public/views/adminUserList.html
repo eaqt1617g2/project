@@ -2,8 +2,9 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Usuarios</h1>
-    </div>
+        <button href="#/create" type="button" onclick = "location='admin#/create'" class="btn btn-success"  style="float: right;">Crear Usuario</button>
+        <h1 class="page-header">Usuarios</h1></div>
+
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
@@ -36,37 +37,7 @@
                             <td>{{user.email}}</td>
                             <td>{{user.creation_date}}</td>
                             <td>{{user.last_login_date}}</td> 
-                            <td><button type="button" class="btn btn-warning" ng-click = "getUser(user._id)" ng-hide="formVisibility" >Editar</button></td>
-
-
-                            <form ng-show="formVisibility" class="simple-form">
-                                <div class="form-group">
-                                    <label for="user-id">ID</label>
-                                    <input type="text" class="form-control" id="user-id" placeholder="Identificador" ng-model="user._id"disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="user-loginid">Loginid</label>
-                                    <input type="text" class="form-control" id="user-loginid" placeholder="Usuario" ng-model="user.loginid"disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="user-password">Password</label>
-                                    <input type="password" class="form-control" id="user-password" placeholder="Contraseña" ng-model="user.password">
-                                </div>
-                                <div class="form-group">
-                                    <label for="user-name">Nombre</label>
-                                    <input type="text" class="form-control" id="user-name" placeholder="Nombre" ng-model="user.name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="user-last_name">Apellido</label>
-                                    <input type="text" class="form-control" id="user-last_name" placeholder="Apellido" ng-model="user.last_name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="user-email">Email</label>
-                                    <input type="text" class="form-control" id="user-email" placeholder="Dirección de correo electrónico" ng-model="user.email">
-                                </div>
-
-                                <input type="submit" ng-click="changeUser(user)" value="Modificar usuario" class="btn btn-warning">
-                            </form>
+                            <td><button type="button" class="btn btn-warning" ng-click = "getUser(user._id)" onclick = "location='admin#/modify'">Editar</button><button type="button" class="btn btn-danger" ng-click="deleteUser(user._id)">Borrar</button></td>
 
                         </tr>                                       
                     </tbody>
