@@ -44,7 +44,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">
                     <i class="fa fa-gear fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
+                </a>  
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href=""><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
@@ -55,12 +55,14 @@
         </ul>
         <!-- /.navbar-top-links -->
 
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    
+        <div class="sidebar" role="navigation">
+            <div class="">
+                <ul class="nav">                    
                     <li>
-                        <a href="#/"><i class="fa fa-user fa-fw"></i> Usuarios</a>
+                        <a href="#/"><i class="fa fa-user fa-fw"></i> Usuarios</a>                       
+                    </li>
+                    <li>
+                        <a href="#/create"><i class="fa fa-plus fa-fw"></i> Crear usuario</a>
                     </li>
                     <li>
                         <a href="#/items"><i class="fa fa-files-o fa-fw"></i> Entradas</a>
@@ -83,6 +85,8 @@
     <!--AngularJs -->
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
+
+    <script src="../bower_components/bootstrap.native/dist/bootstrap-native.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../assets/js/sb-admin-2.js"></script>
