@@ -13,7 +13,7 @@ adminApp.config(function($routeProvider) {
         templateUrl:  "/views/adminCreateUser.html",
         controller: "adminUserController"
     })
-    .when("/modify", {
+    .when("/modify/:id", {
         templateUrl:  "/views/adminModifyUser.html",
         controller: "adminUserController"
     });

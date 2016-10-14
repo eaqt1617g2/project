@@ -1,4 +1,4 @@
-adminApp.controller("adminUserController", function($scope, $http, $location) {
+adminApp.controller("adminUserController", function($scope, $http, $location, $routeParams) {
     
     /*
     $scope.users = [
@@ -54,28 +54,32 @@ adminApp.controller("adminUserController", function($scope, $http, $location) {
 
 
 
-    $scope.changeUser = function(user){
-        $scope.formVisibility=false;
-        console.log($scope.formVisibility)
+    $scope.changeUser = function(user){       
+        
         $http.put('http://localhost:2709/users/'+ user._id, user)
             .success(function(data) {
-                user = {};
-                $scope.users = data;
+                user = {}; 
+                $location.path("/");               
             })
             .error(function(data) {
             });
     };
 
 
-    $scope.getUser = function(id) {
-        $scope.formVisibility=true;
-        $http.get('http://localhost:2709/users/' + id)
-            .success(function(data) {
-                $scope.user = data;
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
+    $scope.getUser = function() {
+        console.log("GET USER");
+        console.log("USER: ", $routeParams.id);
+        
+        $http.get('http://localhost:2709/users/'+$routeParams.id)
+        .success(function(data) {
+            $scope.user = data;
+            console.log("get user ok ", $scope.user);
+
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+        
     };
     
 

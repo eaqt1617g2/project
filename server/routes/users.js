@@ -19,8 +19,13 @@ router.get('/', function(req, res,next) {
 
 router.get('/:id', function(req, res,next) {
 
-    var users=[{"name":"XXXX"}];
-    res.json(users);
+    User.findOne(function(err, user) {
+        _id: req.params.id
+        if(err) {
+            res.send(err);
+        }
+        res.json(user);
+    });
 
 });
 

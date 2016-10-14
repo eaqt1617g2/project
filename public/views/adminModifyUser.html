@@ -7,35 +7,35 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div class="row">
+<div class="row" ng-init="getUser()">
     <div class="col-lg-12">
-        <form class="simple-form">
+        <form class="simple-form" ng-submit="changeUser(user)">
             <div class="form-group">
                 <label for="user-id">ID</label>
-                <input type="text" class="form-control" id="user-id" placeholder="Identificador" ng-model="user._id"disabled>
+                <input type="text" class="form-control" id="user-id" placeholder="{{user._id}}" ng-model="user._id"disabled>
             </div>
             <div class="form-group">
                 <label for="user-loginid">Loginid</label>
-                <input type="text" class="form-control" id="user-loginid" placeholder="Usuario" ng-model="user.loginid"disabled>
+                <input type="text" class="form-control" id="user-loginid" placeholder="{{user.loginid}}" ng-model="user.loginid"disabled>
             </div>
             <div class="form-group">
                 <label for="user-password">Password</label>
-                <input type="password" class="form-control" id="user-password" placeholder="Contraseña" ng-model="user.password">
+                <input type="password" class="form-control" id="user-password" placeholder="{{user.password}}" ng-model="user.password">
             </div>
             <div class="form-group">
                 <label for="user-name">Nombre</label>
-                <input type="text" class="form-control" id="user-name" placeholder="Nombre" ng-model="user.name">
+                <input type="text" class="form-control" id="user-name" placeholder="{{user.name}}" ng-model="user.name">
             </div>
             <div class="form-group">
                 <label for="user-last_name">Apellido</label>
-                <input type="text" class="form-control" id="user-last_name" placeholder="Apellido" ng-model="user.last_name">
+                <input type="text" class="form-control" id="user-last_name" placeholder="{{user.lastname}}" ng-model="user.last_name">
             </div>
             <div class="form-group">
                 <label for="user-email">Email</label>
-                <input type="text" class="form-control" id="user-email" placeholder="Dirección de correo electrónico" ng-model="user.email">
+                <input type="text" class="form-control" id="user-email" placeholder="{{user.email}}" ng-model="user.email">
             </div>
 
-            <input type="submit" ng-click="changeUser(user)" onclick = "location='admin#/'" value="Modificar usuario" class="btn btn-warning">
+            <input type="submit" value="Modificar usuario" class="btn btn-warning">
         </form>
 
     </div>
