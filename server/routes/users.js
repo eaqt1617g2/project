@@ -50,9 +50,9 @@ router.put('/api/users/:id', function(req, res) {
 });
 
 
-router.delete('/api/users/:user', function(req, res) {
+router.delete('/:id', function(req, res) {
     User.remove({
-        email: req.params.user
+        _id: req.params.id
     }, function(err, user) {
         if(err){
             res.send(err);
