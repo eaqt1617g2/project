@@ -28,7 +28,7 @@ adminApp.controller("adminUserListController", function($scope, $http) {
 
    
     $scope.createUser = function(user){
-        $http.post('http://localhost:2709/api/users', user)
+        $http.post('http://localhost:2709/users', user)
             .success(function(data) {
                 user = {};
                 $scope.users = data;
@@ -40,7 +40,7 @@ adminApp.controller("adminUserListController", function($scope, $http) {
 
     
     $scope.deleteUser = function(id) {
-        $http.delete('/api/users/' + id)
+        $http.delete('http://localhost:2709/users/' + id)
             .success(function(data) {
                 $scope.users = data;
                 console.log("Entrada borrada");
@@ -56,7 +56,7 @@ adminApp.controller("adminUserListController", function($scope, $http) {
     $scope.changeUser = function(user){
         $scope.formVisibility=false;
         console.log($scope.formVisibility)
-        $http.put('http://localhost:2709/api/users'+ user._id, user)
+        $http.put('http://localhost:2709/users/'+ user._id, user)
             .success(function(data) {
                 user = {};
                 $scope.users = data;
@@ -68,7 +68,7 @@ adminApp.controller("adminUserListController", function($scope, $http) {
 
     $scope.getUser = function(id) {
         $scope.formVisibility=true;
-        $http.get('http://localhost:2709/api/users' + id)
+        $http.get('http://localhost:2709/users/' + id)
             .success(function(data) {
                 $scope.user = data;
             })
