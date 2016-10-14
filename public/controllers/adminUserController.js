@@ -1,4 +1,4 @@
-adminApp.controller("adminUserListController", function($scope, $http) {
+adminApp.controller("adminUserController", function($scope, $http, $location) {
     
     /*
     $scope.users = [
@@ -25,16 +25,17 @@ adminApp.controller("adminUserListController", function($scope, $http) {
             console.log('Error: ' + data);
         });
 
-
    
     $scope.createUser = function(user){
         $http.post('http://localhost:2709/users', user)
             .success(function(data) {
-                user = {};
-                $scope.users = data;
+                $scope.users.push(user);
+                user = {};   
+                console.log("Usuario creado correctamente");
+                $location.path( "/" );             
             })
             .error(function(data) {
-
+                console.log("Error al añadir usuario");
             });
     };
 
