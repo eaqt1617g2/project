@@ -25,9 +25,9 @@ router.get('/:id', function(req, res,next) {
 });
 
 
-router.put('/api/users/:id', function(req, res) {
+router.put('/:id', function(req, res) {
     User.update({
-        _id: req.params.user,
+        _id: req.params.id,
         //loginid: req.body.loginid
         password: req.body.password,
         name: req.body.name,
@@ -69,7 +69,7 @@ router.delete('/:id', function(req, res) {
 });
 
 
-router.post('/api/users', function(req, res) {
+router.post('/', function(req, res) {
     User.create({
         loginid: req.body.loginid,
         password: req.body.password,
