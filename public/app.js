@@ -1,4 +1,4 @@
-var adminApp = angular.module("adminApp", ["ngRoute"]);
+var adminApp = angular.module("adminApp", ["ngRoute", 'ui.bootstrap']);
 
 adminApp.config(function($routeProvider) {
     $routeProvider

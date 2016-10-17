@@ -1,4 +1,4 @@
-adminApp.controller("adminUserController", function($scope, $http, $location, $routeParams) {
+adminApp.controller("adminUserController", function($scope, $http, $location, $routeParams, $uibModal) {
     
     /*
     $scope.users = [
@@ -81,6 +81,32 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
         });
         
     };
+
+    $scope.openConfirmDeleteUserModal = function(id) {
+        var modalInstance = $uibModal.open({
+            templateUrl: '/views/modals/adminConfirmDeleteUser.html',
+            controller: function($scope, $uibModalInstance) {
+                
+                $scope.close = function()
+                {
+                    $uibModalInstance.dismiss();
+                }
+                $scope.confirm = function()
+                {                    
+                    $uibModalInstance.close();
+                }
+            }
+        });
+
+        modalInstance.result.then(function () {
+                console.log("Modal dismiss - Si");
+                $scope.deleteUser(id);
+            }, function () {
+                console.log("Modal cerrado - No");
+            });
+    };
+
+    
     
 
 });
