@@ -1,5 +1,5 @@
 adminApp.controller("adminUserController", function($scope, $http, $location, $routeParams, $uibModal) {
-    
+    var ipServer = "http://localhost:2709"
     /*
     $scope.users = [
         {name:'Carlos',email:'carlos@gmail.com'},
@@ -16,7 +16,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
     }*/
 
     
-    $http.get('http://localhost:2709/users')
+    $http.get(ipServer+ '/users')
         .success(function(data) {
             $scope.users = data;
 
@@ -27,7 +27,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
 
    
     $scope.createUser = function(user){
-        $http.post('http://localhost:2709/users', user)
+        $http.post(ipServer+ '/users', user)
             .success(function(data) {
                 $scope.users.push(user);
                 user = {};   
@@ -41,7 +41,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
 
     
     $scope.deleteUser = function(id) {
-        $http.delete('http://localhost:2709/users/' + id)
+        $http.delete(ipServer+ '/users/'+ id)
             .success(function(data) {
                 $scope.users = data;
                 console.log("Entrada borrada");
@@ -56,7 +56,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
 
     $scope.changeUser = function(user){       
         
-        $http.put('http://localhost:2709/users/'+ user._id, user)
+        $http.put(ipServer+ '/users/'+ user._id, user)
             .success(function(data) {
                 user = {}; 
                 $location.path("/");               
@@ -70,7 +70,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
         console.log("GET USER");
         console.log("USER: ", $routeParams.id);
         
-        $http.get('http://localhost:2709/users/'+$routeParams.id)
+        $http.get(ipServer+ '/users/'+$routeParams.id)
         .success(function(data) {
             $scope.user = data;
             console.log("get user ok ", $scope.user);
@@ -98,12 +98,13 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
             }
         });
 
-        modalInstance.result.then(function () {
+        modalInstance.result.then(
+            function () {
                 console.log("Modal dismiss - Si");
                 $scope.deleteUser(id);
             }, function () {
                 console.log("Modal cerrado - No");
-            });
+        });
     };
 
     

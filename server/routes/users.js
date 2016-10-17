@@ -2,11 +2,9 @@ var app = require('express');
 var router = app.Router();
 
 var User = require('../models/user');
+var mongoose = require('mongoose');
 
 router.get('/', function(req, res,next) {
-
-  //  var users=[{"name":"joan"}, {"name":"pepe"}];
-   // res.json(users);
 
     User.find(function(err, todos) {
         if(err) {
@@ -18,9 +16,8 @@ router.get('/', function(req, res,next) {
 });
 
 router.get('/:id', function(req, res,next) {
-
-    User.findOne(function(err, user) {
-        _id: req.params.id
+    var o_id = new mongoose.Types.ObjectId(req.params.id);
+    User.findOne({_id: o_id}, function(err, user) {        
         if(err) {
             res.send(err);
         }
@@ -31,16 +28,18 @@ router.get('/:id', function(req, res,next) {
 
 
 router.put('/:id', function(req, res) {
-    User.update({
-        _id: req.params.id,
-        //loginid: req.body.loginid
-        password: req.body.password,
-        name: req.body.name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-
-        done: false
-    }, function(err, user){
+    var o_id = new mongoose.Types.ObjectId(req.params.id);
+    User.update(
+        {
+            _id: o_id 
+        },
+        {            
+            password: req.body.password,
+            name: req.body.name,
+            last_name: req.body.last_name,
+            email: req.body.email
+        },        
+    function(err, user){
         if(err) {
             res.send(err);
         }
@@ -56,8 +55,9 @@ router.put('/:id', function(req, res) {
 
 
 router.delete('/:id', function(req, res) {
+    var o_id = new mongoose.Types.ObjectId(req.params.id);
     User.remove({
-        _id: req.params.id
+        _id: o_id
     }, function(err, user) {
         if(err){
             res.send(err);
@@ -74,26 +74,27 @@ router.delete('/:id', function(req, res) {
 });
 
 
-router.post('/', function(req, res) {
+router.post('/', function(req, res) { 
+    
     User.create({
         loginid: req.body.loginid,
         password: req.body.password,
         name: req.body.name,
         last_name: req.body.last_name,
-        email: req.body.email,
-        done: false
+        email: req.body.email       
     }, function(err, user){
         if(err) {
-            res.send(err);
+            res.send(err);            
         }
 
         User.find(function(err, users) {
             if(err){
                 res.send(err);
-            }
+            }            
             res.json(users);
         });
     });
+    
 });
 
 module.exports = router;
