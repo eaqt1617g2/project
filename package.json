@@ -21,5 +21,9 @@
     "cors": "^2.8.1",
     "mongoose": "^4.6.1",
     "express": "~4.14.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-ssh": "~0.12.9"
   }
 }

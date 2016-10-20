@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "0.10.25"
+install:
+    - npm install -g bower
+    - npm install -g grunt
+    - npm install
+after_success:
+  if [ "$TRAVIS_BRANCH" == "production" ] ; then
+    if [ "x$DEPLOY_HOST$DEPLOY_PATH$DEPLOY_USER$DEPLOY_PASSWORD" != "x" ] ; then
+      grunt deploy;
+    else
+      echo "Deployment missing environment variables $DEPLOY_(HOST,PATH,USERNAME,PASSWORD)." ;
+    fi
+  else
+    echo "Deployment omitted.";
+  fi
