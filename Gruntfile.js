@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         command: "cd "+projectFolderName+" && bower install"
       },
       start: {
-        command: "cd "+projectFolderName+"/server && node server.js"
+        command: "cd "+projectFolderName+"/server && forever stopall && forever start server.js"
       }
     }   
 
