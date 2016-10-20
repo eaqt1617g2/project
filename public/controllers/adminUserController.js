@@ -1,22 +1,10 @@
-adminApp.controller("adminUserController", function($scope, $http, $location, $routeParams, $uibModal) {
-    var ipServer = "http://localhost:2709"
-    /*
-    $scope.users = [
-        {name:'Carlos',email:'carlos@gmail.com'},
-        {name:'Pepe',email:'pepe@gmail.com'},
-        {name:'Juan',email:'juan@gmail.com'},
-        {name:'Ana',email:'ana@gmail.com'},
-        {name:'Jordi',email:'jordi@gmail.com'}
-    ];
-    */
-    /* $scope.formVisibility=false;
-    $scope.ShowForm=function(){
-        $scope.formVisibility=true;
-        console.log($scope.formVisibility)
-    }*/
+adminApp.controller("adminUserController", function(SERVER_INFO, $scope, $http, $location, $routeParams, $uibModal) {
+    
+    var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
+    console.log("Server: "+serverAddr);
 
     
-    $http.get(ipServer+ '/users')
+    $http.get(serverAddr+ '/users')
         .success(function(data) {
             $scope.users = data;
 
@@ -27,7 +15,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
 
    
     $scope.createUser = function(user){
-        $http.post(ipServer+ '/users', user)
+        $http.post(serverAddr+ '/users', user)
             .success(function(data) {
                 $scope.users.push(user);
                 user = {};   
@@ -41,7 +29,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
 
     
     $scope.deleteUser = function(id) {
-        $http.delete(ipServer+ '/users/'+ id)
+        $http.delete(serverAddr+ '/users/'+ id)
             .success(function(data) {
                 $scope.users = data;
                 console.log("Entrada borrada");
@@ -51,12 +39,9 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
             });
     };
 
-
-
-
     $scope.changeUser = function(user){       
         
-        $http.put(ipServer+ '/users/'+ user._id, user)
+        $http.put(serverAddr+ '/users/'+ user._id, user)
             .success(function(data) {
                 user = {}; 
                 $location.path("/");               
@@ -65,12 +50,11 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
             });
     };
 
-
     $scope.getUser = function() {
         console.log("GET USER");
         console.log("USER: ", $routeParams.id);
         
-        $http.get(ipServer+ '/users/'+$routeParams.id)
+        $http.get(serverAddr+ '/users/'+$routeParams.id)
         .success(function(data) {
             $scope.user = data;
             console.log("get user ok ", $scope.user);
@@ -105,9 +89,7 @@ adminApp.controller("adminUserController", function($scope, $http, $location, $r
             }, function () {
                 console.log("Modal cerrado - No");
         });
-    };
-
-    
+    };  
     
 
 });
