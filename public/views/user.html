@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../assets/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body ng-app="userApp" ng-controller="homeController">
+
+<!-- ****HEADER*** -->
+<div id="header">
+    <nav class="navbar navbar-default" role=navigation>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="user#/">
+                    <img class="site-logo" src="../assets/imgs/logoShopping.png">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-main-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-clock-o"></i> Last Minute</a></li>
+                    <li><a href="#"><i class="fa fa-globe"></i> Discover</a></li>
+                    <li><a href="#"><i class="fa fa-users"></i> Friends</a></li>
+                    <!--<li>
+                        <a href="">
+                            <i class="fa fa-gear fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                    </li>-->
+                    <li class="dropdown">
+                        <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear fa-fw"></i> <i class="fa fa-caret-down"></i> </a>
+                        <ul class="dropdown-menu">
+                            <li><a ng-href="user#/loginRegister">Login/Register</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ng-click="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- ****END HEADER*** -->
+<ng-view></ng-view>
+
+
+<!--AngularJs -->
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="../bower_components/angular-route/angular-route.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+<!--Falta migrar a directivas angular-bootstrap -->
+<!--<script src="../bower_components/bootstrap.native/dist/bootstrap-native.min.js"></script>-->
+<script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<script src="../app2.js"></script>
+<script src="../config.js"></script>
+<script src="../controllers/UserController.js"></script>
+<script>
+    $(function() {
+        $(document).on('click', '#login-form-link', function(e) {
+            $("#login-form").delay(100).fadeIn(100);
+            $("#register-form").fadeOut(100);
+            $('#register-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+        $(document).on('click', '#register-form-link', function(e) {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+    });
+    $(document).ready(function(){
+        var h = $("#header").height();
+        var t = $(document).height();
+        var lr = $("#loginregister").height();
+        var c = ((t-h)-lr)/2;
+        console.log(c);
+        $("#loginregister").css("padding-top", c);
+    });
+    $(document).resize(function() {
+        var h = $("#header").height();
+        var t = $(document).height();
+        var lr = $("#loginregister").height();
+        var c = ((t-h)-lr)/2;
+        console.log(c);
+        $("#loginregister").css("padding-top", c);
+    });
+</script>
+</body>
+
+</html>
