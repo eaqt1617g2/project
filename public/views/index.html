@@ -18,10 +18,10 @@
 
     
   </head>
-  <body>
+  <body ng-app="mainApp">
 <!-- ****HEADER*** -->
     <div id="header">
-      <nav class="navbar navbar-default" role=navigation>
+      <nav id="main-navbar" class="navbar navbar-default" role=navigation>
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">
@@ -44,8 +44,10 @@
       </nav>
     </div>
 <!-- ****END HEADER*** -->
-    <div id="content-wrapper">
-      <div id="main-content" class="container">
+
+
+      <ng-view></ng-view>
+      <!--<div id="main-content" class="container">
         <div class="row">
           <div class="col-md-3">
             <div id="profile-preview">
@@ -68,15 +70,25 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div>
-    </div>
+
 
     <div id="footer">
 
     </div>
 
-    
+    <!--AngularJs -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+
+    <!--Falta migrar a directivas angular-bootstrap -->
+    <!--<script src="../bower_components/bootstrap.native/dist/bootstrap-native.min.js"></script>-->
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="../mainApp.js"></script>
+    <script src="../config.js"></script>
   </body>
 </html>
