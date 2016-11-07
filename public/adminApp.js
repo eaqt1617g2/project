@@ -3,18 +3,18 @@ var adminApp = angular.module("adminApp", ["ngRoute", 'ui.bootstrap', 'app.confi
 adminApp.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl : "/views/adminUserList.html",
+        templateUrl : "/views/admin/adminUserList.html",
         controller: "adminUserController"
     })
     .when("/items", {
-        templateUrl : "/views/adminItemList.html"
+        templateUrl : "/views/admin/adminItemList.html"
     })
     .when("/create", {
-        templateUrl:  "/views/adminCreateUser.html",
+        templateUrl:  "/views/admin/adminCreateUser.html",
         controller: "adminUserController"
     })
     .when("/modify/:id", {
-        templateUrl:  "/views/adminModifyUser.html",
+        templateUrl:  "/views/admin/adminModifyUser.html",
         controller: "adminUserController"
     });
     

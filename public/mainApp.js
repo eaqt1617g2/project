@@ -1,11 +1,13 @@
-var userApp = angular.module("mainApp", ["ngRoute", 'ui.bootstrap', 'app.config']);
+var mainApp = angular.module("mainApp", ["ngRoute", 'ui.bootstrap', 'app.config']);
 
-userApp.config(function($routeProvider) {
+mainApp.config(function($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl : "/views/homeScreen.html"
+            templateUrl : "/views/homeScreen.html",
+            controller: "homeScreenCtrl"
         }).when("/user", {
-            templateUrl : "/views/userProfile.html"
+            templateUrl : "/views/userProfile.html",
+            controller: "userProfileCtrl"
     });
     
 }); 

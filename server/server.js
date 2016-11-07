@@ -18,8 +18,8 @@ mongoose.connect('mongodb://localhost/project');
 
 app.use(express.static('../public'));
 app.use('/', express.static('../public/views'));
-app.use('/admin', express.static('../public/views/admin/admin.html'));
 app.use('/login', express.static('../public/views/loginRegister.html'));
+app.use('/adminPanel', express.static('../public/views/admin/admin.html'));
 
 
 // Escucha en el puerto 2709 y corre el server

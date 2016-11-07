@@ -4,23 +4,23 @@
             <div class="col-md-3">
                 <div id="profile-preview" class="module">
                     <div id="profile-pre-header">
-                        <a href="#"><img src="../assets/imgs/profileTestPic3.png"></a>
-                        <h3>Scarlet Johanson</h3>
-                        <h4>@Scarlett88</h4>
+                        <a href="#"><img src={{user.profile_pic_url}}></a>
+                        <h3>{{user.name}} {{user.last_name}}</h3>
+                        <h4>{{user.loginid}}</h4>
                     </div>
                     <div  id="profile-pre-stats">
                         <div class="row">
                             <div class="col-md-4">
                                 <h5>ARTÍCULOS</h5>
-                                <h6>10</h6>
+                                <h6>{{user.items}}</h6>
                             </div>
                             <div class="col-md-4">
                                 <h5>SEGUIDORES</h5>
-                                <h6>10</h6>
+                                <h6>{{user.followers}}</h6>
                             </div>
                             <div class="col-md-4">
                                 <h5>SIGUIENDO</h5>
-                                <h6>10</h6>
+                                <h6>{{user.following}}</h6>
                             </div>
                         </div>
                     </div>
@@ -35,115 +35,19 @@
             <div class="col-md-9">
                 <div id="main-module">
                     <div class="row items-row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" ng-repeat="item in items">
                             <div class="item-wrapper">
                                 <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
+                                    <a href="#"><img class="item-pre-pic" src={{item.pic_url}}></a>
                                 </div>
                                 <div class="item-pre-info">
-                                    <h2>Camisa de invierno en REBAJAS!</h2>
+                                    <h2>{{item.title}}</h2>
                                     <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
+                                        <p><i class="fa fa-heart"></i> {{item.likes}} <i class="fa fa-comments-o"></i> {{item.num_comments}}</p>
                                     </div>
                                 </div>
                                 <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-wrapper">
-                                <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
-                                </div>
-                                <div class="item-pre-info">
-                                    <h2>Pantalones tejanos a mitad de precio</h2>
-                                    <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
-                                    </div>
-                                </div>
-                                <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-wrapper">
-                                <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
-                                </div>
-                                <div class="item-pre-info">
-                                    <h2>Liquidación de ropa de verano</h2>
-                                    <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
-                                    </div>
-                                </div>
-                                <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-wrapper">
-                                <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
-                                </div>
-                                <div class="item-pre-info">
-                                    <h2>Ropa de hombre rabajada</h2>
-                                    <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
-                                    </div>
-                                </div>
-                                <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-wrapper">
-                                <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
-                                </div>
-                                <div class="item-pre-info">
-                                    <h2>Ropa de hombre rabajada</h2>
-                                    <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
-                                    </div>
-                                </div>
-                                <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-wrapper">
-                                <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
-                                </div>
-                                <div class="item-pre-info">
-                                    <h2>Ropa de hombre rabajada</h2>
-                                    <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
-                                    </div>
-                                </div>
-                                <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-wrapper">
-                                <div>
-                                    <a href="#"><img class="item-pre-pic" src="../assets/imgs/placeholder.jpg"></a>
-                                </div>
-                                <div class="item-pre-info">
-                                    <h2>Ropa de hombre rabajada</h2>
-                                    <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> 3 <i class="fa fa-comments-o"></i> 6</p>
-                                    </div>
-                                </div>
-                                <div class="item-pre-footer">
-                                    <h3><a>@Scarlet88</a> - 02/10/2016</h3>
+                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm:ss'}}</h3>
                                 </div>
                             </div>
                         </div>

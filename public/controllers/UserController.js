@@ -1,4 +1,4 @@
-userApp.controller("UserController", function(SERVER_INFO, $scope, $http, $location, $routeParams, $uibModal) {
+mainApp.controller("UserController", function(SERVER_INFO, $scope, $http, $location, $routeParams, $uibModal) {
     $(document).ready(function(){
         var h = $("#header").height();
         var t = $(document).height();
@@ -28,8 +28,4 @@ userApp.controller("UserController", function(SERVER_INFO, $scope, $http, $locat
 
     
 
-}).controller("homeController", function(SERVER_INFO, $scope, $http, $location, $routeParams, $uibModal) {
-    $scope.logout= function () {
-        console.log("logout");
-    }
 });
