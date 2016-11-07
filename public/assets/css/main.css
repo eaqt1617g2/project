@@ -309,10 +309,8 @@ html, body {
 /* items */
 
 .item-wrapper {
-
 	background: #fff;
 	margin-bottom: 20px;
-
 	border: 1px solid #e0e3e9;
 	border-radius: 5px;
 }
@@ -325,6 +323,8 @@ html, body {
 .item-pre-info {
 	margin:0px;
 	padding: 5px 3px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
 }
 
 .item-pre-info h2 {
@@ -333,6 +333,9 @@ html, body {
 	font-size: 20px;
 	/* color: #00b3ee; */
 	color: #353a3d;
+	height: 45px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .user-info-list {

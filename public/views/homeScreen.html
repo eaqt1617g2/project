@@ -4,7 +4,7 @@
             <div class="col-md-3">
                 <div id="profile-preview" class="module">
                     <div id="profile-pre-header">
-                        <a href="#"><img src={{user.profile_pic_url}}></a>
+                        <a href="#/user"><img src={{user.profile_pic_url}}></a>
                         <h3>{{user.name}} {{user.last_name}}</h3>
                         <h4>{{user.loginid}}</h4>
                     </div>
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="item-pre-footer">
-                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm:ss'}}</h3>
+                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm'}}</h3>
                                 </div>
                             </div>
                         </div>

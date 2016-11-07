@@ -4,7 +4,7 @@
         <!-- Foto + titulo -->
         <div class="row" id="profile-content">
             <div class="col-md-3" id="profile-avatar-wrapper">
-                <a href="#"><img src={{user.profile_pic_url}}></a>
+                <a href="#/user"><img src={{user.profile_pic_url}}></a>
             </div>
             <div class="col-md-9" id="profile-info-wrapper">
                 <div>
@@ -24,9 +24,9 @@
             <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
                 <div class="container">
                     <ul class="nav navbar-nav">
-                        <li class="profile-li-selected"><a href="#"> Artículos<span>{{user.items}}</span></a></li>
-                        <li><a href="#"> Seguidores<span>{{user.followers}}</span></a></li>
-                        <li><a href="#"> Siguiendo<span>{{user.following}}</span></a></li>
+                        <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{user.items}}</span></a></li>
+                        <li><a href="#/user"> Seguidores<span>{{user.followers}}</span></a></li>
+                        <li><a href="#/user"> Siguiendo<span>{{user.following}}</span></a></li>
                     </ul>
                 </div>
             </nav>
@@ -43,8 +43,8 @@
             <div class="col-md-3">
                 <div class="module">
                     <ul class="user-info-list">
-                        <li><i class="fa fa-clock-o"></i> Registrado el {{user.creation_date | date:'dd/MM/yyyy HH:mm:ss'}}</li>
-                        <li><i class="fa fa-sign-in"></i> Último acceso el {{user.last_login_date| date:'dd/MM/yyyy HH:mm:ss'}}</li>
+                        <li><i class="fa fa-clock-o"></i> Registrado el {{user.creation_date | date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-sign-in"></i> Último acceso el {{user.last_login_date| date:'dd/MM/yyyy'}}</li>
                         <li><i class="fa fa-envelope-o"></i> {{user.email}}</li>
                     </ul>
                 </div>
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="item-pre-footer">
-                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm:ss'}}</h3>
+                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm'}}</h3>
                                 </div>
                             </div>
                         </div>
