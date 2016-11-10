@@ -21,6 +21,7 @@
     "font-awesome": "fontawesome#^4.6.3",
     "angular-route": "^1.5.8",
     "bootstrap.native": "^1.0.5",
-    "angular-bootstrap": "^2.2.0"
+    "angular-bootstrap": "^2.2.0",
+    "ionic-native": "^2.0.3"
   }
 }
