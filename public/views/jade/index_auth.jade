@@ -1,0 +1,23 @@
+//
+   Created by Jordi on 12/11/2016.
+
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    if(user)
+        ul
+            li
+                img(src="#{user.photo_user}")
+            li Bienvenido #{user.name}
+            li
+                a(href='logout') Salir
+    else
+        ul
+            li
+                a(href='auth/twitter') Login con Twitter
+            li
+                a(href='auth/facebook') Login con Facebook
+            li
+                a(href='auth/Google') Login con Google
