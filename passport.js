@@ -2,7 +2,7 @@
  * Created by Jordi on 17/10/2016.
  */
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
+var User = mongoose.model('User_auth');
 // Estrategia de autenticación con Twitter
 var TwitterStrategy = require('passport-twitter').Strategy;
 // Estrategia de autenticación con Facebook
@@ -35,7 +35,7 @@ module.exports = function(passport) {
     passport.use(new TwitterStrategy({
         consumerKey		 : config.twitter.key,
         consumerSecret	: config.twitter.secret,
-        callbackURL		 : 'http://147.83.7.157:2709/auth/twitter/callback'
+        callbackURL		 : 'http://localhost:2709/auth/twitter/callback'
     }, function(accessToken, refreshToken, profile, done) {
         // Busca en la base de datos si el usuario ya se autenticó en otro
         // momento y ya está almacenado en ella
@@ -48,8 +48,13 @@ module.exports = function(passport) {
             var user = new User({
                 provider_id	: profile.id,
                 provider		 : profile.provider,
-                name				 : profile.displayName,
-                photo				: profile.photos[0].value
+                name				 : profile.givenName,
+                last_name				 : profile.familyName,
+                loginid				 : profile.username,
+                photo_user				: profile.photos[0].value,
+                email               : profile.emails[0].value
+
+
             });
             //...y lo almacena en la base de datos
             user.save(function(err) {
@@ -63,8 +68,8 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
         clientID			: config.facebook.key,
         clientSecret	: config.facebook.secret,
-        callbackURL	 : 'http://147.83.7.157:2709/auth/facebook/callback',
-        profileFields : ['id', 'displayName', /*'provider',*/ 'photos']
+        callbackURL	 : 'http://localhost:2709/auth/facebook/callback',
+        profileFields : ['id', 'displayName', 'provider', 'photos']
     }, function(accessToken, refreshToken, profile, done) {
         // El campo 'profileFields' nos permite que los campos que almacenamos
         // se llamen igual tanto para si el usuario se autentica por Twitter o
@@ -80,8 +85,11 @@ module.exports = function(passport) {
             var user = new User({
                 provider_id	: profile.id,
                 provider		 : profile.provider,
-                name				 : profile.displayName,
-                photo				: profile.photos[0].value
+                name				 : profile.givenName,
+                last_name				 : profile.familyName,
+                loginid				 : profile.username,
+                photo_user				: profile.photos[0].value,
+                email               : profile.emails[0].value
             });
             user.save(function(err) {
                 if(err) throw err;
@@ -92,14 +100,31 @@ module.exports = function(passport) {
 
     // Configuración del autenticado con Google+
     passport.use(new GoogleStrategy({
-            clientID:     GOOGLE_CLIENT_ID,
-            clientSecret: GOOGLE_CLIENT_SECRET,
-            callbackURL: "http://147.83.7.157:2709/auth/google/callback",
+            clientID:     config.Google.key,
+            clientSecret: config.Google.secret,
+            callbackURL: "http://localhost:2709/auth/google/callback",
             passReqToCallback   : true
         },
         function(request, accessToken, refreshToken, profile, done) {
-            User.findOrCreate({ googleId: profile.id }, function (err, user) {
-                return done(err, user);
+            User.findOne({provider_id: profile.id}, function(err, user) {
+                if(err) throw(err);
+                if(!err && user!= null) return done(null, user);
+
+                // Al igual que antes, si el usuario ya existe lo devuelve
+                // y si no, lo crea y salva en la base de datos
+                var user = new User({
+                    provider_id	: profile.id,
+                    provider		 : profile.provider,
+                    name				 : profile.givenName,
+                    last_name				 : profile.familyName,
+                    loginid				 : profile.username,
+                    photo_user				: profile.photos[0].value,
+                    email               : profile.emails[0].value
+                });
+                user.save(function(err) {
+                    if(err) throw err;
+                    done(null, user);
+                });
             });
         }
     ));
