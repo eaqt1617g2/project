@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -23,7 +23,7 @@
 
 </head>
 
-<body ng-app="userApp" ng-controller="homeController">
+<body ng-app="loginApp" ng-controller="loginRegisterCtrl">
 
 
 <div id="rosa">
@@ -34,10 +34,10 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-6">
-                                <a href="" class="active" id="login-form-link">Login</a>
+                                <a href="#/" ng-click="loginClick()" class="active" id="login-form-link">Login</a>
                             </div>
                             <div class="col-xs-6">
-                                <a href="" id="register-form-link">Register</a>
+                                <a href="#/register" ng-click="registerClick()" id="register-form-link">Register</a>
                             </div>
                         </div>
                         <hr>
@@ -45,61 +45,10 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" role="form" style="display: block;" ng-submit="login()">
-                                    <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" ng-model="user.name">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" ng-model="user.pass">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-                                        <label for="remember"> Remember Me</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-sm-offset-3">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form id="register-form" role="form" style="display: none;" ng-submit="register()">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="username" value="" ng-model="user.username">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="name" ng-model="user.name">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="lastname" ng-model="user.lastname">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="password" ng-model="user.password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="confirm password" ng-model="user.confirm_password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="email address" ng-model="user.email">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-sm-offset-3">
-                                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Accept">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+
+                                <!-- Login form o Register form -->
+                                <ng-view></ng-view>
+
                             </div>
                         </div>
                     </div>
@@ -113,35 +62,16 @@
 <!--AngularJs -->
 <script src="../bower_components/angular/angular.min.js"></script>
 <script src="../bower_components/angular-route/angular-route.min.js"></script>
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
 <!--Falta migrar a directivas angular-bootstrap -->
 <!--<script src="../bower_components/bootstrap.native/dist/bootstrap-native.min.js"></script>-->
 <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
-<script src="../mainApp.js"></script>
+<script src="../loginApp.js"></script>
 <script src="../config.js"></script>
-<script src="../controllers/UserController.js"></script>
-<script>
-    $(function() {
-        $(document).on('click', '#login-form-link', function(e) {
-            $("#login-form").delay(100).fadeIn(100);
-            $("#register-form").fadeOut(100);
-            $('#register-form-link').removeClass('active');
-            $(this).addClass('active');
-            e.preventDefault();
-        });
-        $(document).on('click', '#register-form-link', function(e) {
-            $("#register-form").delay(100).fadeIn(100);
-            $("#login-form").fadeOut(100);
-            $('#login-form-link').removeClass('active');
-            $(this).addClass('active');
-            e.preventDefault();
-        });
-    });
-</script>
+<script src="../controllers/loginRegisterCtrl.js"></script>
+
 </body>
 
 </html>

@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost/project');
 
 app.use(express.static('../public'));
 app.use('/', express.static('../public/views'));
-app.use('/login', express.static('../public/views/loginRegister.html'));
+app.use('/access', express.static('../public/views/loginRegister.html'));
 app.use('/adminPanel', express.static('../public/views/admin/admin.html'));
 
 
