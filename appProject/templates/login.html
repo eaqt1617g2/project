@@ -13,7 +13,9 @@
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
       <button id="login-button1" class="button button-stable  button-block">Log in</button>
-      <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+      <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" ui-sref="signup" href="#/page2" class="button button-positive  button-block button-clear">Or create an account</a>
     </form>
   </ion-content>
 </ion-view>
+
+<a ui-sref="tabsController.lastMinuteDefaultPage" menu-close="" id="menu-button4" class="button button-dark button-large button-block icon-right ion-android-home" data-componentid="button4" href="#/page3/page4">Home</a>
