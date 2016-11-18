@@ -1,4 +1,4 @@
-<ion-view title="Login" id="page5">
+<ion-view title="Login" id="page2">
   <ion-content padding="true" class="has-header">
     <form id="login-form1" class="list">
       <ion-list id="login-list1">
@@ -13,7 +13,15 @@
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
       <button id="login-button1" class="button button-stable  button-block">Log in</button>
-      <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+      <div class="spacer" style="height: 40px;"></div>
+      <h5 id="login-heading5" style="color:#000000;font-weight:lighter;">Acceder desde otra cuenta</h5>
+      <div id="login-button-bar3" class="button-bar">
+        <button id="login-button11" class="button button-light  button-block icon ion-social-facebook"></button>
+        <button id="login-button12" class="button button-light  button-block icon ion-social-twitter"></button>
+        <button id="login-button13" class="button button-light  button-block icon ion-social-googleplus"></button>
+      </div>
     </form>
   </ion-content>
 </ion-view>
+
+<a ui-sref="tabsController.lastMinuteDefaultPage" menu-close="" id="menu-button4" class="button button-dark button-large button-block icon-right ion-android-home" data-componentid="button4" href="#/page4/page5">Home</a>

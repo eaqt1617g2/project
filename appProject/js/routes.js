@@ -7,21 +7,71 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
 
-      .state('tabsController.lastMinuteDefaultPage', {
-    url: '/page4',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/lastMinuteDefaultPage.html',
-        controller: 'lastMinuteDefaultPageCtrl'
+  .state('tabsControllerLogin', {
+      url: '/page1',
+      templateUrl: 'templates/tabsControllerLogin.html',
+      abstract:true
+  })
+
+  .state('tabsControllerLogin.login', {
+      url: '/page2',
+      views: {
+          'tab1': {
+              templateUrl: 'templates/login.html',
+              controller: 'loginCtrl'
+          }
       }
-    }
+  })
+
+  .state('tabsControllerLogin.register', {
+      url: '/page3',
+      views: {
+          'tab2': {
+              templateUrl: 'templates/register.html',
+              controller: 'registerCtrl'
+          }
+      }
+  })
+
+  .state('tabsController', {
+      url: '/page4',
+      templateUrl: 'templates/tabsController.html',
+      abstract:true
+  })
+
+  .state('tabsController.lastMinuteDefaultPage', {
+    url: '/page5',
+      views: {
+          'tab1': {
+              templateUrl: 'templates/lastMinuteDefaultPage.html',
+              controller: 'lastMinuteDefaultPageCtrl'
+          }
+      }
+  })
+
+  .state('tabsController.discoverDefaultPage', {
+      url: '/page6',
+      views: {
+          'tab2': {
+              templateUrl: 'templates/discoverDefaultPage.html',
+              controller: 'discoverDefaultPageCtrl'
+          }
+      }
+  })
+
+  .state('tabsController.friendsDefaultPage', {
+      url: '/page7',
+      views: {
+          'tab3': {
+              templateUrl: 'templates/friendsDefaultPage.html',
+              controller: 'friendsDefaultPageCtrl'
+          }
+      }
   })
 
   .state('tabsController.perfilDefaultPage', {
-    url: '/page7',
+    url: '/page8',
     views: {
       'tab1': {
         templateUrl: 'templates/perfilDefaultPage.html',
@@ -40,45 +90,9 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('tabsController.discoverDefaultPage', {
-    url: '/page5',
-    views: {
-      'tab2': {
-        templateUrl: 'templates/discoverDefaultPage.html',
-        controller: 'discoverDefaultPageCtrl'
-      }
-    }
-  })
 
-  .state('tabsController.friendsDefaultPage', {
-    url: '/page6',
-    views: {
-      'tab3': {
-        templateUrl: 'templates/friendsDefaultPage.html',
-        controller: 'friendsDefaultPageCtrl'
-      }
-    }
-  })
 
-  .state('tabsController', {
-    url: '/page3',
-    templateUrl: 'templates/tabsController.html',
-    abstract:true
-  })
-
-  .state('login', {
-    url: '/page1',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
-
-  .state('signup', {
-    url: '/page2',
-    templateUrl: 'templates/signup.html',
-    controller: 'signupCtrl'
-  })
-
-$urlRouterProvider.otherwise('/page3/page4')
+$urlRouterProvider.otherwise('/page1/page2')
 
   
 
