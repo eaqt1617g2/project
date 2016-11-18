@@ -6,6 +6,7 @@
             <div class="col-md-3" id="profile-avatar-wrapper">
                 <a href="#/user"><img src={{user.profile_pic_url}}></a>
             </div>
+
             <div class="col-md-9" id="profile-info-wrapper">
                 <div>
                     <h1 class="profile-user-fullname">{{user.name}} {{user.last_name}}</h1>
@@ -14,27 +15,28 @@
                     <h2 class="profile-user-loginid">@{{user.loginid}}</h2>
                 </div>
             </div>
-
         </div>
-        </div>
+    </div>
+</div>
         <!-- navbar -->
         <div id="profile-nav-wrapper">
+            <div class="container">
             <div class="row">
-            <div class="col-md-9 col-md-offset-3">
-            <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{user.items}}</span></a></li>
-                        <li><a href="#/user"> Seguidores<span>{{user.followers}}</span></a></li>
-                        <li><a href="#/user"> Siguiendo<span>{{user.following}}</span></a></li>
-                    </ul>
+                <div class="col-md-9 col-md-offset-3">
+                    <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
+                        <ul class="nav navbar-nav">
+                            <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{user.items}}</span></a></li>
+                            <li><a href="#/user"> Seguidores<span>{{user.followers}}</span></a></li>
+                            <li><a href="#/user"> Siguiendo<span>{{user.following}}</span></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="follow-button" class="btn btn-default" role="button">Follow</a></li>
+                        </ul>
+                    </nav>
                 </div>
-            </nav>
             </div>
             </div>
         </div>
-
-
 </div>
 
 <div id="content-wrapper">

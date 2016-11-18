@@ -1,5 +1,11 @@
 mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
     console.log("homeScreenCtrl");
+    var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
+
+    $scope.logout = function() {
+        console.log("Logout");
+        window.location.href = serverAddr+"/access";
+    }
 
     $scope.items = [
         {

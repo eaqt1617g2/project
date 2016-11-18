@@ -1,5 +1,6 @@
 mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http) {
 
+
     $scope.items = [
         {
             title: "Camisa de invierno en REBAJAS!",

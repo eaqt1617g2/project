@@ -8,6 +8,11 @@ mainApp.config(function($routeProvider) {
         }).when("/user", {
             templateUrl : "/views/userProfile.html",
             controller: "userProfileCtrl"
+        }).when("/user/config", {
+            templateUrl: "/views/userConfiguration.html"
+
+        }).when("/item", {
+            templateUrl: "/views/itemView.html"
     });
     
 }); 

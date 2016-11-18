@@ -6,7 +6,7 @@
                     <div id="profile-pre-header">
                         <a href="#/user"><img src={{user.profile_pic_url}}></a>
                         <h3>{{user.name}} {{user.last_name}}</h3>
-                        <h4>{{user.loginid}}</h4>
+                        <h4>@{{user.loginid}}</h4>
                     </div>
                     <div  id="profile-pre-stats">
                         <div class="row">
@@ -38,7 +38,7 @@
                         <div class="col-md-4" ng-repeat="item in items">
                             <div class="item-wrapper">
                                 <div>
-                                    <a href="#"><img class="item-pre-pic" src={{item.pic_url}}></a>
+                                    <a href="#/item"><img class="item-pre-pic" src={{item.pic_url}}></a>
                                 </div>
                                 <div class="item-pre-info">
                                     <h2>{{item.title}}</h2>
