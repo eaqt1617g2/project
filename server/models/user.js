@@ -1,19 +1,28 @@
 var mongoose = require('mongoose');
+var bcrypt   = require('bcrypt-nodejs');
 
-var User = mongoose.model('users', {
-	name: String,
+var userSchema = mongoose.Schema({
+
+	name: {type: String, unique: true},
 	last_name: String,
+	displayname: String,
 	loginid: String,
 	password: String,
+	token: String,
 	provider: String,
 	provider_id: {type: String, unique: true},
 	photo_user: String,
 	photo_background: String,
 	creation_date: {type: Date, default: Date.now},
-	email: String,
+	email: {type: String, unique: true},
 	last_login_date: {type: Date, default: Date.now}
+
 });
 
-module.exports = User;
-// Exportamos el modelo 'User_auth' para usarlo en otras
-// partes de la aplicación
+userSchema.methods.generateHash = function(password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+userSchema.methods.validPassword = function(password) {
+	return bcrypt.compareSync(password, this.password);
+};
+module.exports = mongoose.model('User', userSchema);

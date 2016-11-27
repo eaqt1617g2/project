@@ -4,6 +4,12 @@ var router = app.Router();
 var User = require('../models/user');
 var mongoose = require('mongoose');
 
+
+/* GET users listing. LOGIN*/
+router.get('/', function(req, res, next) {
+    res.send('respond with a resource');
+});
+
 router.get('/', function(req, res,next) {
 
     User.find(function(err, todos) {
@@ -96,5 +102,8 @@ router.post('/', function(req, res) {
     });
     
 });
+
+
+
 
 module.exports = router;
