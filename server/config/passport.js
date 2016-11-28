@@ -26,6 +26,7 @@ module.exports = function(passport) {
         function(req, email, password, done) {
             process.nextTick(function() {
                 User.findOne({ 'email': email }, function(err, user) {
+                    console.log('entro en sign up');
                     if (err)
                         return done(err);
                     if (user) {
@@ -67,7 +68,7 @@ module.exports = function(passport) {
         },
         function(req, email, password, done) {
             User.findOne({ 'email':  email , 'provider':'local' }, function(err, user) {
-
+                console.log('entro en login local');
                 if (err)
                     return done(err);
                 if (!user || !user.validPassword(password)){

@@ -5,21 +5,22 @@ loginApp.controller("loginRegisterCtrl", function(SERVER_INFO, $scope, $http, $l
 
 
     $scope.login = function() {
-        console.log("Login function");
+        console.log('Login function');
         window.location.href = serverAddr+"/";
     };
 
     $scope.loginClick = function()
     {
-        console.log("loginClick");
+        console.log('loginClick');
         angular.element(document.querySelector('#login-form-link')).addClass("active");
         angular.element(document.querySelector('#register-form-link')).removeClass("active");
     };
     $scope.registerClick = function()
     {
-        console.log("registerClick");
+        console.log('registerClick');
         angular.element(document.querySelector('#register-form-link')).addClass("active");
         angular.element(document.querySelector('#login-form-link')).removeClass("active");
+
     };
 
 

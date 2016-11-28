@@ -5,12 +5,12 @@ module.exports = {
     facebookAuth: {
         clientID: '343051082715858',
         clientSecret: '8ef3e3eff8f5d2059707161b53bcc8bb',
-        callbackURL: 'http://localhost:3000/auth/facebook/callback',
+        callbackURL: 'http://localhost:2709/auth/facebook/callback',
     },
     twitterAuth: {
         consumerKey: 'n97MUo0VUGuKqOP0tcw3Faz4b',
         consumerSecret: 'nOmFm4p2yRnqyOTl6iUd7ESZ6kPDSNXXLtY1bV5a3U8maSVVjH',
-        callbackURL: 'http://localhost:3000/auth/twitter/callback',
+        callbackURL: 'http://localhost:2709/auth/twitter/callback',
     },
     googleAuth: {
         clientID: '1063612097703-4grhbrh1kl316idhctspnf356uk0hl17.apps.googleusercontent.com',
