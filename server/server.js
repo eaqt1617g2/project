@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 
 var users = require("./routes/users");
+var items = require("./routes/items");
 // INICIO ********************************** CÓDIGO PARA EL USO DE PASSPORT FACEBOOK, TWITTER, GOOGLE *************
 
 var path = require('path');
@@ -60,7 +61,8 @@ app.use(passport.session());
 app.use(flash());
 
 app.use('/', routes);
-//app.use('/users', users);
+app.use('/users', users);
+app.use('/items', items);
 
 require('./config/passport')(passport);
 

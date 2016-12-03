@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 */
+
 router.get('/', function(req, res,next) {
 
     User.find(function(err, todos) {
@@ -21,6 +22,7 @@ router.get('/', function(req, res,next) {
     });
 
 });
+
 
 router.get('/:id', function(req, res,next) {
     var o_id = new mongoose.Types.ObjectId(req.params.id);
@@ -102,6 +104,17 @@ router.post('/', function(req, res) {
         });
     });
     
+});
+
+router.get('/:id/items', function(req, res) {
+    var o_id = new mongoose.Types.ObjectId(req.params.id);
+    Item.findOne({author: o_id}, function(err, item) {
+        if(err) {
+            res.send(err);
+        }
+        res.json(item);
+    });
+
 });
 
 

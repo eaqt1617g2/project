@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Main Layout</title>
+    <title>ShopIn</title>
 
     <!-- Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,12 +25,12 @@
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#/">
-              <img class="site-logo" src="../assets/imgs/logoShopping.png">
+              <img class="site-logo" src="../assets/imgs/logo_shopin_v2.png">
             </a>
           </div>
           <div class="collapse navbar-collapse navbar-main-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#/"><i class="fa fa-clock-o"></i> Last Minute</a></li>
+              <li class="navbar-li-selected"><a href="#/"><i class="fa fa-clock-o"></i> Last Minute</a></li>
               <li><a href="#/"><i class="fa fa-globe"></i> Discover</a></li>
               <li><a href="#/"><i class="fa fa-users"></i> Friends</a></li>
               <li uib-dropdown>
@@ -58,18 +58,32 @@
 
     </div>
 
+
+
+
+
     <!--AngularJs -->
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.min.js"></script>
 
-    <!--Falta migrar a directivas angular-bootstrap -->
+
     <!--<script src="../bower_components/bootstrap.native/dist/bootstrap-native.min.js"></script>-->
     <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+
+    <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
 
     <script type="text/javascript" src="../mainApp.js"></script>
     <script type="text/javascript" src="../config.js"></script>
     <script type="text/javascript" src="../controllers/homeScreenCtrl.js"></script>
     <script type="text/javascript" src="../controllers/userProfileCtrl.js"></script>
+    <script type="text/javascript" src="../controllers/itemViewCtrl.js"></script>
+
+
   </body>
 </html>

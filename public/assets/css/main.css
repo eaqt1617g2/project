@@ -5,18 +5,25 @@ body {
 
 #header nav {
 	/* border-top: 3px solid #E64B3A; */
-	border-top: 3px solid #2E9FFF;
+	/*border-top: 3px solid #2E9FFF;*/
 	background-color: #ffffff;	
 }
 
 .site-logo {
-	height: 20px;
+	height: 45px;
+}
+.navbar-brand {
+	padding: 5px 15px;
 }
 
 #main-navbar .navbar-nav>li>a {
 	color: #2E9FFF;
 	font-weight: bold;
 	font-size: 16px;
+}
+
+.navbar-li-selected {
+	border-bottom: 4px #00b3ee solid;
 }
 
 #follow-button {
@@ -38,7 +45,7 @@ body {
 
 #content-wrapper {
 	background: #ebeef2;
-	min-height: 500px;
+	min-height: 600px;
 	
 }
 
@@ -331,6 +338,7 @@ html, body {
 .item-pre-pic {
 	width: 100%;
 	border-radius: 5px 5px 0px 0px;
+	border-bottom: 1px solid #ebeef2;
 }
 
 .item-pre-info {
@@ -346,7 +354,7 @@ html, body {
 	font-size: 20px;
 	/* color: #00b3ee; */
 	color: #353a3d;
-	height: 45px;
+	max-height: 45px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -381,4 +389,14 @@ html, body {
 	padding: 0px;
 	text-align:right;
 	color: #00b3ee;
+}
+
+#footer {
+	border-top: 3px solid #2E9FFF;
+	min-height: 50px;
+	background-color: #3c3c3c;
+}
+
+.angular-google-map-container {
+	height: 300px;
 }

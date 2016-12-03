@@ -1,4 +1,4 @@
-var mainApp = angular.module("mainApp", ["ngRoute", 'ui.bootstrap', 'app.config']);
+var mainApp = angular.module("mainApp", ['ngRoute', 'ui.bootstrap', 'app.config', 'ngCookies', 'uiGmapgoogle-maps']);
 
 mainApp.config(function($routeProvider) {
     $routeProvider
@@ -11,8 +11,9 @@ mainApp.config(function($routeProvider) {
         }).when("/user/config", {
             templateUrl: "/views/userConfiguration.html"
 
-        }).when("/item", {
-            templateUrl: "/views/itemView.html"
+        }).when("/item/:id", {
+            templateUrl: "/views/itemView.html",
+            controller: "itemViewCtrl"
     });
     
 }); 

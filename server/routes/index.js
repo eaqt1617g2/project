@@ -3,7 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.render('index.html', { title: 'Express' });
+  res.render('index.html', { title: 'patata' });
 });
 
 router.get('/login', function(req, res, next) {

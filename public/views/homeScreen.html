@@ -1,4 +1,4 @@
-<div id="content-wrapper">
+<div id="content-wrapper" ng-init="getItems()">
     <div id="main-content" class="container">
         <div class="row">
             <div class="col-md-3">
@@ -38,19 +38,22 @@
                         <div class="col-md-4" ng-repeat="item in items">
                             <div class="item-wrapper">
                                 <div>
-                                    <a href="#/item"><img class="item-pre-pic" src={{item.pic_url}}></a>
+                                    <a href="#/item/{{item._id}}"><img class="item-pre-pic" src="http://localhost:2709/assets/imgs/{{item.pic_id}}"></a>
                                 </div>
                                 <div class="item-pre-info">
                                     <h2>{{item.title}}</h2>
                                     <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> {{item.likes}} <i class="fa fa-comments-o"></i> {{item.num_comments}}</p>
+                                        <p><i class="fa fa-heart"></i> {{item.likes}} <i class="fa fa-comments-o"></i> {{item.comments.length}}</p>
                                     </div>
                                 </div>
                                 <div class="item-pre-footer">
-                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm'}}</h3>
+                                    <h3><a>@{{item.author.loginid}}</a> - {{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h3>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row text-center">
+                        <button class="btn btn-default" ng-click="loadMore()">Load more</button>
                     </div>
                 </div>
             </div>
