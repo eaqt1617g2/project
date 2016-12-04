@@ -108,7 +108,7 @@ body {
 /* Login & Register */
 
 #loginregister {
-	padding-top: 100px;
+	padding-top: 80px;
 }
 
 .panel-login {
@@ -122,6 +122,7 @@ body {
 	background-color: #fff;
 	border-color: #fff;
 	text-align:center;
+
 }
 .panel-login>.panel-heading a{
 	text-decoration: none;
@@ -198,7 +199,7 @@ body {
 }
 
 
-#rosa {
+#login-wrapper {
 	height: 100%;
 	background-image:url('../imgs/fondo.jpg');
 	background-position: center center;
@@ -397,6 +398,113 @@ html, body {
 	background-color: #3c3c3c;
 }
 
+.item-view-module {
+	background: #fff;
+	border: solid 1px #ebeef2;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+.item-view-header {
+	border-bottom: 1px solid #ebeef2;
+	padding: 8px 15px 10px 15px;
+	background-color: #00b3ee;
+	color: white;
+	border-radius: 5px 5px 0px 0px;
+	font-weight: bold;
+	height: 35px;
+}
+.item-view-header .displayname {
+	font-size: 15px;
+	color: white;
+	margin-top:0px;
+	display: inline;
+	font-weight: bold;
+
+
+}
+.item-view-header .loginid {
+	display:inline;
+	font-weight: bold;
+	font-size: 15px;
+	color: #424242;
+	margin-right: 5px;
+}
+.item-view-header .time {
+	display:inline;
+	font-weight: bold;
+	font-size: 10px;
+}
+.item-view-map-wrapper {
+	padding: 15px;
+}
+.item-view-pic-wrapper {
+	border-bottom: 1px solid #ebeef2;
+	border-top: 1px solid #ebeef2;
+	padding: 10px 0px;
+	background-color: #f7f9fa;
+
+}
+.item-view-title {
+	font-size: 25px;
+	font-weight: bold;
+	padding: 15px;
+
+}
+.item-view-pic-wrapper img {
+	border-radius: 5px;
+}
+
 .angular-google-map-container {
 	height: 300px;
+	border: 1px solid #00b3ee;
+	margin-top: 20px;
 }
+.show-map-button {
+	font-weight: bold;
+	font-size: 20px;
+}
+.show-map-button i {
+	margin-right: 10px;
+	color: #DB2624;
+}
+
+
+/* Comments */
+.item-view-comments {
+	padding: 30px;
+	border-top: 1px solid #ebeef2;
+}
+.comments-list {
+	list-style-type: none;
+}
+.comment {
+	display:block;
+	width: 100%;
+	margin: 20px 0px;
+}
+.comment-heading {
+	display:block;
+	with: 100%;
+}
+.comment-body {
+	margin-left: 50px;
+}
+
+.comment-heading .user {
+	font-size: 14px;
+	font-weight: bold;
+	display:inline;
+	margin-top: 0px;
+	margin-right: 10px;
+}
+.comment-heading .time {
+	font-size: 12px;
+	color: #aaa;
+	margin-top: 0px;
+	display: inline;
+}
+.comment-avatar {
+	width: 40px;
+	height: 40px;
+}
+/* --------------*/

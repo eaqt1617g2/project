@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
 
 router.get('/:id', function(req, res) {
     var o_id = new mongoose.Types.ObjectId(req.params.id);
-    Item.findOne({_id: o_id}, function(err, item) {
+    Item.findOne({_id: o_id}).populate('author','loginid displayname').exec(function(err, item) {
         if(err) {
             res.send(err);
         }

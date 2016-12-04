@@ -5,10 +5,10 @@ mainApp.config(function($routeProvider) {
         .when("/", {
             templateUrl : "/views/homeScreen.html",
             controller: "homeScreenCtrl"
-        }).when("/user", {
+        }).when("/user/:loginid", {
             templateUrl : "/views/userProfile.html",
             controller: "userProfileCtrl"
-        }).when("/user/config", {
+        }).when("/config", {
             templateUrl: "/views/userConfiguration.html"
 
         }).when("/item/:id", {
