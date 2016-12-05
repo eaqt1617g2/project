@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index.html', { title: 'patata' });
 });
 
+
 router.get('/login', function(req, res, next) {
   res.render('loginForm.html', { message: req.flash('loginMessage') });
 });
