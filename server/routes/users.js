@@ -2,6 +2,7 @@ var app = require('express');
 var router = app.Router();
 
 var User = require('../models/user');
+var Item = require('../models/item');
 var mongoose = require('mongoose');
 
 
@@ -12,7 +13,18 @@ router.get('/', function(req, res, next) {
 });
 */
 
-router.get('/', function(req, res,next) {
+router.get('/my', isLoggedIn, function(req, res) {
+    res.send(req.user);
+});
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated())
+      return next();
+
+    res.status(400).send('User not logged in');
+};
+
+router.get('/', function(req, res) {
 
     User.find(function(err, todos) {
         if(err) {
@@ -24,9 +36,8 @@ router.get('/', function(req, res,next) {
 });
 
 
-router.get('/:id', function(req, res,next) {
-    var o_id = new mongoose.Types.ObjectId(req.params.id);
-    User.findOne({_id: o_id}, function(err, user) {        
+router.get('/:loginid', function(req, res,next) {
+    User.findOne({loginid: req.params.loginid}, function(err, user) {
         if(err) {
             res.send(err);
         }
@@ -106,14 +117,22 @@ router.post('/', function(req, res) {
     
 });
 
-router.get('/:id/items', function(req, res) {
-    var o_id = new mongoose.Types.ObjectId(req.params.id);
-    Item.findOne({author: o_id}, function(err, item) {
+router.get('/:loginid/items', function(req, res) {
+    var o_id = undefined;
+    User.findOne({loginid: req.params.loginid}, function(err, user) {
         if(err) {
             res.send(err);
         }
-        res.json(item);
+        o_id = user._id;
+        Item.find({author: o_id}).populate('author', 'loginid').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
+            if(err) {
+                res.send(err);
+            }
+            res.json(items);
+        });
     });
+
+
 
 });
 

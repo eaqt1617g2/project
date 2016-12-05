@@ -4,23 +4,23 @@
             <div class="col-md-3">
                 <div id="profile-preview" class="module">
                     <div id="profile-pre-header">
-                        <a href="#/user/my"><img src={{user.profile_pic_url}}></a>
-                        <h3>{{user.name}} {{user.last_name}}</h3>
+                        <a href="#/user/{{user.loginid}}"><img src={{user.photo_user}}></a>
+                        <h3>{{user.displayname}}</h3>
                         <h4>@{{user.loginid}}</h4>
                     </div>
                     <div  id="profile-pre-stats">
                         <div class="row">
                             <div class="col-md-4">
                                 <h5>ARTÍCULOS</h5>
-                                <h6>{{user.items}}</h6>
+                                <h6>{{user.items || '0'}}</h6>
                             </div>
                             <div class="col-md-4">
                                 <h5>SEGUIDORES</h5>
-                                <h6>{{user.followers}}</h6>
+                                <h6>{{user.followers || 0}}</h6>
                             </div>
                             <div class="col-md-4">
                                 <h5>SIGUIENDO</h5>
-                                <h6>{{user.following}}</h6>
+                                <h6>{{user.following || 0}}</h6>
                             </div>
                         </div>
                     </div>

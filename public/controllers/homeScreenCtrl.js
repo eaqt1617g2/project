@@ -5,7 +5,15 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
     var currentItemsPage = 0;
     $scope.items = [];
 
-    //console.log($req.title);
+    $http.get(serverAddr+ '/users/my')
+        .success(function(data) {
+            console.log(JSON.stringify(data));
+            $scope.user = data;
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+
 
     $scope.logout = function() {
         console.log("Logout");
@@ -32,7 +40,7 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
 
 
 
-
+    /*
     $scope.user = {
         loginid: "Scarlet88",
         name: "Scarlett",
@@ -45,6 +53,7 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
         items: "6",
         profile_pic_url: "../assets/imgs/profileTestPic3.png"
     };
+    */
 
 
 

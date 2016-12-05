@@ -1,6 +1,32 @@
-mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http) {
+mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $routeParams) {
+    var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
+    var currentItemsPage = 0;
+    $scope.items = [];
 
+    $http.get(serverAddr+"/users/"+$routeParams.loginid)
+        .success(function(data) {
+            console.log("Get user OK")
+            $scope.user = data;
+        })
+        .error(function(data) {
+            console.log("Error: "+data);
+    });
+
+    $scope.getUserItems = function() {
+        $http.get(serverAddr+'/users/'+$routeParams.loginid+'/items', {
+            params: {page: currentItemsPage}
+            })
+            .success(function(data) {
+                console.log(JSON.stringify(data));
+                $scope.items = $scope.items.concat(data);
+            })
+            .error(function(err) {
+                console.log('Error: ' + err);
+        });
+    };
+
+    /*
     $scope.items = [
         {
             title: "Camisa de invierno en REBAJAS!",
@@ -56,5 +82,6 @@ mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http) {
         items: "6",
         profile_pic_url: "../assets/imgs/profileTestPic3.png"
     };
+    */
 
 });

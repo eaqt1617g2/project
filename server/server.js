@@ -44,17 +44,17 @@ app.use('/adminPanel', express.static('../public/views/admin/admin.html'));
 
 // INICIO ********************************** CÓDIGO PARA EL USO DE PASSPORT FACEBOOK, TWITTER, GOOGLE *************
 
-// view engine setup
-app.set('views', path.join(__dirname, '../public/views'));
-app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use(session({ resave: true,
+app.use(session({
+    resave: true,
     saveUninitialized: true,
-    secret: 'shhsecret' }));
+    secret: 'secretString',
+    cookie: {secure: false}
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -74,18 +74,12 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err,
-        });
+        console.log('Error: '+err.message);
     });
 }
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {},
-    });
+    console.log('Error: '+err.message);
 });
 
 
