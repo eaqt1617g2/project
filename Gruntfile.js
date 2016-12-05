@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     sftp: {
       deploy: {
         files: {
-          './': ['server/**', 'public/**', '!public/config.js', '!public/bower_components/**', 'package.json', 'bower.json', '.bowerrc']
+          './': ['server/**', 'public/**', '!public/config.js', '!public/bower_components/**', 'package.json', 'bower.json', '.bowerrc', 'passport.js']
         },
         options: {          
           showProgress: true,          

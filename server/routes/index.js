@@ -2,8 +2,8 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-router.get('/test', function(req, res, next) {
-  res.render('index.html', { title: 'Express' });
+router.get('/', function(req, res, next) {
+  res.render('index.html', { title: 'patata' });
 });
 
 router.get('/login', function(req, res, next) {

@@ -2,9 +2,70 @@
     <div id="main-content" class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="module">
-                    <h2>Item View</h2>
-                    <h3>No implementado</h3>
+                <div class="item-view-module">
+                    <div class="item-view-header">
+                        <div class="pull-left">
+                            <h4 class="displayname">{{item.author.displayname}}</h4>
+                            <h4 class="loginid">@{{item.author.loginid}}</h4>
+                            <h5 class="time">- {{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5>
+                        </div>
+                        <div class="pull-right">
+                            {{item.likes}} <i class="fa fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="item-view-title">{{item.title}}</div>
+                    <div class="item-view-pic-wrapper">
+                        <div class="row">
+                            <img class="col-md-10 col-md-offset-1 col-xs-12" src="http://localhost:2709/assets/imgs/items/{{item.pic_id}}">
+                        </div>
+
+                    </div>
+
+
+                    <div class="item-view-map-wrapper" >
+                        <div class="row">
+                            <a ng-click="mapButton()" class="btn btn-default show-map-button col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
+                                <i class="fa fa-lg fa-map-marker"></i>{{mapButtonLabel}} map
+                            </a>
+                        </div>
+                        <ui-gmap-google-map center="map.center" zoom="map.zoom" ng-show="mapVisible"></ui-gmap-google-map>
+
+                    </div>
+                    <div class="item-view-comments">
+                        <div class="input-group">
+                            <input ng-model="newComment.content" class="form-control" placeholder="Add a comment" type="text">
+                            <span class="input-group-addon">
+                                <a ng-click="postComment()"><i class="fa fa-edit"></i></a>
+                            </span>
+                        </div>
+                        <ul class="comments-list">
+                            <li class="comment">
+                                <a class="pull-left" href="#" >
+                                    <img class="comment-avatar" src="http://localhost:2709/assets/imgs/profiles/profileTestPic2.png" alt="Avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Carlos Santiago</h4>
+                                        <h4 class="time">3 minutes ago</h4>
+                                    </div>
+                                    <p>Comentario</p>
+                                </div>
+                            </li>
+                            <li class="comment">
+                                <a class="pull-left" href="#" >
+                                    <img class="comment-avatar" src="http://localhost:2709/assets/imgs/profiles/profileTestPic2.png">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Carlos Santiago</h4>
+                                        <h4 class="time">4 minutes ago</h4>
+                                    </div>
+                                    <p>Comentario 2</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>

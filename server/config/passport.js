@@ -1,6 +1,3 @@
-/**
- * Created by Jordi on 18/11/2016.
- */
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;

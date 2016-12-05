@@ -4,12 +4,12 @@
         <!-- Foto + titulo -->
         <div class="row" id="profile-content">
             <div class="col-md-3" id="profile-avatar-wrapper">
-                <a href="#/user"><img src={{user.profile_pic_url}}></a>
+                <a href="#/user"><img src={{user.photo_user}}></a>
             </div>
 
             <div class="col-md-9" id="profile-info-wrapper">
                 <div>
-                    <h1 class="profile-user-fullname">{{user.name}} {{user.last_name}}</h1>
+                    <h1 class="profile-user-fullname">{{user.displayname}}</h1>
                 </div>
                 <div>
                     <h2 class="profile-user-loginid">@{{user.loginid}}</h2>
@@ -25,9 +25,9 @@
                 <div class="col-md-9 col-md-offset-3">
                     <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
                         <ul class="nav navbar-nav">
-                            <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{user.items}}</span></a></li>
-                            <li><a href="#/user"> Seguidores<span>{{user.followers}}</span></a></li>
-                            <li><a href="#/user"> Siguiendo<span>{{user.following}}</span></a></li>
+                            <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{user.items || '0'}}</span></a></li>
+                            <li><a href="#/user"> Seguidores<span>{{user.followers || '0'}}</span></a></li>
+                            <li><a href="#/user"> Siguiendo<span>{{user.following || '0'}}</span></a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a id="follow-button" class="btn btn-default" role="button">Follow</a></li>
@@ -52,12 +52,12 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div id="main-module">
+                <div id="main-module" ng-init="getUserItems()">
                     <div class="row items-row">
                         <div class="col-md-4" ng-repeat="item in items">
                             <div class="item-wrapper">
                                 <div>
-                                    <a href="#"><img class="item-pre-pic" src={{item.pic_url}}></a>
+                                    <a href="#"><img class="item-pre-pic" src="http://localhost:2709/assets/imgs/items/{{item.pic_id}}"></a>
                                 </div>
                                 <div class="item-pre-info">
                                     <h2>{{item.title}}</h2>
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="item-pre-footer">
-                                    <h3><a>@{{item.author}}</a> - {{item.date | date:'dd/MM/yyyy HH:mm'}}</h3>
+                                    <h3><a>@{{item.author.loginid}}</a> - {{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h3>
                                 </div>
                             </div>
                         </div>
