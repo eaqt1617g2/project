@@ -2,7 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/test', function(req, res, next) {
   res.render('index.html', { title: 'Express' });
 });
 
@@ -14,8 +14,8 @@ router.get('/signup', function(req, res) {
   res.render('registerForm.html', { message: req.flash('signupMessage') });
 });
 
-router.get('/profile', isLoggedIn, function(req, res) {
-  res.render('homeScreen.html', { user: req.user });
+router.get('/', isLoggedIn, function(req, res) {
+  res.render('index.html', { user: req.user });
 });
 
 router.get('/logout', function(req, res) {
@@ -28,6 +28,8 @@ router.post('/signup', passport.authenticate('local-signup', {
   failureRedirect: '/access#/register',
   failureFlash: true,
 }));
+
+
 
 router.post('/login', passport.authenticate('local-login', {
   successRedirect: '/',
@@ -60,10 +62,13 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 }));
 
 
-module.exports = router;
+
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
   res.redirect('/');
 }
+
+
+module.exports = router;

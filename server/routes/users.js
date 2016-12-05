@@ -10,7 +10,8 @@ var mongoose = require('mongoose');
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
-*/
+
+
 router.get('/', function(req, res,next) {
 
     User.find(function(err, todos) {
@@ -21,7 +22,7 @@ router.get('/', function(req, res,next) {
     });
 
 });
-
+ */
 router.get('/:id', function(req, res,next) {
     var o_id = new mongoose.Types.ObjectId(req.params.id);
     User.findOne({_id: o_id}, function(err, user) {        
@@ -80,7 +81,7 @@ router.delete('/:id', function(req, res) {
     })
 });
 
-
+/*
 router.post('/', function(req, res) { 
     
     User.create({
@@ -105,6 +106,6 @@ router.post('/', function(req, res) {
 });
 
 
-
+*/
 
 module.exports = router;
