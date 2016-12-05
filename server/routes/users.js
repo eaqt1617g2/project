@@ -8,10 +8,10 @@ var mongoose = require('mongoose');
 
 //GET users listing. LOGIN
 /*
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
-});
-*/
+ router.get('/', function(req, res, next) {
+ res.send('respond with a resource');
+ });
+ */
 
 router.get('/my', isLoggedIn, function(req, res) {
     res.send(req.user);
@@ -19,7 +19,7 @@ router.get('/my', isLoggedIn, function(req, res) {
 
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated())
-      return next();
+        return next();
 
     res.status(400).send('User not logged in');
 };
@@ -51,26 +51,26 @@ router.put('/:id', function(req, res) {
     var o_id = new mongoose.Types.ObjectId(req.params.id);
     User.update(
         {
-            _id: o_id 
+            _id: o_id
         },
-        {            
+        {
             password: req.body.password,
             name: req.body.name,
             last_name: req.body.last_name,
             email: req.body.email
-        },        
-    function(err, user){
-        if(err) {
-            res.send(err);
-        }
-
-        User.find(function(err, users) {
-            if(err){
+        },
+        function(err, user){
+            if(err) {
                 res.send(err);
             }
-            res.json(users);
+
+            User.find(function(err, users) {
+                if(err){
+                    res.send(err);
+                }
+                res.json(users);
+            });
         });
-    });
 });
 
 
@@ -94,27 +94,27 @@ router.delete('/:id', function(req, res) {
 });
 
 
-router.post('/', function(req, res) { 
-    
+router.post('/', function(req, res) {
+
     User.create({
         loginid: req.body.loginid,
         password: req.body.password,
         name: req.body.name,
         last_name: req.body.last_name,
-        email: req.body.email       
+        email: req.body.email
     }, function(err, user){
         if(err) {
-            res.send(err);            
+            res.send(err);
         }
 
         User.find(function(err, users) {
             if(err){
                 res.send(err);
-            }            
+            }
             res.json(users);
         });
     });
-    
+
 });
 
 router.get('/:loginid/items', function(req, res) {

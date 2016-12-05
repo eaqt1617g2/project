@@ -45,6 +45,7 @@ module.exports = function(passport) {
                         newUser.loginid = req.body.loginid;
                         newUser.name = req.body.name;
                         newUser.last_name = req.body.last_name;
+                        newUser.displayname = (req.body.name + ' ' + req.body.last_name);
                         newUser.token = randomtoken;
                         newUser.photo_user = req.body.photo_user;
                         newUser.photo_background = req.body.photo_background;
@@ -93,7 +94,7 @@ module.exports = function(passport) {
             clientSecret: configAuth.facebookAuth.clientSecret,
             callbackURL: configAuth.facebookAuth.callbackURL,
             includeEmail: true,
-            profileFields : ['id', 'picture','email','first_name','last_name']
+            profileFields : ['id', 'email','first_name','last_name','picture.type(large)']
         },
         function(token, refreshToken, profile, done) {
             process.nextTick(function() {
@@ -117,7 +118,7 @@ module.exports = function(passport) {
                         newUser.last_name = profile.name.familyName;
                         newUser.displayname = (profile.name.givenName + ' ' + profile.name.familyName);
                         newUser.email = (profile.emails[0].value || '').toLowerCase();
-                        newUser.loginid	= profile.username;
+                        newUser.loginid	= newUser.email.substr(0,newUser.email.indexOf("@"));
                         newUser.photo_user = profile.photos[0].value;
 
                         newUser.save(function(err) {
@@ -157,7 +158,7 @@ module.exports = function(passport) {
                         newUser.last_name = profile.familyName;
                         newUser.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.loginid	= profile.username;
-                        newUser.photo_user = profile.photos[0].value;
+                        newUser.photo_user = profile.photos[0].value.replace("_normal","");
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
@@ -192,7 +193,7 @@ module.exports = function(passport) {
                         newUser.token = token;
                         newUser.displayname = profile.displayName;
                         newUser.email = profile.emails[0].value;
-                        newUser.loginid	= profile.username;
+                        newUser.loginid	= newUser.email.substr(0,newUser.email.indexOf("@"));
                         newUser.photo_user = profile.photos[0].value;
                         newUser.name = profile.name.givenName;
                         newUser.last_name = profile.name.familyName;

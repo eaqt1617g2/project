@@ -14,8 +14,12 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
 
+      <script type="text/javascript">
+          if (window.location.hash && window.location.hash == '#_=_') {
+              window.location.hash = '';
+          }
+      </script>
     
   </head>
   <body ng-app="mainApp">
@@ -40,7 +44,7 @@
                   <ul class="dropdown-menu" uib-dropdown-menu role="menu">
                       <li role="menuitem"><a href="#/config">Configuración</a></li>
                       <li class="divider"></li>
-                      <li role="menuitem"><a ng-click="logout()">Log out</a></li>
+                      <li role="menuitem"><a href="/logout">Log out</a></li>
                   </ul>
               </li>              
             </ul>            
