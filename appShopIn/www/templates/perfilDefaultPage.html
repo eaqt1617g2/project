@@ -15,7 +15,9 @@
           <button id="perfilDefaultPage-button17" ng-click="getItemsOrder()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
           <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS</button>
           <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING</button>
-        </div>
+          </div>
+        <button id="perfilDefaultPage-button20" ng-click="createItem()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Crear Item</button>
+
         <ion-item class="item-remove-animate item-icon-right" ng-repeat="user in users" ng-click="selectUser(user)">
         <button class="button icon ion-android-person"></button>
           <h2>Nombre: {{user.name}}</h2>

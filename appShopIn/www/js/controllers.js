@@ -71,6 +71,41 @@ function ($scope, $stateParams) {
       });
   }
 
+  $scope.createItem = function () {
+    $scope.newItem = {};
+    console.log('Usuario: ' + $scope.usuario.loginid);
+    var addPopup = $ionicPopup.confirm({
+      title: 'Crear item nuevo',
+      template: '<input type="text" placeholder="Titulo" ng-model="newItem.title">',
+      scope: $scope,
+      buttons: [
+        {text: 'Cancel'},
+        {
+          text: '<b>Crear</b>',
+          type: 'button-positive',
+          onTap: function () {
+            var postItem = {
+              title : $scope.newItem.title,
+              author: $scope.usuario.loginid
+            };
+            $http.post(BASE_URL + '/items/', postItem)
+              .success(function (data) {
+                $scope.newItem = data;
+                console.log('Item creado',$scope.newItem);
+
+              })
+              .error(function (data) {
+                console.log('Error: ' + data);
+                var alertPopup = $ionicPopup.alert({
+                  title: 'No se ha creado el item!'
+                });
+              });
+          }
+        }
+      ]
+    });
+  };
+
 
   $scope.getItems = function(){
     console.log("Loginid", $scope.usuario.loginid);
@@ -104,6 +139,9 @@ function ($scope, $stateParams) {
         });
       });
   }
+
+
+
 
 }])
 

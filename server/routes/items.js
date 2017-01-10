@@ -5,6 +5,17 @@ var Item = require('../models/item');
 var mongoose = require('mongoose');
 
 
+router.post('/', function(req, res) {
+    Item.create({
+        title: req.body.title,
+        author: req.body.author
+    }, function(err, item){
+        if(err) {
+            res.send(err);
+        }
+    });
+});
+
 router.get('/', function(req, res) {
     console.log(req.query.page);
     Item.find().populate('author', 'loginid').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
