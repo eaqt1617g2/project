@@ -7,6 +7,16 @@ adminApp.controller("adminUserController", function(SERVER_INFO, $scope, $http, 
     $http.get(serverAddr+ '/users')
         .success(function(data) {
             $scope.users = data;
+            console.log('No Llego: ' + data);
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+
+    $http.get(serverAddr+ '/users/order')
+        .success(function(data) {
+            $scope.users = data;
+            console.log('Llego: ' + data);
 
         })
         .error(function(data) {
