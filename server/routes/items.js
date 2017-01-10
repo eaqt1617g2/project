@@ -48,5 +48,25 @@ router.get('/:id', function(req, res) {
 
 });
 
+router.post('/additem', function(req, res) {
+    console.log("entro para crear");
+    console.log(req.body.author);
+    Item.create({
+        author: req.body.author,
+        title: req.body.title,
+        pic_id: req.body.pic_id
+    }, function(err, item){
+        if(err) {
+            res.send(err);
+        }
+        Item.find(function(err, item) {
+            if(err){
+                res.send(err);
+            }
+            res.json(item);
+        });
+    });
+});
+
 module.exports = router;
 

@@ -48,6 +48,7 @@ app.use('/adminPanel', express.static('../public/views/admin/admin.html'));
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(favicon(path.join(__dirname, '../public/favicon.ico')));
 
 app.use(session({
     resave: true,
