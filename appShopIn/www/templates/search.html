@@ -1,0 +1,22 @@
+<ion-view title="Search" id="search">
+  <ion-content padding="true" class="has-header">
+    <ion-list id="perfilDefaultPage-list3">
+      <ion-search placeholder="Usuario" filter="filter:search.value" class="" min-length="1" model="" source="findUser()"></ion-search>
+      <button id="search-button1" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Mostrar todos</button>
+    </ion-list>
+    <div id="search-container2">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="user in users" ng-click="selectUser(user)">
+        <button class="button icon ion-android-person"></button>
+        <h2>Nombre: {{user.loginid}}</h2>
+      </ion-item>
+      <ion-item class="item-remove-animate item-icon-right">
+        <button class="button icon ion-android-person"></button>
+        <h2>Loginid: {{usuario.loginid}}</h2>
+        <h2>Nombre: {{usuario.name}}</h2>
+        <h2>Apellido: {{usuario.last_name}}</h2>
+        <h2>Fecha creación: {{usuario.creation_date}}</h2>
+        <h2>Contraseña: {{usuario.password}}</h2>
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-view>

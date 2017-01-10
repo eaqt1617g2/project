@@ -5,17 +5,6 @@ var Item = require('../models/item');
 var mongoose = require('mongoose');
 
 
-router.post('/', function(req, res) {
-    Item.create({
-        title: req.body.title,
-        author: req.body.author
-    }, function(err, item){
-        if(err) {
-            res.send(err);
-        }
-    });
-});
-
 router.get('/', function(req, res) {
     console.log(req.query.page);
     Item.find().populate('author', 'loginid').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
@@ -49,8 +38,9 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/additem', function(req, res) {
-    console.log("entro para crear");
     console.log(req.body.author);
+    console.log(req.body.title);
+    console.log(req.body.pic_id);
     Item.create({
         author: req.body.author,
         title: req.body.title,

@@ -76,7 +76,7 @@ function ($scope, $stateParams) {
     console.log('Usuario: ' + $scope.usuario.loginid);
     var addPopup = $ionicPopup.confirm({
       title: 'Crear item nuevo',
-      template: '<input type="text" placeholder="Titulo" ng-model="newItem.title">',
+      template: '<input type="text" placeholder="Titulo" ng-model="newItem.title"> <br> <input type="text" placeholder="Pic ID" ng-model="newItem.pic_id">',
       scope: $scope,
       buttons: [
         {text: 'Cancel'},
@@ -86,9 +86,10 @@ function ($scope, $stateParams) {
           onTap: function () {
             var postItem = {
               title : $scope.newItem.title,
-              author: $scope.usuario.loginid
+              author: $scope.usuario.loginid,
+              pic_id: $scope.newItem.pic_id
             };
-            $http.post(BASE_URL + '/items/', postItem)
+            $http.post(BASE_URL + '/items/additem', postItem)
               .success(function (data) {
                 $scope.newItem = data;
                 console.log('Item creado',$scope.newItem);
@@ -150,6 +151,41 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 
+
+}])
+
+.controller('searchCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
+
+  $scope.getUsersOrder = function() {
+    $http.get(BASE_URL + '/users/order').success(function(data) {
+      $scope.users = {};
+      $scope.users = data;
+      console.log("Usuarios", $scope.users);
+    })
+      .error(function (data) {
+        console.log('Error: ' + data);
+        var alertPopup = $ionicPopup.alert({
+          title: 'No accedes a usuarios!',
+          template: 'Introduce bien los datos!'
+        });
+      });
+  };
+
+  $scope.selectUser = function(user){
+
+    $http.get(BASE_URL + '/users/'+user._id).success(function(data) {
+      $scope.usuario = user;
+      $scope.users = {};
+      console.log("Usuario", $scope.usuario);
+    })
+      .error(function (data) {
+        console.log('Error: ' + data);
+        var alertPopup = $ionicPopup.alert({
+          title: 'No accedes a usuarios!',
+          template: 'Introduce bien los datos!'
+        });
+      });
+  }
 
 }])
 

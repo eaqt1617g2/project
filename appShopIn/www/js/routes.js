@@ -89,6 +89,15 @@ angular.module('app.routes', [])
       }
     }
   })
+    .state('tabsController.searchDefaultPage', {
+      url: '/search',
+      views: {
+        'tab1': {
+          templateUrl: 'templates/search.html',
+          controller: 'searchCtrl'
+        }
+      }
+    })
 
 
 
