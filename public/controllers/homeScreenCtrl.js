@@ -33,6 +33,17 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
         });
     };
 
+    $scope.getAllItems = function() {
+        $http.get(serverAddr+'/items/')
+            .success(function(data) {
+                $scope.items = data;
+
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
     $scope.loadMore = function() {
         currentItemsPage++;
         $scope.getItems();

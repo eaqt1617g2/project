@@ -13,6 +13,14 @@ mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $
             console.log("Error: "+data);
         });
 
+    $http.get(serverAddr+'/items/order').success(function(data) {
+            console.log(JSON.stringify(data));
+            $scope.items = data;
+        })
+        .error(function(err) {
+            console.log('Error: ' + err);
+        });
+
     $scope.mapButton = function() {
         $scope.mapVisible = !$scope.mapVisible;
 
