@@ -60,6 +60,32 @@ router.get('/auth/google/callback', passport.authenticate('google', {
   failureRedirect: '/access',
 }));
 
+var Item = require('../models/item');
+router.post('/additem', function(req, res) {
+  console.log("entro para crear");
+  console.log(req.body.author);
+  Item.create({
+    author: req.body.author,
+    title: req.body.title,
+    pic_id: req.body.pic_id
+  }, function(err, item){
+    if(err) {
+      console.log("ERROR!!");
+      res.send(err);
+    }
+    console.log("OK!");
+    res.redirect('/views/itemView.html');
+    /*Item.find(function(err, item) {
+      if(err){
+        res.send(err);
+      }
+      res.json(item);
+
+    });*/
+  });
+});
+
+
 
 module.exports = router;
 

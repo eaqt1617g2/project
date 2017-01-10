@@ -1,7 +1,7 @@
 mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $http) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
-    $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
-
+    $scope.map = {center: {latitude: 41.2833, longitude: 1.9667}, zoom: 8};
+    $scope.date = new Date();
     $scope.mapVisible = false;
     $scope.mapButtonLabel = "Show";
 
