@@ -35,13 +35,13 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController', {
-      url: '/page4',
+      url: '/tabsController',
       templateUrl: 'templates/tabsController.html',
       abstract:true
   })
 
   .state('tabsController.lastMinuteDefaultPage', {
-    url: '/page5',
+    url: '/lastMinute',
       views: {
           'tab1': {
               templateUrl: 'templates/lastMinuteDefaultPage.html',
@@ -51,7 +51,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.discoverDefaultPage', {
-      url: '/page6',
+      url: '/discover',
       views: {
           'tab2': {
               templateUrl: 'templates/discoverDefaultPage.html',
@@ -61,7 +61,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.friendsDefaultPage', {
-      url: '/page7',
+      url: '/friends',
       views: {
           'tab3': {
               templateUrl: 'templates/friendsDefaultPage.html',
@@ -71,7 +71,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.perfilDefaultPage', {
-    url: '/page8',
+    url: '/perfil/:loginid',
     views: {
       'tab1': {
         templateUrl: 'templates/perfilDefaultPage.html',
@@ -81,7 +81,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.detailDefaultPage', {
-    url: '/page9',
+    url: '/detail',
     views: {
       'tab1': {
         templateUrl: 'templates/detailDefaultPage.html',
@@ -89,15 +89,25 @@ angular.module('app.routes', [])
       }
     }
   })
-    .state('tabsController.searchDefaultPage', {
-      url: '/search',
-      views: {
-        'tab1': {
-          templateUrl: 'templates/search.html',
-          controller: 'searchCtrl'
-        }
+
+  .state('tabsController.searchDefaultPage', {
+    url: '/search',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/search.html',
+        controller: 'searchCtrl'
       }
-    })
+    }
+  })
+  .state('tabsController.herramientasDefaultPage', {
+    url: '/herramientas',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/herramientas.html',
+        controller: 'herramientasCtrl'
+      }
+    }
+  })
 
 
 

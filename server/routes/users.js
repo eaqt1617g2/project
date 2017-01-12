@@ -36,11 +36,11 @@ router.get('/', function(req, res) {
 });
 
 router.get('/order', function (req, res){
-    User.find({ $query: {}, $orderby: { loginid : 1, quantityest:-1 } },
-        function(err, users) {
+    User.find({ $query: {}, $orderby: { name : 1, quantityest:-1 } },
+        function(err, todos) {
             if (err)
                 res.send(err);
-            res.json(users);
+            res.json(todos);
         }
     );
 });
@@ -157,7 +157,6 @@ router.get('/:loginid/itemsorder', function(req, res) {
         });
     });
 });
-
 
 
 

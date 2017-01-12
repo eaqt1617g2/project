@@ -1,0 +1,40 @@
+<ion-view title="Herramientas" id="herramientas">
+  <ion-content padding="true" class="has-header">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="Buscar por Loginid" ng-model="filtro.loginid" required>
+      </label>
+      <div class="button-bar">
+        <a class="button" ng-click="buscarUsuarioLoginid(filtro)" ng-disabled="myForm.$invalid || selected">Buscar</a>
+      </div>
+    </div>
+    <h4 style="text-align: center">Modificar Datos</h4>
+    <form id="register-form2" class="list">
+      <ion-list id="register-list2">
+        <label class="item item-input" id="signup-input4">
+          <span class="input-label">Name</span>
+          <input type="text" placeholder="" ng-model="newUser.name">
+        </label>
+        <label class="item item-input" id="signup-input5">
+          <span class="input-label">Lastname</span>
+          <input type="text" placeholder="" ng-model="newUser.last_name">
+        </label>
+        <label class="item item-input" id="signup-input6">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="" ng-model="newUser.password">
+        </label>
+        <label class="item item-input" id="signup-input8">
+          <span class="input-label">Email address</span>
+          <input type="text" placeholder="" ng-model="newUser.email">
+        </label>
+      </ion-list>
+      <button id="register-button3" ng-click="modificarUser()" class="button button-stable  button-block">Accept</button>
+    </form>
+
+    <h4 style="text-align: center">Eliminar Usuario</h4>
+    <div class="button-bar">
+      <a class="button" ng-click="removeUser()" ng-disabled="myForm.$invalid || selected">Buscar</a>
+    </div>
+
+  </ion-content>
+</ion-view>

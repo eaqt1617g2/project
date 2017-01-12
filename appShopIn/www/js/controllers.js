@@ -2,29 +2,35 @@ var BASE_URL = "http://localhost:2709";
 
 angular.module('app.controllers', [])
 
-.controller('menuCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+.controller('menuCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
 
 }])
 
-.controller('lastMinuteDefaultPageCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+.controller('lastMinuteDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
 
 }])
 
 .controller('perfilDefaultPageCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
 
-
+  $scope.UserID = ($state.params.loginid); //Obtenemos ID de la URI
+  console.log("Usuarios", $scope.UserID);
   //console.log('logueado', $scope.usuario );
   $scope.users = {};
-  $scope.usuario = {};
   $scope.items = {};
+  $scope.usuario = {};
+
+  $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
+    $scope.users = {};
+    $scope.usuario = data;
+    console.log("Usuario", $scope.usuario);
+  })
+    .error(function (data) {
+      console.log('Error: ' + data);
+      var alertPopup = $ionicPopup.alert({
+        title: 'No accedes a usuarios!',
+        template: 'Introduce bien los datos!'
+      });
+    });
 
   $scope.getUsers = function(){
     $http.get(BASE_URL + '/users').success(function (data) {
@@ -146,19 +152,21 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('detailDefaultPageCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+.controller('detailDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
 
 }])
 
-.controller('searchCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
+.controller('searchCtrl', ['$scope', '$http', '$ionicPopup', '$state', '$stateParams', function ($scope, $http, $ionicPopup, $state, $stateParams) {
+
+  $scope.filtro = {};
+  $scope.users = {};
+  $scope.usuario = {};
+  $scope.usuarios = {};
 
   $scope.getUsersOrder = function() {
     $http.get(BASE_URL + '/users/order').success(function(data) {
       $scope.users = {};
+      $scope.usuario = {};
       $scope.users = data;
       console.log("Usuarios", $scope.users);
     })
@@ -171,41 +179,87 @@ function ($scope, $stateParams) {
       });
   };
 
-  $scope.selectUser = function(user){
+  $scope.buscarUsuarioLoginid = function() {
+    console.log($scope.filtro.loginid)
+    $http.get(BASE_URL + '/users/'+ $scope.filtro.loginid)
+      .success(function(data) {
+        console.log($scope.filtro.loginid)
+        $scope.filtro = {}; // Borramos los datos del formulario
+        $scope.usuario = {};
+        $scope.users = {};
+        $scope.usuario = data;
 
-    $http.get(BASE_URL + '/users/'+user._id).success(function(data) {
-      $scope.usuario = user;
-      $scope.users = {};
-      console.log("Usuario", $scope.usuario);
-    })
-      .error(function (data) {
+      })
+      .error(function(data) {
+        console.log($scope.user)
         console.log('Error: ' + data);
-        var alertPopup = $ionicPopup.alert({
-          title: 'No accedes a usuarios!',
-          template: 'Introduce bien los datos!'
-        });
       });
-  }
+  };
 
 }])
 
-.controller('discoverDefaultPageCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+.controller('herramientasCtrl', ['$scope', '$http', '$ionicPopup', '$state','$stateParams', function ($scope, $http, $ionicPopup, $state, $stateParams) {
 
+  $scope.usuario = {};
+  $scope.newUser = {};
+  $scope.filtro = {};
+
+  $scope.buscarUsuarioLoginid = function() {
+    console.log($scope.filtro.loginid)
+    $http.get(BASE_URL + '/users/'+ $scope.filtro.loginid)
+      .success(function(data) {
+        $scope.filtro = {}; // Borramos los datos del formulario
+        $scope.usuario = {};
+        $scope.users = {};
+        $scope.usuario = data;
+      })
+      .error(function(data) {
+        console.log($scope.user)
+        console.log('Error: ' + data);
+      });
+  };
+
+  $scope.modificarUser = function() {
+    var postUser = {
+      name: $scope.newUser.name,
+      last_name: $scope.newUser.last_name,
+      password: $scope.newUser.password,
+      email: $scope.newUser.email
+    };
+    console.log('PostUser: ' + postUser);
+    $http.put(BASE_URL + '/users/'+ $scope.usuario._id, postUser).success(function(data) {
+        $scope.newUser = {}; // Borramos los datos del formulario
+        $scope.usuario = {};
+        $scope.usuario = data;
+        console.log($scope.usuario)
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
+  };
+
+  // Función para eliminar estudiante
+  $scope.removeUser = function() {
+    $http.delete(BASE_URL + '/users/'+ $scope.usuario._id)
+      .success(function(data) {
+        console.log("Usuario eliminado correctamente.");
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
+  };
 
 }])
 
-.controller('friendsDefaultPageCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+.controller('discoverDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
 
 }])
 
-.controller('loginCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams', function ($scope, $http, $ionicPopup, $stateParams) {
+.controller('friendsDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+
+}])
+
+.controller('loginCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $http, $ionicPopup, $stateParams, $state) {
 
   $scope.User = {};
 
