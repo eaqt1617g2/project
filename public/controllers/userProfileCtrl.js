@@ -1,13 +1,15 @@
-mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $routeParams) {
+mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $routeParams, $rootScope) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
     var currentItemsPage = 0;
     $scope.items = [];
 
+
     $http.get(serverAddr+"/users/"+$routeParams.loginid)
         .success(function(data) {
             console.log("Get user OK")
-            $scope.user = data;
+            $scope.profile_user = data;
+
         })
         .error(function(data) {
             console.log("Error: "+data);
@@ -27,107 +29,23 @@ mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $rout
     };
 
     $scope.getFollowers = function() {
-        $scope.followers = [
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            },
-            {
-                loginid: "Scarlet88",
-                displayname: "Scarlett",
-                email: "scarlet.johansson@gmail.com",
-                creation_date: "2016-10-07T17:40:11.071Z",
-                last_login_date: "2016-10-07T17:40:11.071Z",
-                followers: "65",
-                following: "54",
-                items: "6",
-                photo_user: "../assets/imgs/profileTestPic3.png"
-            }
-        ];
+
+    };
+
+    $scope.follow = function() {
+        $http.post(serverAddr+ '/users/'+$rootScope.user.loginid+'/follow',
+            {"_id": $scope.profile_user._id}
+        )
+            .success(function(data) {
+
+            })
+            .error(function(data) {
+                console.log("Follow error: ");
+        });
+    };
+
+    $scope.unfollow = function() {
+
     };
 
     /*

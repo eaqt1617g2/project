@@ -16,8 +16,9 @@ var userSchema = mongoose.Schema({
 	creation_date: {type: Date, default: Date.now},
 	email: {type: String, unique: true},
 	/*seguidos: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],*/
-	last_login_date: {type: Date, default: Date.now}
-
+	last_login_date: {type: Date, default: Date.now},
+	followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	following: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 });
 
 userSchema.methods.generateHash = function(password) {

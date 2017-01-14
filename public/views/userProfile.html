@@ -4,15 +4,15 @@
         <!-- Foto + titulo -->
         <div class="row" id="profile-content">
             <div class="col-md-3" id="profile-avatar-wrapper">
-                <a href="#/user"><img src={{user.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}}></a>
+                <a href="#/user"><img src={{profile_user.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}}></a>
             </div>
 
             <div class="col-md-9" id="profile-info-wrapper">
                 <div>
-                    <h1 class="profile-user-fullname">{{user.displayname}}</h1>
+                    <h1 class="profile-user-fullname">{{profile_user.displayname}}</h1>
                 </div>
                 <div>
-                    <h2 class="profile-user-loginid">@{{user.loginid}}</h2>
+                    <h2 class="profile-user-loginid">@{{profile_user.loginid}}</h2>
                 </div>
             </div>
         </div>
@@ -25,13 +25,15 @@
                 <div class="col-md-9 col-md-offset-3">
                     <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
                         <ul class="nav navbar-nav">
-                            <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{user.items || '0'}}</span></a></li>
-                            <li><a href="#/user"> Seguidores<span>{{user.followers || '0'}}</span></a></li>
-                            <li><a href="#/user"> Siguiendo<span>{{user.following || '0'}}</span></a></li>
+                            <li class="profile-li-selected"><a href="#/user"> Artículos<span>{{profile_user.items || '0'}}</span></a></li>
+                            <li><a href="#/user"> Seguidores<span>{{profile_user.followers.length || '0'}}</span></a></li>
+                            <li><a href="#/user"> Siguiendo<span>{{profile_user.following.length || '0'}}</span></a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a id="follow-button" class="btn btn-default" role="button">Follow</a></li>
+                            <li ng-hide="user._id == profile_user._id || user.following.includes(profile_user._id)"><a ng-click="follow()" id="follow-button" class="btn btn-default follow-button" role="button">Follow</a></li>
+                            <li ng-show="user.following.includes(profile_user._id)"><a ng-click="unfollow()" id="unfollow-button" class="btn btn-default" role="button">Unfollow</a></li>
                         </ul>
+
                     </nav>
                 </div>
             </div>
@@ -45,9 +47,9 @@
             <div class="col-md-3">
                 <div class="module">
                     <ul class="user-info-list">
-                        <li><i class="fa fa-clock-o"></i> Registrado el {{user.creation_date | date:'dd/MM/yyyy'}}</li>
-                        <li><i class="fa fa-sign-in"></i> Último acceso el {{user.last_login_date| date:'dd/MM/yyyy'}}</li>
-                        <li><i class="fa fa-envelope-o"></i> {{user.email}}</li>
+                        <li><i class="fa fa-clock-o"></i> Registrado el {{profile_user.creation_date | date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-sign-in"></i> Último acceso el {{profile_user.last_login_date| date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-envelope-o"></i> {{profile_user.email}}</li>
                     </ul>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
+mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootScope) {
     //console.log("homeScreenCtrl");
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
@@ -8,7 +8,7 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
     $http.get(serverAddr+ '/users/my')
         .success(function(data) {
            // console.log(JSON.stringify(data));
-            $scope.user = data;
+            $rootScope.user = data;
         })
         .error(function(data) {
             console.log('Error: ' + data);

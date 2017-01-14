@@ -26,11 +26,12 @@
                 <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
                     <ul class="nav navbar-nav">
                         <li><a href="#/user"> Artículos<span>{{user.items || '0'}}</span></a></li>
-                        <li class="profile-li-selected"><a href="#/user"> Seguidores<span>{{user.followers || '0'}}</span></a></li>
-                        <li><a href="#/user"> Siguiendo<span>{{user.following || '0'}}</span></a></li>
+                        <li class="profile-li-selected"><a href="#/user"> Seguidores<span>{{user.followers.length || '0'}}</span></a></li>
+                        <li><a href="#/user"> Siguiendo<span>{{user.following.length || '0'}}</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a id="follow-button" class="btn btn-default" role="button">Follow</a></li>
+                        <li ng-hide="user._id == profile_user._id || user.following.includes(profile_user._id)"><a ng-click="follow()" id="follow-button" class="btn btn-default follow-button" role="button">Follow</a></li>
+                        <li ng-show="user.following.includes(profile_user._id)"><a ng-click="unfollow()" id="unfollow-button" class="btn btn-default" role="button">Unfollow</a></li>
                     </ul>
                 </nav>
             </div>

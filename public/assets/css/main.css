@@ -33,6 +33,13 @@ body {
 	color:white !important;
 	margin: 6px 35px;
 }
+#unfollow-button {
+	padding: 10px 30px;
+	margin-top: 6px;
+	background-color: #db1321;
+	color:white !important;
+	margin: 6px 35px;
+}
 
 .dropdown-menu>li>a {
 	font-weight: bold;

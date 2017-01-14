@@ -158,6 +158,35 @@ router.get('/:loginid/itemsorder', function(req, res) {
     });
 });
 
+router.post('/:loginid/follow', function(req, res) {
+    if(req.body._id == undefined) {
+        res.status(500).send("No id specified");
+        return;
+    }
+    console.log(req.body._id);
+    User.findOneAndUpdate(
+       {loginid: req.params.loginid},
+       {$addToSet : {"following": req.body._id}},
+       {},
+       function(err, user) {
+           if(err) {
+               res.send(err);
+           }
+           User.findOneAndUpdate(
+               {_id: req.body._id},
+               {$addToSet : {"followers": user._id}},
+               {},
+               function(err, user2) {
+                   if(err) {
+                       res.send(err);
+                   }
+                   res.send(user);
+               }
+           )
+       }
+    );
+});
+
 
 
 
