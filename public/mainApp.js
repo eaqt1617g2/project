@@ -8,6 +8,9 @@ mainApp.config(function($routeProvider) {
         }).when("/user/:loginid", {
             templateUrl : "/views/userProfile.html",
             controller: "userProfileCtrl"
+        }).when("/user/:loginid/followers", {
+            templateUrl: "/views/userFollowers.html",
+            controller: "userProfileCtrl"
         }).when("/config", {
             templateUrl: "/views/userConfiguration.html"
         }).when("/additem/:loginid", {

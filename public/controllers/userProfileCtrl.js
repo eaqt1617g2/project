@@ -26,6 +26,110 @@ mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $rout
         });
     };
 
+    $scope.getFollowers = function() {
+        $scope.followers = [
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            },
+            {
+                loginid: "Scarlet88",
+                displayname: "Scarlett",
+                email: "scarlet.johansson@gmail.com",
+                creation_date: "2016-10-07T17:40:11.071Z",
+                last_login_date: "2016-10-07T17:40:11.071Z",
+                followers: "65",
+                following: "54",
+                items: "6",
+                photo_user: "../assets/imgs/profileTestPic3.png"
+            }
+        ];
+    };
+
     /*
     $scope.items = [
         {
