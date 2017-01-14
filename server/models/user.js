@@ -15,6 +15,7 @@ var userSchema = mongoose.Schema({
 	photo_background: String,
 	creation_date: {type: Date, default: Date.now},
 	email: {type: String, unique: true},
+	/*seguidos: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],*/
 	last_login_date: {type: Date, default: Date.now}
 
 });

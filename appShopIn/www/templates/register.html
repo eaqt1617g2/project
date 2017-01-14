@@ -1,0 +1,33 @@
+<ion-view title="Register" id="register">
+  <ion-content padding="true" class="has-header">
+    <form id="register-form2" class="list">
+      <ion-list id="register-list2">
+        <label class="item item-input" id="signup-input3">
+          <span class="input-label">Username</span>
+          <input type="text" placeholder="" ng-model="newUser.loginid">
+        </label>
+        <label class="item item-input" id="signup-input4">
+          <span class="input-label">Name</span>
+          <input type="text" placeholder="" ng-model="newUser.name">
+        </label>
+        <label class="item item-input" id="signup-input5">
+          <span class="input-label">Lastname</span>
+          <input type="text" placeholder="" ng-model="newUser.last_name">
+        </label>
+        <label class="item item-input" id="signup-input6">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="" ng-model="newUser.password">
+        </label>
+        <label class="item item-input" id="signup-input7">
+          <span class="input-label">Confirm password</span>
+          <input type="password" placeholder="" ng-model="newUser.confirm_password">
+        </label>
+        <label class="item item-input" id="signup-input8">
+          <span class="input-label">Email address</span>
+          <input type="text" placeholder="" ng-model="newUser.email">
+        </label>
+      </ion-list>
+      <button id="register-button3" ng-click="createUser()" class="button button-stable  button-block">Accept</button>
+    </form>
+  </ion-content>
+</ion-view>

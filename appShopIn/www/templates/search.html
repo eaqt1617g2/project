@@ -1,0 +1,34 @@
+<ion-view title="Search" id="search">
+  <ion-content padding="true" class="has-header">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="Buscar por Loginid" ng-model="filtro.loginid" required>
+      </label>
+      <div class="button-bar">
+        <a class="button" ng-click="buscarUsuarioLoginid(filtro)" ng-disabled="myForm.$invalid || selected">Buscar</a>
+      </div>
+    </div>
+    <ion-list id="perfilDefaultPage-list3">
+      <ion-search placeholder="Usuario" filter="filter:search.value" class="" min-length="1" model="" source="findUser()"></ion-search>
+      <button id="search-button1" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Mostrar todos</button>
+    </ion-list>
+    <div class="list animate-fade-slide-in-right">
+      <a class="item item-avatar item-icon-right" ng-repeat="user in users" href="#/tabsController/perfil/{{user.loginid}}">
+        <img src="img/logo_shopin.png">
+        <h2>{{user.loginid}}</h2>
+        <p>{{user.name}} {{user.last_name}}</p>
+        <i class="icon ion-chatbubble muted"></i>
+      </a>
+    </div>
+    <div class="list animate-fade-slide-in-right" content scroll="false">
+      <a class="item item-avatar item-icon-right" href="#/tabsController/perfil/{{usuario.loginid}}">
+        <img src="img/logo_shopin.png">
+        <h2>{{usuario.loginid}}</h2>
+        <p>{{usuario.name}} {{usuario.last_name}}</p>
+        <p>{{usuario.creation_date}}</p>
+        <i class="icon ion-chatbubble muted"></i>
+      </a>
+    </div>
+
+  </ion-content>
+</ion-view>

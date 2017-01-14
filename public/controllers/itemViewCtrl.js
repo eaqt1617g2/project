@@ -1,7 +1,7 @@
 mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $http) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
-    $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
-
+    $scope.map = {center: {latitude: 41.2833, longitude: 1.9667}, zoom: 8};
+    $scope.date = new Date();
     $scope.mapVisible = false;
     $scope.mapButtonLabel = "Show";
 
@@ -11,6 +11,14 @@ mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $
         })
         .error(function(data) {
             console.log("Error: "+data);
+        });
+
+    $http.get(serverAddr+'/items/order').success(function(data) {
+            console.log(JSON.stringify(data));
+            $scope.items = data;
+        })
+        .error(function(err) {
+            console.log('Error: ' + err);
         });
 
     $scope.mapButton = function() {

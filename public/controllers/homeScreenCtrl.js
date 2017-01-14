@@ -1,5 +1,5 @@
 mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
-    console.log("homeScreenCtrl");
+    //console.log("homeScreenCtrl");
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
     var currentItemsPage = 0;
@@ -7,7 +7,7 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
 
     $http.get(serverAddr+ '/users/my')
         .success(function(data) {
-            console.log(JSON.stringify(data));
+           // console.log(JSON.stringify(data));
             $scope.user = data;
         })
         .error(function(data) {
@@ -25,12 +25,23 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http) {
             params: {page: currentItemsPage}
         })
         .success(function(data) {
-            console.log(JSON.stringify(data));
+           // console.log(JSON.stringify(data));
             $scope.items = $scope.items.concat(data);
         })
         .error(function(err) {
             console.log('Error: ' + err);
         });
+    };
+
+    $scope.getAllItems = function() {
+        $http.get(serverAddr+'/items/')
+            .success(function(data) {
+                $scope.items = data;
+
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
     };
 
     $scope.loadMore = function() {

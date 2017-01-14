@@ -35,6 +35,16 @@ router.get('/', function(req, res) {
 
 });
 
+router.get('/order', function (req, res){
+    User.find({ $query: {}, $orderby: { name : 1, quantityest:-1 } },
+        function(err, todos) {
+            if (err)
+                res.send(err);
+            res.json(todos);
+        }
+    );
+});
+
 
 router.get('/:loginid', function(req, res,next) {
     User.findOne({loginid: req.params.loginid}, function(err, user) {
@@ -131,9 +141,21 @@ router.get('/:loginid/items', function(req, res) {
             res.json(items);
         });
     });
+});
 
-
-
+router.get('/:loginid/itemsorder', function(req, res) {
+    User.findOne({loginid: req.params.loginid}, function(err, user) {
+        if(err) {
+            res.send(err);
+        }
+        o_id = user._id;
+        Item.find({author: o_id}).populate('author', 'loginid').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
+            if(err) {
+                res.send(err);
+            }
+            res.json(items);
+        });
+    });
 });
 
 

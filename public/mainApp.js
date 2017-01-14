@@ -10,7 +10,9 @@ mainApp.config(function($routeProvider) {
             controller: "userProfileCtrl"
         }).when("/config", {
             templateUrl: "/views/userConfiguration.html"
-
+        }).when("/additem/:loginid", {
+            templateUrl: "/views/itemAdd.html",
+            controller: "itemAddCtrl"
         }).when("/item/:id", {
             templateUrl: "/views/itemView.html",
             controller: "itemViewCtrl"
