@@ -18,7 +18,6 @@
         </div>
     </div>
 </div>
-
 <!-- navbar -->
 <div id="profile-nav-wrapper">
     <div class="container">
@@ -26,9 +25,9 @@
             <div class="col-md-9 col-md-offset-3">
                 <nav id="profile-navbar" class="navbar navbar-default" role=navigation>
                     <ul class="nav navbar-nav">
-                        <li class="profile-li-selected"><a href="#/user/{{profile_user.loginid}}"> Artículos<span>{{profile_user.items || '0'}}</span></a></li>
+                        <li><a href="#/user/{{profile_user.loginid}}"> Artículos<span>{{profile_user.items || '0'}}</span></a></li>
                         <li><a href="#/user/{{profile_user.loginid}}/followers"> Seguidores<span>{{profile_user.followers.length || '0'}}</span></a></li>
-                        <li><a href="#/user/{{profile_user.loginid}}/following"> Siguiendo<span>{{profile_user.following.length || '0'}}</span></a></li>
+                        <li class="profile-li-selected"><a href="#/user/{{profile_user.loginid}}/following"> Siguiendo<span>{{profile_user.following.length || '0'}}</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li ng-hide="user._id == profile_user._id || following"><a ng-click="follow()" id="follow-button" class="btn btn-default follow-button" role="button">Follow</a></li>
@@ -40,7 +39,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <div id="content-wrapper">
     <div id="main-content" class="container">
@@ -48,34 +47,30 @@
             <div class="col-md-3">
                 <div class="module">
                     <ul class="user-info-list">
-                        <li><i class="fa fa-clock-o"></i> Registrado el {{profile_user.creation_date | date:'dd/MM/yyyy'}}</li>
-                        <li><i class="fa fa-sign-in"></i> Último acceso el {{profile_user.last_login_date| date:'dd/MM/yyyy'}}</li>
-                        <li><i class="fa fa-envelope-o"></i> {{profile_user.email}}</li>
+                        <li><i class="fa fa-clock-o"></i> Registrado el {{user.creation_date | date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-sign-in"></i> Último acceso el {{user.last_login_date| date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-envelope-o"></i> {{user.email}}</li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-9">
-                <div id="main-module" ng-init="getUserItems()">
+                <div id="main-module">
                     <div class="row">
-                        <div ng-repeat="item in items">
-                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                            <div class="col-md-4" >
-                                <div class="item-wrapper">
-                                    <div class="item-pre-pic-wrapper">
-                                        <a href="#/item/{{item._id}}"><img class="item-pre-pic" src="http://localhost:2709/assets/imgs/items/{{item.pic_id}}"></a>
-                                    </div>
-                                    <div class="item-pre-info">
-                                        <h2>{{item.title}}</h2>
-                                        <div class="item-pre-stats">
-                                            <p><i class="fa fa-heart"></i> {{item.likes}} <i class="fa fa-comments-o"></i> {{item.comments.length}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="item-pre-footer">
-                                        <h3><a href="#/user/{{item.author.loginid}}">@{{item.author.loginid}}</a> - {{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h3>
+                        <div ng-repeat="follower in profile_user.following">
+                            <!-- <div class="clearfix" ng-if="$index % 3 == 0"></div> -->
+                            <div class="col-md-3" >
+                                <div class="user-list-item" ng-href="">
+                                    <a href="">
+                                        <img src={{follower.photo_user}}>
+                                    </a>
+                                    <div class="user-list-item-info">
+                                        <h3>{{follower.displayname}}</h3>
+                                        <h4>@{{follower.loginid}}</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

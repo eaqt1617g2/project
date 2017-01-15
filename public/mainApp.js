@@ -11,6 +11,9 @@ mainApp.config(function($routeProvider) {
         }).when("/user/:loginid/followers", {
             templateUrl: "/views/userFollowers.html",
             controller: "userProfileCtrl"
+        }).when("/user/:loginid/following", {
+            templateUrl: "/views/userFollowing.html",
+            controller: "userProfileCtrl"
         }).when("/config", {
             templateUrl: "/views/userConfiguration.html"
         }).when("/additem/:loginid", {

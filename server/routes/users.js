@@ -47,13 +47,12 @@ router.get('/order', function (req, res){
 
 
 router.get('/:loginid', function(req, res,next) {
-    User.findOne({loginid: req.params.loginid}, function(err, user) {
+    User.findOne({loginid: req.params.loginid}).populate('followers', 'loginid displayname photo_user').populate('following', 'loginid displayname photo_user').exec(function(err, user) {
         if(err) {
             res.send(err);
         }
         res.json(user);
     });
-
 });
 
 
@@ -158,12 +157,14 @@ router.get('/:loginid/itemsorder', function(req, res) {
     });
 });
 
+//Función para hacer follow a otro usuario. En la url aparece el loginid del usuario que va a seguir a otro.
+//En el body aparece la id del usuario al que se le hace follow
+//Devuelve el usuario al que se ha seguido
 router.post('/:loginid/follow', function(req, res) {
     if(req.body._id == undefined) {
         res.status(500).send("No id specified");
         return;
     }
-    console.log(req.body._id);
     User.findOneAndUpdate(
        {loginid: req.params.loginid},
        {$addToSet : {"following": req.body._id}},
@@ -180,10 +181,49 @@ router.post('/:loginid/follow', function(req, res) {
                    if(err) {
                        res.send(err);
                    }
-                   res.send(user);
+                   User.findOne({_id: req.body._id}).populate('followers', 'loginid displayname photo_user').populate('following', 'loginid displayname photo_user').exec(function(err, user) {
+                       if(err) {
+                           res.send(err);
+                       }
+                       res.json(user);
+                   });
                }
            )
        }
+    );
+});
+
+//Igual que la función de follow pero en lugar de añadir al array, substraer(pull)
+router.post('/:loginid/unfollow', function(req, res) {
+    if(req.body._id == undefined) {
+        res.status(500).send("No id specified");
+        return;
+    }
+    User.findOneAndUpdate(
+        {loginid: req.params.loginid},
+        {$pull : {"following": req.body._id}},
+        {},
+        function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+            User.findOneAndUpdate(
+                {_id: req.body._id},
+                {$pull : {"followers": user._id}},
+                {},
+                function(err, user2) {
+                    if(err) {
+                        res.send(err);
+                    }
+                    User.findOne({_id: req.body._id}).populate('followers', 'loginid displayname photo_user').populate('following', 'loginid displayname photo_user').exec(function(err, user) {
+                        if(err) {
+                            res.send(err);
+                        }
+                        res.json(user);
+                    });
+                }
+            )
+        }
     );
 });
 

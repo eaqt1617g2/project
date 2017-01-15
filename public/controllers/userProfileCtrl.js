@@ -4,16 +4,27 @@ mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $rout
     var currentItemsPage = 0;
     $scope.items = [];
 
+    //Meto el profile_user (usuario que se muestra en el perfil) en el rootScope para no tener que
+    //hacer una peticion cuando se navegue entre profile-following-followers
 
-    $http.get(serverAddr+"/users/"+$routeParams.loginid)
-        .success(function(data) {
-            console.log("Get user OK")
-            $scope.profile_user = data;
-
-        })
-        .error(function(data) {
-            console.log("Error: "+data);
-    });
+    if($rootScope.profile_user == undefined || $rootScope.profile_user.loginid != $routeParams.loginid)
+    {
+        $http.get(serverAddr+"/users/"+$routeParams.loginid)
+            .success(function(data) {
+                console.log("Get user OK")
+                $rootScope.profile_user = data;
+                for(var i = 0; i < $rootScope.profile_user.followers.length; i++)
+                {
+                    if($rootScope.profile_user.followers[i]._id == $rootScope.user._id)
+                        $rootScope.following = true;
+                    else
+                        $rootScope.following = false;
+                }
+            })
+            .error(function(data) {
+                console.log("Error: "+data);
+        });
+    }
 
     $scope.getUserItems = function() {
         $http.get(serverAddr+'/users/'+$routeParams.loginid+'/items', {
@@ -28,24 +39,30 @@ mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $rout
         });
     };
 
-    $scope.getFollowers = function() {
-
-    };
-
     $scope.follow = function() {
         $http.post(serverAddr+ '/users/'+$rootScope.user.loginid+'/follow',
-            {"_id": $scope.profile_user._id}
+            {"_id": $rootScope.profile_user._id}
         )
             .success(function(data) {
-
+                $rootScope.profile_user = data;
+                $rootScope.following = true;
             })
             .error(function(data) {
-                console.log("Follow error: ");
+                console.log("Follow error");
         });
     };
 
     $scope.unfollow = function() {
-
+        $http.post(serverAddr+ '/users/'+$rootScope.user.loginid+'/unfollow',
+            {"_id": $rootScope.profile_user._id}
+        )
+            .success(function(data) {
+                $rootScope.profile_user = data;
+                $rootScope.following = false;
+            })
+            .error(function(data) {
+                console.log("Unfollow error");
+        });
     };
 
     /*
