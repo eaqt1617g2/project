@@ -71,10 +71,13 @@
     <ion-side-menu-content>
       <ion-nav-bar class="bar-calm">
         <ion-nav-back-button></ion-nav-back-button>
-        <ion-nav-buttons side="left">
+        <ion-nav-buttons ng-controller="menuCtrl" side="left">
           <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-          <button class="button button-icon button-clear ion-android-search" ui-sref="tabsController.searchDefaultPage"></button>
-          <button class="button button-icon button-clear ion-gear-a" ui-sref="tabsController.herramientasDefaultPage"></button>
+          <div class="col button-right">
+            <button class="button button-icon button-clear ion-android-search" ui-sref="tabsController.searchDefaultPage"></button>
+            <button class="button button-icon button-clear ion-gear-a" ui-sref="tabsController.herramientasDefaultPage"></button>
+            <button class="button button-icon button-clear ion-power" ui-sref="tabsController.herramientasDefaultPage"></button>
+          </div>
         </ion-nav-buttons>
       </ion-nav-bar>
       <ion-nav-view></ion-nav-view>

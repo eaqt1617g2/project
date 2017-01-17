@@ -10,21 +10,19 @@
           <ion-item id="perfilDefaultPage-list-item5">{{usuario.name}} {{usuario.last_name}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item6">{{usuario.email}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item4">{{usuario.last_login_date}}</ion-item>
-
+          <button id="perfilDefaultPage-button21" ng-click="follow(usuario)" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Follow</button>
+          <button id="perfilDefaultPage-button22" ng-click="unfollow(usuario)" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Unfollow</button>
         </ion-list>
         <div id="perfilDefaultPage-button-bar2" class="button-bar">
           <button id="perfilDefaultPage-button17" ng-click="getItemsOrder()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
           <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS</button>
           <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING</button>
           </div>
-        <button id="perfilDefaultPage-button20" ng-click="createItem()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Crear Item</button>
 
         <ion-item class="item-remove-animate item-icon-right" ng-repeat="user in users">
         <button class="button icon ion-android-person" ng-click="selectUser(user)"></button>
           <h2>Nombre: {{user.name}}</h2>
-          <button id="perfilDefaultPage-button21" ng-click="follow(user, usuario)" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Follow</button>
-          <button id="perfilDefaultPage-button22" ng-click="unfollow(user, usuario)" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Unfollow</button>
-        </ion-item>
+          </ion-item>
         <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items">
           <h2>Nombre: {{item.title}}, Autor: {{item.author}}, Likes: {{item.likes}}</h2>
         </ion-item>

@@ -1,6 +1,9 @@
 <ion-view title="Herramientas" id="herramientas">
   <ion-content padding="true" class="has-header">
     <div class="list list-inset">
+      <div class="col text-right">
+        <button id="logout-button3" ng-click="logout()" class="button button-assertive icon ion-power"> Salir</button>
+      </div>
       <label class="item item-input">
         <input type="text" placeholder="Buscar por Loginid" ng-model="filtro.loginid" required>
       </label>
@@ -31,9 +34,12 @@
       <button id="register-button3" ng-click="modificarUser()" class="button button-stable  button-block">Accept</button>
     </form>
 
-    <h4 style="text-align: center">Eliminar Usuario</h4>
+    <h4 style="text-align: center">Si quiere Eliminar su cuenta introduzca su contraseña y apriete eliminar</h4>
+    <label class="item item-input">
+      <input type="text" placeholder="Contraseña" ng-model="eliminar.contraseña" required>
+    </label>
     <div class="button-bar">
-      <a class="button" ng-click="removeUser()" ng-disabled="myForm.$invalid || selected">Buscar</a>
+      <a class="button" ng-click="removeUser()" ng-disabled="myForm.$invalid || selected">Eliminar</a>
     </div>
 
   </ion-content>

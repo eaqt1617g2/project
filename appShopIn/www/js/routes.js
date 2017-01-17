@@ -8,6 +8,8 @@ angular.module('app.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+
+
   .state('tabsControllerLogin', {
       url: '/login',
       templateUrl: 'templates/tabsControllerLogin.html',
@@ -70,6 +72,16 @@ angular.module('app.routes', [])
       }
   })
 
+  .state('tabsController.usersDefaultPage', {
+      url: '/users/:loginid',
+      views: {
+        'tab1': {
+          templateUrl: 'templates/usersDefaultPage.html',
+          controller: 'usersDefaultPageCtrl'
+        }
+      }
+  })
+
   .state('tabsController.perfilDefaultPage', {
     url: '/perfil/:loginid',
     views: {
@@ -99,6 +111,7 @@ angular.module('app.routes', [])
       }
     }
   })
+
   .state('tabsController.herramientasDefaultPage', {
     url: '/herramientas',
     views: {

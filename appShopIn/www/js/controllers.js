@@ -10,6 +10,54 @@ angular.module('app.controllers', [])
 
 }])
 
+.controller('usersDefaultPageCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
+
+  $scope.UserID = ($state.params.loginid); //Obtenemos ID de la URI
+  console.log("Usuarios", $scope.UserID);
+  //console.log('logueado', $scope.usuario );
+  $scope.users = {};
+  $scope.items = {};
+  $scope.usuario = {};
+
+  $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
+    $scope.users = {};
+    $scope.usuario = data;
+    console.log("Usuario", $scope.usuario);
+  })
+    .error(function (data) {
+      console.log('Error: ' + data);
+      var alertPopup = $ionicPopup.alert({
+        title: 'No accedes a usuarios!',
+        template: 'Introduce bien los datos!'
+      });
+    });
+
+  $scope.follow = function(user, usuario) {
+    $http.post(BASE_URL + '/users/'+ usuario.loginid+'/follow',{"_id": user._id}).success(function(data) {
+      console.log("Usuario", usuario);
+      console.log("User", user);
+      $scope.usuario = data;
+      //$rootScope.following = true;
+    })
+      .error(function(data) {
+        console.log("Follow error");
+      });
+  };
+
+  $scope.unfollow = function(user, usuario) {
+    $http.post(BASE_URL+ '/users/'+usuario.loginid +'/unfollow',{"_id": user._id}).success(function(data) {
+      console.log("Usuario", $scope.usuario);
+      console.log("User", $scope.user);
+      $scope.usuario = data;
+      //$rootScope.following = false;
+    })
+      .error(function(data) {
+        console.log("Unfollow error");
+      });
+  };
+
+}])
+
 .controller('perfilDefaultPageCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
 
   $scope.UserID = ($state.params.loginid); //Obtenemos ID de la URI
@@ -18,6 +66,8 @@ angular.module('app.controllers', [])
   $scope.users = {};
   $scope.items = {};
   $scope.usuario = {};
+
+  var userLogin = JSON.parse(window.sessionStorage.getItem("user"));
 
   $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
     $scope.users = {};
@@ -62,7 +112,6 @@ angular.module('app.controllers', [])
   };
 
   $scope.selectUser = function(user){
-
     $http.get(BASE_URL + '/users/'+user._id).success(function(data) {
       $scope.usuario = user;
       $scope.users = {};
@@ -76,6 +125,30 @@ angular.module('app.controllers', [])
         });
       });
   }
+
+  $scope.follow = function(user, usuario) {
+    $http.post(BASE_URL + '/users/'+ usuario.loginid+'/follow',{"_id": user._id}).success(function(data) {
+      console.log("Usuario", usuario);
+      console.log("User", user);
+      $scope.usuario = data;
+      //$rootScope.following = true;
+      })
+      .error(function(data) {
+        console.log("Follow error");
+      });
+  };
+
+  $scope.unfollow = function(user, usuario) {
+    $http.post(BASE_URL+ '/users/'+usuario.loginid +'/unfollow',{"_id": user._id}).success(function(data) {
+      console.log("Usuario", $scope.usuario);
+      console.log("User", $scope.user);
+      $scope.usuario = data;
+      //$rootScope.following = false;
+      })
+      .error(function(data) {
+        console.log("Unfollow error");
+      });
+  };
 
   $scope.createItem = function () {
     $scope.newItem = {};
@@ -219,6 +292,31 @@ angular.module('app.controllers', [])
       });
   };
 
+  $scope.logout = function () {
+    $scope.newItem = {};
+    var userLogin = JSON.parse(window.sessionStorage.getItem("user"));
+    console.log('Usuario: ' + userLogin);
+    var addPopup = $ionicPopup.confirm({
+      title: 'Seguro que quieres salir?',
+      template: '',
+      scope: $scope,
+      buttons: [
+        {text: 'No'},
+        {
+          text: '<b>Si</b>',
+          type: 'button-positive',
+          onTap: function () {
+            window.sessionStorage.removeItem("user");
+            $scope.userlogged = null;
+            //$http.get(BASE_URL + "/api/logout");
+            console.log("Ha salido correctamente.");
+            $state.go('tabsControllerLogin.login', {}, {reload: true});
+          }
+        }
+      ]
+    });
+  };
+
   $scope.modificarUser = function() {
     var postUser = {
       name: $scope.newUser.name,
@@ -259,7 +357,7 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('loginCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $http, $ionicPopup, $stateParams, $state) {
+.controller('loginCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams','$state','$window', function ($scope, $http, $ionicPopup, $stateParams, $state, $window) {
 
   $scope.User = {};
 
