@@ -62,9 +62,7 @@ body {
 
 .module {
 	background: #fff;
-	
 	border: solid 1px #ebeef2;
-
 	border-radius: 5px;
 	padding: 5px 20px;
 	margin-bottom: 20px;
@@ -280,11 +278,21 @@ html, body {
 	padding: 0px 5px;
 	background-color: #f7f9fa;
 	border-radius: 0px 0px 5px 5px;
+	border-bottom: 1px solid #ebeef2;
 }
 #profile-pre-stats h5{
 	color: #2E9FFF;
 	font-weight: bold;
 	font-size: 12px;
+}
+
+.add-item-button {
+	font-weight: bold;
+	margin: 8px;
+	font-size: 15px;
+	background-color: #2E9FFF;
+	border-color: #2E9FFF;
+	color:white;
 }
 
 #profile-pre-stats h6{
@@ -551,3 +559,27 @@ html, body {
 	height: 40px;
 }
 /* --------------*/
+
+.user-conf-module {
+	background: #fff;
+	border: solid 1px #ebeef2;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+.user-conf-module-header {
+	border-bottom: 1px solid #ebeef2;
+	padding: 8px 15px 10px 15px;
+	background-color: #00b3ee;
+	color: white;
+	border-radius: 5px 5px 0px 0px;
+	font-weight: bold;
+}
+.user-conf-module-content {
+	padding: 20px;
+	border-top: 1px solid #ebeef2;
+}
+.module-separator {
+	border-bottom: 1px solid #ebeef2;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}

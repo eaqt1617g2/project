@@ -2,9 +2,34 @@
     <div id="main-content" class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="module">
-                    <h2>User Configuration</h2>
-                    <h3>No implementado</h3>
+                <div class="user-conf-module">
+                    <div class="user-conf-module-header">
+                        <h4>User configuration</h4>
+                    </div>
+                    <div class="user-conf-module-content">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="displayname">Displayname: </label>
+                                <input type="text" class="form-control" id="displayname">
+                            </div>
+                            <button type="submit" class="btn btn-primary ">Save</button>
+                        </form>
+                    </div>
+                    <div class="user-conf-module-content">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="password">Password: </label>
+                                <input type="password" class="form-control" placeholder="Name" id="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="repeat-password">Repeat password: </label>
+                                <input type="password" class="form-control" placeholder="Name" id="repeat-password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Change password</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>

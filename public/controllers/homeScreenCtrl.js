@@ -12,6 +12,7 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootS
         })
         .error(function(data) {
             console.log('Error: ' + data);
+            window.location.href = serverAddr+"/access";
         });
 
 

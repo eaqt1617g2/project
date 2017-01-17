@@ -10,23 +10,17 @@
                     </div>
                     <div  id="profile-pre-stats">
                         <div class="row">
-                            <div class="col-md-4">
-                                <h5>ARTÍCULOS</h5>
-                                <h6>{{user.items || '0'}}</h6>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <h5>SEGUIDORES</h5>
                                 <h6>{{user.followers.length || 0}}</h6>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <h5>SIGUIENDO</h5>
                                 <h6>{{user.following.length || 0}}</h6>
                             </div>
                         </div>
-                        <div items-add-new>
-                            <li ><a href="#/additem/{{user.loginid}}">Add new Item</a></li>
-                        </div>
                     </div>
+                    <a class="btn add-item-button" ng-href="#/additem/{{user.loginid}}">Add new item</a>
                 </div>
                 <div id="filters" class="module">
                     <div class="module-header">
