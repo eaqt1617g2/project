@@ -24,6 +24,7 @@
     "angular-bootstrap": "^2.2.0",
     "ionic-native": "^2.0.3",
     "angular-cookies": "^1.5.9",
-    "angular-google-maps": "^2.4.0"
+    "angular-google-maps": "^2.4.0",
+    "ng-flow": "~2"
   }
 }

@@ -1,4 +1,4 @@
-var mainApp = angular.module("mainApp", ['ngRoute', 'ui.bootstrap', 'app.config', 'ngCookies', 'uiGmapgoogle-maps']);
+var mainApp = angular.module("mainApp", ['ngRoute', 'ui.bootstrap', 'app.config', 'ngCookies', 'uiGmapgoogle-maps','flow']);
 
 mainApp.config(function($routeProvider) {
     $routeProvider
@@ -24,5 +24,10 @@ mainApp.config(function($routeProvider) {
             templateUrl: "/views/itemView.html",
             controller: "itemViewCtrl"
     });
+
+
+    mainApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
+            flowFactoryProvider.factory = fustyFlowFactory;
+        }]);
     
-}); 
+});

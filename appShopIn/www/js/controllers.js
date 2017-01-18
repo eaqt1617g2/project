@@ -371,7 +371,7 @@ angular.module('app.controllers', [])
       console.log("User Logged", data);
       window.sessionStorage.setItem("user", JSON.stringify(data));
       $scope.usuario = data;
-      $state.go('tab.mapa', {}, {reload: true});
+      $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
     })
       .error(function (data) {
         console.log('Error: ' + data);

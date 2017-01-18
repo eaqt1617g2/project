@@ -30,6 +30,29 @@
                             </div>
                         </div>
 
+                        <div flow-init="{target: '../assets/imgs/items'}"
+                             flow-files-submitted="$flow.upload()"
+                             flow-file-success="$file.msg = $message"
+                             flow-name="obj.flow">
+
+                            <input type="file" flow-btn/>
+
+                            <table>
+                                <tr ng-repeat="file in $flow.files">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{file.name}}</td>
+                                    <td>{{file.msg}}</td>
+                                </tr>
+                            </table>
+
+                            <img flow-img="$flow.files[0]" />
+
+                            Tienes subidos estos ficheros: #{{obj.flow.files.length}}
+
+                        </div>
+                        <br>
+
+
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Address"  name="address">
                         </div>
