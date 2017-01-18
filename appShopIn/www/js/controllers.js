@@ -1,7 +1,7 @@
 var BASE_URL = "http://localhost:2709";
 
 angular.module('app.controllers', [])
-
+//angular google maps
 .controller('menuCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
 
 }])
@@ -36,6 +36,8 @@ angular.module('app.controllers', [])
     $http.post(BASE_URL + '/users/'+ usuario.loginid+'/follow',{"_id": user._id}).success(function(data) {
       console.log("Usuario", usuario);
       console.log("User", user);
+      $scope.usuario = {};
+      $scope.users = {};
       $scope.usuario = data;
       //$rootScope.following = true;
     })
@@ -58,16 +60,15 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('perfilDefaultPageCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
+.controller('perfilDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
   $scope.UserID = ($state.params.loginid); //Obtenemos ID de la URI
   console.log("Usuarios", $scope.UserID);
-  //console.log('logueado', $scope.usuario );
   $scope.users = {};
   $scope.items = {};
-  $scope.usuario = {};
+  $scope.usuario = $rootScope.userLogued;
+  console.log('logueado', $scope.usuario );
 
-  var userLogin = JSON.parse(window.sessionStorage.getItem("user"));
 
   $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
     $scope.users = {};
@@ -271,7 +272,7 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('herramientasCtrl', ['$scope', '$http', '$ionicPopup', '$state','$stateParams', function ($scope, $http, $ionicPopup, $state, $stateParams) {
+.controller('herramientasCtrl', ['$scope', '$http', '$ionicPopup', '$state','$stateParams','$rootScope', function ($scope, $http, $ionicPopup, $state, $stateParams, $rootScope) {
 
   $scope.usuario = {};
   $scope.newUser = {};
@@ -284,7 +285,7 @@ angular.module('app.controllers', [])
         $scope.filtro = {}; // Borramos los datos del formulario
         $scope.usuario = {};
         $scope.users = {};
-        $scope.usuario = data;
+        $rootScope.usuario = data;
       })
       .error(function(data) {
         console.log($scope.user)
@@ -357,7 +358,7 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('loginCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams','$state','$window', function ($scope, $http, $ionicPopup, $stateParams, $state, $window) {
+.controller('loginCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
 
   $scope.User = {};
 
@@ -369,9 +370,22 @@ angular.module('app.controllers', [])
     };
     $http.post(BASE_URL + '/login', userLogin).success(function (data) {
       console.log("User Logged", data);
-      window.sessionStorage.setItem("user", JSON.stringify(data));
-      $scope.usuario = data;
-      $state.go('tab.mapa', {}, {reload: true});
+      $rootScope.userLogued = data;
+      $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+    })
+      .error(function (data) {
+        console.log('Error: ' + data);
+        var alertPopup = $ionicPopup.alert({
+          title: 'No se ha logueado correctamente!',
+          template: 'Introduce bien los datos!'
+        });
+      });
+  }
+  $scope.loginFacebook = function(){
+    $http.post(BASE_URL + '/auth/facebook').success(function (data) {
+      console.log("User Logged", data);
+      $rootScope.userLogued = data;
+      $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
     })
       .error(function (data) {
         console.log('Error: ' + data);
@@ -382,6 +396,34 @@ angular.module('app.controllers', [])
       });
   }
 
+  $scope.loginTwitter = function(){
+    $http.post(BASE_URL + '/auth/twitter').success(function (data) {
+      console.log("User Logged", data);
+      $rootScope.userLogued = data;
+      $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+    })
+      .error(function (data) {
+        console.log('Error: ' + data);
+        var alertPopup = $ionicPopup.alert({
+          title: 'No se ha logueado correctamente!',
+          template: 'Introduce bien los datos!'
+        });
+      });
+  }
+  $scope.loginGoogle = function(){
+    $http.post(BASE_URL + '/auth/google').success(function (data) {
+      console.log("User Logged", data);
+      $rootScope.userLogued = data;
+      $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+    })
+      .error(function (data) {
+        console.log('Error: ' + data);
+        var alertPopup = $ionicPopup.alert({
+          title: 'No se ha logueado correctamente!',
+          template: 'Introduce bien los datos!'
+        });
+      });
+  }
 }])
 
 .controller('registerCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams', function ($scope, $http, $ionicPopup, $stateParams) {
