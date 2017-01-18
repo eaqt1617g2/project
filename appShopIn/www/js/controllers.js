@@ -6,7 +6,24 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('lastMinuteDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+.controller('lastMinuteDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
+
+  $scope.usuario = $rootScope.userLogued;
+  console.log('logueado', $scope.usuario );
+  $http.get(BASE_URL + '/items').success(function (data) {
+    $scope.items = {};
+    $scope.users = {};
+    $scope.items = data;
+    console.log("Items", $scope.items);
+  })
+    .error(function (data) {
+      console.log('Error: ' + data);
+      var alertPopup = $ionicPopup.alert({
+        title: 'No accedes a items!',
+        template: 'Introduce bien los datos!'
+      });
+    });
+
 
 }])
 
@@ -350,7 +367,23 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('discoverDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+.controller('discoverDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
+
+  $scope.usuario = $rootScope.userLogued;
+  console.log('logueado', $scope.usuario );
+  $http.get(BASE_URL + '/items').success(function (data) {
+    $scope.items = {};
+    $scope.users = {};
+    $scope.items = data;
+    console.log("Items", $scope.items);
+  })
+    .error(function (data) {
+      console.log('Error: ' + data);
+      var alertPopup = $ionicPopup.alert({
+        title: 'No accedes a items!',
+        template: 'Introduce bien los datos!'
+      });
+    });
 
 }])
 
