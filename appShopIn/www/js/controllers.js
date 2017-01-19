@@ -101,6 +101,8 @@ angular.module('app.controllers', [])
       });
 
     $scope.getUsers = function(){
+      $scope.items = {};
+      $scope.users = {};
       $http.get(BASE_URL + '/users').success(function (data) {
         $scope.users = data;
         console.log("Usuarios", $scope.users);
@@ -115,6 +117,8 @@ angular.module('app.controllers', [])
     }
 
     $scope.getUsersOrder = function() {
+      $scope.items = {};
+      $scope.users = {};
       $http.get(BASE_URL + '/users/order').success(function(data) {
         $scope.users = {};
         $scope.users = data;
@@ -457,9 +461,22 @@ angular.module('app.controllers', [])
           });
         });
     }
+    $scope.loginGoogle2 = function(){
+      console.log($scope.User.email)
+      $http.get(BASE_URL + '/users/'+ $scope.User.email)
+        .success(function(data) {
+          $rootScope.userLogued = data;
+          console.log($scope.User.email)
+          $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+        })
+        .error(function(data) {
+          console.log($scope.User)
+          console.log('Error: ' + data);
+        });
+    }
   }])
 
-  .controller('registerCtrl', ['$scope', '$http', '$ionicPopup', '$stateParams', function ($scope, $http, $ionicPopup, $stateParams) {
+  .controller('registerCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
 
     $scope.newUser = {};
 
@@ -467,7 +484,6 @@ angular.module('app.controllers', [])
     $scope.createUser = function(){
       if ($scope.newUser.password == $scope.newUser.confirm_password) {
         console.log('user', $scope.newUser);
-        console.log('url', BASE_URL);
         var postUser = {
           loginid: $scope.newUser.loginid,
           name: $scope.newUser.name,
@@ -475,14 +491,16 @@ angular.module('app.controllers', [])
           password: $scope.newUser.password,
           email: $scope.newUser.email
         };
-        $http.post(BASE_URL + '/users', postUser)
-          .success(function (data) {
-            $scope.newUser = {}; // Borramos los datos del formulario
-            console.log('Registrado correctamente');
-            var alertPopup = $ionicPopup.alert({
-              title: 'Información',
-              template: 'Registrado correctamente'
-            });
+        $http.post(BASE_URL + '/users/android', postUser).success(function (data) {
+          console.log('Registrado correctamente');
+          var alertPopup = $ionicPopup.alert({
+            title: 'Información',
+            template: 'Se ha registrado correctamente, le enseñaremos su página de perfil.'
+          });
+          console.log($scope.newUser.loginid)
+          $rootScope.userLogued = $scope.newUser;
+          console.log($scope.newUser)
+          $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
           })
           .error(function (data) {
             console.log('Error: ' + data);

@@ -115,13 +115,27 @@ router.post('/', function(req, res) {
         if(err) {
             res.send(err);
         }
-
         User.find(function(err, users) {
             if(err){
                 res.send(err);
             }
             res.json(users);
         });
+    });
+
+});
+
+router.post('/android', function(req, res) {
+    User.create({
+        loginid: req.body.loginid,
+        password: req.body.password,
+        name: req.body.name,
+        last_name: req.body.last_name,
+        email: req.body.email
+    }, function(err, user){
+        if(err) {
+            res.send(err);
+        }
     });
 
 });

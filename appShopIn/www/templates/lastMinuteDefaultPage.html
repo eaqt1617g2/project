@@ -1,53 +1,21 @@
 <ion-view title="Last Minute Default Page" id="page5">
   <ion-content padding="true" class="has-header">
-    <div class="list card" id="lastMinuteDefaultPage-card21">
+    <div class="list card" id="lastMinuteDefaultPage-card21" ng-repeat="item in items" href="#/tabsController/detail/{{item.loginid}}">
       <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ui-sref="tabsController.perfilDefaultPage">
-        <img src="img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png">
-        <h2>Usuario</h2>
+        <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+        <h2>{{item.author.loginid}}</h2>
       </ion-item>
+      <strong>{{item.title}} </strong></p>
       <div class=" item item-image">
         <a style="display:block;" ui-sref="tabsController.detailDefaultPage">
-          <img src="img/fz74BLExTOSO3JMDGBtf_fondo.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+          <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
         </a>
       </div>
       <div class="item item-body" id="lastMinuteDefaultPage-list-item-container2">
         <div id="lastMinuteDefaultPage-markdown5" class="show-list-numbers-and-dots">
           <p style="margin-top:0px;color:#000000;">
-            <strong>Descripcion</strong> de la foto</p>
-        </div>
-      </div>
-    </div>
-    <div class="list card" id="lastMinuteDefaultPage-card23">
-      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item12" ui-sref="tabsController.perfilDefaultPage">
-        <img src="img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png">
-        <h2>Usuario</h2>
-      </ion-item>
-      <div class=" item item-image">
-        <a style="display:block;" ui-sref="tabsController.detailDefaultPage">
-          <img src="img/fz74BLExTOSO3JMDGBtf_fondo.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-        </a>
-      </div>
-      <div class="item item-body" id="lastMinuteDefaultPage-list-item-container4">
-        <div id="lastMinuteDefaultPage-markdown7" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            <strong>Descripcion</strong> de la foto</p>
-        </div>
-      </div>
-    </div>
-    <div class="list card" id="lastMinuteDefaultPage-card22">
-      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item11" ui-sref="tabsController.perfilDefaultPage">
-        <img src="img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png">
-        <h2>Usuario</h2>
-      </ion-item>
-      <div class=" item item-image">
-        <a style="display:block;" ui-sref="tabsController.detailDefaultPage">
-          <img src="img/fz74BLExTOSO3JMDGBtf_fondo.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-        </a>
-      </div>
-      <div class="item item-body" id="lastMinuteDefaultPage-list-item-container3">
-        <div id="lastMinuteDefaultPage-markdown6" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            <strong>Descripcion</strong> de la foto</p>
+            <i class="icon ion-heart"></i><strong>{{item.likes}}</strong><i class="icon ion-chatboxes"></i>{{item.comments.length}}</p>
+          {{item.creation_date | date:'dd/MM/yyyy HH:mm'}}
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@
     </ion-list>
     <div class="list animate-fade-slide-in-right">
       <a class="item item-avatar item-icon-right" ng-repeat="user in users" href="#/tabsController/perfil/{{user.loginid}}">
-        <img src="img/logo_shopin.png">
+        <img src={{user.photo_user||"img/logo_shopin.png"}}>
         <h2>{{user.loginid}}</h2>
         <p>{{user.name}} {{user.last_name}}</p>
         <i class="icon ion-chatbubble muted"></i>

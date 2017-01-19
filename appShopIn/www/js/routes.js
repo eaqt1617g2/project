@@ -93,7 +93,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.detailDefaultPage', {
-    url: '/detail',
+    url: '/detail/:id',
     views: {
       'tab1': {
         templateUrl: 'templates/detailDefaultPage.html',
