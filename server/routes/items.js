@@ -2,6 +2,7 @@ var app = require('express');
 var router = app.Router();
 
 var Item = require('../models/item');
+var Comment = require('../models/comment');
 var mongoose = require('mongoose');
 
 
@@ -28,7 +29,7 @@ router.get('/order', function(req, res) {
 
 router.get('/:id', function(req, res) {
     var o_id = new mongoose.Types.ObjectId(req.params.id);
-    Item.findOne({_id: o_id}).populate('author','loginid displayname').exec(function(err, item) {
+    Item.findOne({_id: o_id}).populate('author','loginid displayname').populate('comments').exec(function(err, item) {
         if(err) {
             res.send(err);
         }
@@ -56,6 +57,84 @@ router.post('/additem', function(req, res) {
             res.json(item);
         });
     });
+});
+
+router.post('/:id/comments', function(req, res) {
+    //var o_id = new mongoose.Types.ObjectId(req.params.id);
+    var comment = new Comment({
+        content: req.body.content,
+        author_loginid: req.body.author_loginid
+    });
+    comment.save(function(err, newComment) {
+        if(err)
+            res.send(err);
+        Item.findOneAndUpdate(
+            {_id: req.params.id},
+            {$addToSet : {"comments": comment}},
+            {},
+            function(err, item) {
+                if(err) {
+                    res.send(err);
+                    return;
+                }
+                Item.findOne({_id: req.params.id}).populate('author','loginid displayname').populate('comments').exec(function(err, item) {
+                    if(err) {
+                        res.send(err);
+                        return;
+                    }
+                    res.json(item);
+                });
+            }
+        );
+    });
+});
+
+router.post('/:id/like', function(req, res) {
+    if(req.body._id == undefined) {
+        res.status(500).send("No id specified");
+        return;
+    }
+    Item.findOneAndUpdate(
+        {_id: req.params.id},
+        {$addToSet : {"likes": req.body._id}},
+        {},
+        function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+            Item.findOne({_id: req.params.id}).populate('author','loginid displayname').populate('comments').exec(function(err, item) {
+                if(err) {
+                    res.send(err);
+                    return;
+                }
+                res.json(item);
+            });
+        }
+    );
+});
+
+router.post('/:id/dislike', function(req, res) {
+    if(req.body._id == undefined) {
+        res.status(500).send("No id specified");
+        return;
+    }
+    Item.findOneAndUpdate(
+        {_id: req.params.id},
+        {$pull : {"likes": req.body._id}},
+        {},
+        function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+            Item.findOne({_id: req.params.id}).populate('author','loginid displayname').populate('comments').exec(function(err, item) {
+                if(err) {
+                    res.send(err);
+                    return;
+                }
+                res.json(item);
+            });
+        }
+    );
 });
 
 module.exports = router;

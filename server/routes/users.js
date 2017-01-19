@@ -3,6 +3,7 @@ var router = app.Router();
 
 var User = require('../models/user');
 var Item = require('../models/item');
+var Comment = require('../models/comment');
 var mongoose = require('mongoose');
 
 
