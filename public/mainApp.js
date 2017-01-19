@@ -23,6 +23,8 @@ mainApp.config(function($routeProvider) {
         }).when("/item/:id", {
             templateUrl: "/views/itemView.html",
             controller: "itemViewCtrl"
+        }).when("/searchuser", {
+            templateUrl: "/views/userSearch.html"
     });
 
     mainApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
