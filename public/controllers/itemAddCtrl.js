@@ -53,9 +53,62 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
 
             }
         }
-    };*/
+     };*/
 
+    $scope.processImages = function(images){
 
+        console.log('Processing images..');
 
+        var defer = $q.defer();
+
+        if(!$rootScope.client.media) $rootScope.client.media = [];
+
+        angular.forEach(images, function(flowFile, i){
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (event) {
+
+                var uri = event.target.result;
+
+                $scope.image = {
+                    filename: uri
+                };
+
+                $rootScope.client.media.push($scope.image);
+
+                defer.resolve($scope.image);
+
+                console.log('Load image: #' + i, $scope.image);
+
+            };
+
+            fileReader.readAsDataURL(flowFile.file);
+
+        });
+
+        return defer.promise;
+
+    };
+
+    $scope.loadImages = function(t) {
+
+        console.log('Load Images..');
+
+        $scope.processImages(t)
+
+            .then(function(images) {
+
+                console.log('Save images!');
+
+                $rootScope.client.put({client: $rootScope.client.client})
+
+                    .then(function(res){
+                        $rootScope.client = res;
+                        toast.msgToast('Update Success.');
+                    });
+            });
+
+    };
 
 });
