@@ -560,6 +560,23 @@ html, body {
 }
 /* --------------*/
 
+.search-user-list-avatar {
+	width: 80px;
+	height: 80px;
+	margin-right: 15px;
+	border-radius: 50%;
+	margin-bottom: 20px;
+}
+.search-user {
+	list-style: none;
+	margin-top: 0px;
+}
+.search-user h3 {
+	color: #00b3ee;
+	font-weight: bold;
+	margin-top: 0px;
+}
+
 .user-conf-module {
 	background: #fff;
 	border: solid 1px #ebeef2;

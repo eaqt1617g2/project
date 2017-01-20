@@ -27,13 +27,21 @@ function isLoggedIn(req, res, next) {
 
 router.get('/', function(req, res) {
 
-    User.find(function(err, todos) {
+    User.find(function(err, users) {
         if(err) {
             res.send(err);
         }
-        res.json(todos);
+        res.json(users);
     });
 
+});
+
+router.get('/filter', function(req, res) {
+   User.find({'loginid': new RegExp(req.query.loginid, 'i')}, function(err, users) {
+       if(err)
+           res.send(err);
+       res.json(users);
+   });
 });
 
 router.get('/order', function (req, res){

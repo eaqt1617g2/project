@@ -56,13 +56,13 @@
                                     <p>{{comment.content}}</p>
                                 </div>
                             </li>
-                            <nav>
-                                <ul class="pager">
-                                    <li ng-class="{'disabled':currentCommentsPage <= 0}" class="previous"><a ng-click="olderComments()"><span>&larr;</span> Newer</a></li>
-                                    <li class="next"><a ng-click="newerComments()">Older <span>&rarr;</span></a></li>
-                                </ul>
-                            </nav>
                         </ul>
+                        <nav>
+                            <ul class="pager">
+                                <li ng-class="{'disabled':currentCommentsPage <= 0}" class="previous"><a ng-click="olderComments()"><span>&larr;</span> Newer</a></li>
+                                <li class="next"><a ng-click="newerComments()">Older <span>&rarr;</span></a></li>
+                            </ul>
+                        </nav>
                     </div>
 
                 </div>

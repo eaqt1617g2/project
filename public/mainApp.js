@@ -30,7 +30,8 @@ mainApp.config(function($routeProvider) {
             templateUrl: "/views/itemView.html",
             controller: "itemViewCtrl"
         }).when("/searchuser", {
-            templateUrl: "/views/userSearch.html"
+            templateUrl: "/views/userSearch.html",
+            controller: "userSearchCtrl"
     });
 
     mainApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
