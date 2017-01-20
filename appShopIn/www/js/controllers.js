@@ -1,4 +1,4 @@
-var BASE_URL = "http://localhost:2709";
+var BASE_URL = "http://192.168.1.105:2709";
 
 angular.module('app.controllers', [])
 //angular google maps
@@ -24,14 +24,27 @@ angular.module('app.controllers', [])
         });
       });
 
+    $scope.verUsuario = function(item) {
+      console.log(item)
+      $rootScope.usuarioID = {}
+      $rootScope.usuarioID = item;
+      $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
+    };
+
+    $scope.verDetalle = function(item) {
+      console.log(item)
+      $rootScope.itemID = {}
+      $rootScope.itemID = item;
+      $state.go('tabsControllerUser.detailDefaultPage', {}, {reload: true});
+    };
+
 
   }])
 
-  .controller('usersDefaultPageCtrl', ['$scope', '$http', '$ionicPopup', '$state', function ($scope, $http, $ionicPopup, $state) {
+  .controller('usersDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
-    $scope.UserID = ($state.params.loginid); //Obtenemos ID de la URI
-    console.log("Usuarios", $scope.UserID);
-    //console.log('logueado', $scope.usuario );
+    $scope.UserID = $rootScope.usuarioID; //Obtenemos ID de la URI
+    console.log("Usuario", $scope.UserID);
     $scope.users = {};
     $scope.items = {};
     $scope.usuario = {};
@@ -49,6 +62,20 @@ angular.module('app.controllers', [])
         });
       });
 
+    $scope.verUsuario = function(item) {
+      console.log(item)
+      $rootScope.usuarioID = {}
+      $rootScope.usuarioID = item;
+      $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
+    };
+
+    $scope.verDetalle = function(item) {
+      console.log(item)
+      $rootScope.itemID = {}
+      $rootScope.itemID = item;
+      $state.go('tabsControllerUser.detailDefaultPage', {}, {reload: true});
+    };
+
     $scope.follow = function(user, usuario) {
       $http.post(BASE_URL + '/users/'+ usuario.loginid+'/follow',{"_id": user._id}).success(function(data) {
         console.log("Usuario", usuario);
@@ -56,7 +83,7 @@ angular.module('app.controllers', [])
         $scope.usuario = {};
         $scope.users = {};
         $scope.usuario = data;
-        //$rootScope.following = true;
+        $rootScope.following = true;
       })
         .error(function(data) {
           console.log("Follow error");
@@ -68,7 +95,7 @@ angular.module('app.controllers', [])
         console.log("Usuario", $scope.usuario);
         console.log("User", $scope.user);
         $scope.usuario = data;
-        //$rootScope.following = false;
+        $rootScope.following = false;
       })
         .error(function(data) {
           console.log("Unfollow error");
@@ -79,16 +106,14 @@ angular.module('app.controllers', [])
 
   .controller('perfilDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
-    $scope.UserID = ($state.params.loginid); //Obtenemos ID de la URI
-    console.log("Usuarios", $scope.UserID);
     $scope.users = {};
     $scope.items = {};
     $scope.usuario = $rootScope.userLogued;
     console.log('logueado', $scope.usuario );
 
-
-    $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
+    $http.get(BASE_URL + '/users/'+$scope.usuario).success(function(data) {
       $scope.users = {};
+      $scope.items = {};
       $scope.usuario = data;
       console.log("Usuario", $scope.usuario);
     })
@@ -99,6 +124,20 @@ angular.module('app.controllers', [])
           template: 'Introduce bien los datos!'
         });
       });
+
+    $scope.verUsuario = function(item) {
+      console.log(item)
+      $rootScope.usuarioID = {}
+      $rootScope.usuarioID = item;
+      $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
+    };
+
+    $scope.verDetalle = function(item) {
+      console.log(item)
+      $rootScope.itemID = {}
+      $rootScope.itemID = item;
+      $state.go('tabsControllerUser.detailDefaultPage', {}, {reload: true});
+    };
 
     $scope.getUsers = function(){
       $scope.items = {};
@@ -147,30 +186,6 @@ angular.module('app.controllers', [])
           });
         });
     }
-
-    $scope.follow = function(user, usuario) {
-      $http.post(BASE_URL + '/users/'+ usuario.loginid+'/follow',{"_id": user._id}).success(function(data) {
-        console.log("Usuario", usuario);
-        console.log("User", user);
-        $scope.usuario = data;
-        //$rootScope.following = true;
-      })
-        .error(function(data) {
-          console.log("Follow error");
-        });
-    };
-
-    $scope.unfollow = function(user, usuario) {
-      $http.post(BASE_URL+ '/users/'+usuario.loginid +'/unfollow',{"_id": user._id}).success(function(data) {
-        console.log("Usuario", $scope.usuario);
-        console.log("User", $scope.user);
-        $scope.usuario = data;
-        //$rootScope.following = false;
-      })
-        .error(function(data) {
-          console.log("Unfollow error");
-        });
-    };
 
     $scope.createItem = function () {
       $scope.newItem = {};
@@ -247,11 +262,24 @@ angular.module('app.controllers', [])
 
   }])
 
-  .controller('detailDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+  .controller('detailDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
+    $scope.ItemID = $rootScope.itemID; //Obtenemos ID de la URI
+    console.log("Usuario", $scope.ItemID);
+    $scope.item = {};
+    $http.get(BASE_URL + '/items/'+$scope.ItemID).success(function(data) {
+      $scope.item = data;
+      console.log("Item", $scope.item);
+    })
+      .error(function (data) {
+        console.log('Error: ' + data);
+        var alertPopup = $ionicPopup.alert({
+          title: 'No accedes al item!',
+        });
+      });
   }])
 
-  .controller('searchCtrl', ['$scope', '$http', '$ionicPopup', '$state', '$stateParams', function ($scope, $http, $ionicPopup, $state, $stateParams) {
+  .controller('searchCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
     $scope.filtro = {};
     $scope.users = {};
@@ -291,9 +319,16 @@ angular.module('app.controllers', [])
         });
     };
 
+    $scope.verUsuario = function(item) {
+      console.log(item)
+      $rootScope.usuarioID = {}
+      $rootScope.usuarioID = item;
+      $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
+    };
+
   }])
 
-  .controller('herramientasCtrl', ['$scope', '$http', '$ionicPopup', '$state','$stateParams','$rootScope', function ($scope, $http, $ionicPopup, $state, $stateParams, $rootScope) {
+  .controller('herramientasCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
     $scope.usuario = {};
     $scope.newUser = {};
@@ -315,9 +350,7 @@ angular.module('app.controllers', [])
     };
 
     $scope.logout = function () {
-      $scope.newItem = {};
-      var userLogin = JSON.parse(window.sessionStorage.getItem("user"));
-      console.log('Usuario: ' + userLogin);
+      $rootScope.userLogued = {};
       var addPopup = $ionicPopup.confirm({
         title: 'Seguro que quieres salir?',
         template: '',
@@ -328,9 +361,6 @@ angular.module('app.controllers', [])
             text: '<b>Si</b>',
             type: 'button-positive',
             onTap: function () {
-              window.sessionStorage.removeItem("user");
-              $scope.userlogged = null;
-              //$http.get(BASE_URL + "/api/logout");
               console.log("Ha salido correctamente.");
               $state.go('tabsControllerLogin.login', {}, {reload: true});
             }
@@ -350,7 +380,8 @@ angular.module('app.controllers', [])
       $http.put(BASE_URL + '/users/'+ $scope.usuario._id, postUser).success(function(data) {
         $scope.newUser = {}; // Borramos los datos del formulario
         $scope.usuario = {};
-        $scope.usuario = data;
+        $rootScope.userLogued = {};
+        $rootScope.userLogued = data;
         console.log($scope.usuario)
       })
         .error(function(data) {
@@ -391,7 +422,7 @@ angular.module('app.controllers', [])
 
   }])
 
-  .controller('friendsDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+  .controller('friendsDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
   }])
 
@@ -408,7 +439,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/login', userLogin).success(function (data) {
         console.log("User Logged", data);
         $rootScope.userLogued = data;
-        $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+        $state.go('tabsController.lastMinute', {}, {reload: true});
       })
         .error(function (data) {
           console.log('Error: ' + data);
@@ -422,7 +453,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/auth/facebook').success(function (data) {
         console.log("User Logged", data);
         $rootScope.userLogued = data;
-        $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+        $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
       })
         .error(function (data) {
           console.log('Error: ' + data);
@@ -437,7 +468,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/auth/twitter').success(function (data) {
         console.log("User Logged", data);
         $rootScope.userLogued = data;
-        $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+        $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
       })
         .error(function (data) {
           console.log('Error: ' + data);
@@ -451,7 +482,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/auth/google').success(function (data) {
         console.log("User Logged", data);
         $rootScope.userLogued = data;
-        $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+        $state.go('tabsControllerNormal.lastMinuteDefaultPage', {}, {reload: true});
       })
         .error(function (data) {
           console.log('Error: ' + data);
@@ -467,7 +498,7 @@ angular.module('app.controllers', [])
         .success(function(data) {
           $rootScope.userLogued = data;
           console.log($scope.User.email)
-          $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
         })
         .error(function(data) {
           console.log($scope.User)
@@ -500,7 +531,7 @@ angular.module('app.controllers', [])
           console.log($scope.newUser.loginid)
           $rootScope.userLogued = $scope.newUser;
           console.log($scope.newUser)
-          $state.go('tabsController.perfilDefaultPage', {}, {reload: true});
+          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
           })
           .error(function (data) {
             console.log('Error: ' + data);
@@ -523,4 +554,223 @@ angular.module('app.controllers', [])
       }
     };
 
+  }])
+  .controller('crearItemCtrl', ['$scope', '$ionicLoading', '$ionicPlatform', '$http', '$cordovaCamera', '$cordovaFile', '$cordovaImagePicker', '$state', function ($scope, $ionicLoading, $ionicPlatform, $http, $cordovaCamera, $cordovaFile, $cordovaImagePicker, $state) {
+    var vm = this;
+var base64;
+    var position = {
+      "latitud": 41.4,
+      "longitud": 2.2
+    };
+    var geocoder = new google.maps.Geocoder();
+
+    var map;
+    var marker;
+    $http.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDUm1CEWcBg8E3PKVT715J9uLKr9F-wFKY")
+      .success(function(data) {
+        position.latitud  = data.location.lat;
+        position.longitud = data.location.lng;
+        var myLatlng = new google.maps.LatLng(position.latitud, position.longitud);
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          marker = new google.maps.Marker({
+          draggable:true,
+          position: {
+            lat: position.latitud,
+            lng: position.longitud
+          },
+          map: map,
+          title: 'Hello World!'
+        });
+        geocoder.geocode({
+          latLng: myLatlng
+        }, function(responses) {
+          if (responses && responses.length > 0) {
+            $scope.$apply(function () {
+              $scope.address = responses[0].formatted_address;
+            });
+          } else {
+            console.log('Cannot determine address at this location.');
+          }
+        });
+        marker.addListener('dragend', function(e){
+          position.longitud = e.latLng.lng();
+          position.latitud = e.latLng.lat();
+          console.log(position);
+          geocoder.geocode({
+            latLng: e.latLng
+          }, function(responses) {
+            if (responses && responses.length > 0) {
+              console.log(e.latLng);
+              $scope.$apply(function () {
+                $scope.address = responses[0].formatted_address;
+              });
+            } else {
+              console.log('Cannot determine address at this location.');
+            }
+          });
+        });
+        $scope.map = map;
+    })
+      .error(function(data) {
+        console.log("error: " + data);
+        var myLatlng = new google.maps.LatLng(position.latitud, position.longitud);
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        $scope.map = map;
+      });
+
+    $scope.takeImage = function() {
+      var options = {
+        quality: 80,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 250,
+        targetHeight: 250,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        base64 = imageData;
+        console.log("data:image/jpeg;base64," + imageData );
+        var base64Blob = base64toBlob(imageData, 'image/jpeg');
+        $cordovaFile.writeFile(cordova.file.externalCacheDirectory, 'new_pic.jpg', base64Blob, true).then(
+          function(success){
+            console.log('success')
+            console.log(JSON.stringify(success))
+          },
+          function(error){
+            console.log(error)
+          }
+        )
+          $scope.srcImage = "data:image/jpeg;base64," + imageData;
+        resolveLocalFileSystemURL('cdvfile://localhost/cache-external/new_pic.jpg', function(entry) {
+          var nativePath = entry.toURL();
+          console.log('Native URI: ' + nativePath);
+          //$scope.srcImage = nativePath;
+
+        });
+
+      }, function(err) {
+        // erro
+        console.log(err);
+      });
+    }//
+
+
+    function base64toBlob(base64Data, contentType) {
+      contentType = contentType || '';
+      var sliceSize = 1024;
+      var byteCharacters = atob(base64Data);
+      var bytesLength = byteCharacters.length;
+      var slicesCount = Math.ceil(bytesLength / sliceSize);
+      var byteArrays = new Array(slicesCount);
+
+      for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        var begin = sliceIndex * sliceSize;
+        var end = Math.min(begin + sliceSize, bytesLength);
+
+        var bytes = new Array(end - begin);
+        for (var offset = begin, i = 0 ; offset < end; ++i, ++offset) {
+          bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+      }
+      return new Blob(byteArrays, { type: contentType });
+    }
+    function makeid()
+    {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for( var i=0; i < 25; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+    $scope.item = {};
+    $scope.uploadItem = function(){
+      var data = {
+        author: "rosa",
+        title: $scope.item.title,
+        base64: base64,
+        pic_id: makeid()+".jpg"
+      }
+      $http.post(BASE_URL + '/items/additemApp',data).success(function(data) {
+
+        $scope.usuario = {};
+        $scope.users = {};
+        $scope.usuario = data;
+        //$rootScope.following = true;
+        $state.go('tabsController.lastMinuteDefaultPage');
+      })
+        .error(function(data) {
+          console.log("Follow error");
+        });
+    }
+
+    $scope.getImageSaveContact = function() {
+      // Image picker will load images according to these settings
+      var options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 100,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false,
+        correctOrientation:true
+      };
+
+      function getFileContentAsBase64(path,callback){
+        window.resolveLocalFileSystemURL(path, gotFile, fail);
+
+        function fail(e) {
+          alert('Cannot found requested file');
+        }
+
+        function gotFile(fileEntry) {
+          fileEntry.file(function(file) {
+            var reader = new FileReader();
+            reader.onloadend = function(e) {
+              var content = this.result;
+              callback(content);
+            };
+            // The most important point, use the readAsDatURL Method from the file plugin
+            reader.readAsDataURL(file);
+          });
+        }
+      }
+
+
+      $cordovaImagePicker.getPictures(options).then(function (imageData) {
+        console.log(imageData[0]);
+        getFileContentAsBase64(imageData[0],function(base64Image){
+          //window.open(base64Image);
+          console.log("ya");
+          $scope.$apply(function () {
+            $scope.srcImage = base64Image;
+          });
+          var res = base64Image.split(",");
+          base64 = res[1];
+          console.log(base64);
+          // Then you'll be able to handle the myimage.png file as base64
+        })
+      }, function(error) {
+        console.log('Error: ' + JSON.stringify(error));    // In case of error
+      });
+    };
   }])

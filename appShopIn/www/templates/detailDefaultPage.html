@@ -1,33 +1,36 @@
-<ion-view title="Detail Default Page" id="page9">
+<ion-view title="Detail Default Page" id="/detail/:loginid">
   <ion-content padding="true" class="has-header">
     <div id="detailDefaultPage-container4">
-      <h4 id="detailDefaultPage-heading3" style="color:#000000;">Name Photo</h4>
-      <div>
-        <img src="img/wL8Dr3JrQomJgzFd6uNH_fondo.jpg" width="100%" height="" style="display: block; margin-left: auto; margin-right: auto;">
+      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ui-sref="tabsControllerUser.usersDefaultPage">
+        <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+        <h4>{{item.author.displayname}}  <h5>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5></h4>{{item.likes.length}} <i class="icon ion-heart"></i>
+      </ion-item>
+      <p></p>
+      <div class="row">
+        <div class="col"><button class="button icon ion-heart" ng-hide="liked" ng-click="like()"></button><button class="button icon ion-heart-broken" ng-show="liked" ng-click="dislike()"></button></div>
+        <div class="col col-75">{{item.title}}</div>
       </div>
-      <form id="detailDefaultPage-form5" class="list">
-        <div id="detailDefaultPage-markdown8" class="show-list-numbers-and-dots">
-          <p style="color:#000000;">
-            <strong>Descripcion</strong> de la foto</p>
-        </div>
-      </form>
+      <div class=" item item-image" >
+        <a style="display:block;" >
+          <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+        </a>
+      </div>
+      <p></p>
+      <div class="list animate-fade-slide-in-right">
+        <h4>{{item.comments.length}} Comentarios</h4>
+        <a class="item item-avatar item-icon-right" ng-repeat="comment in item.comments">
+          <img src={{user.photo_user||"img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+          <h2>{{comment.author_loginid}}{{comment.creation_date}}</h2>
+          <p>{{comment.content}}</p>
+          <i class="icon ion-chatbubble muted"></i>
+        </a>
+      </div>
+      <p></p>
+      <label class="item item-input" id="signup-input8">
+        <input type="text" placeholder="Haz un comentario" ng-model="newComment.">
+      </label>
+      <p></p>
+      <button id="button30" ng-click="createComment()" class="button button-stable  button-block">Comentar</button>
     </div>
-    <ion-list id="detailDefaultPage-list6">
-      <ion-item class="item-avatar" id="detailDefaultPage-list-item17">
-        <h2>Que bonito que es...</h2>
-      </ion-item>
-      <ion-item class="item-avatar" id="detailDefaultPage-list-item25">
-        <h2>Espectacular, cuanto colorido</h2>
-      </ion-item>
-      <ion-item class="item-avatar" id="detailDefaultPage-list-item24">
-        <h2>Yo me he comprado uno igual tía</h2>
-      </ion-item>
-      <form id="detailDefaultPage-form6" class="list">
-        <h5 id="detailDefaultPage-heading4" style="color:#000000;">Añadir Comentario</h5>
-        <label class="item item-input" id="detailDefaultPage-textarea2">
-          <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
-        <button id="detailDefaultPage-button23" class="button button-dark button-small icon-right ion-android-textsms">Comentar</button>
-      </form>
-    </ion-list>
   </ion-content>
 </ion-view>

@@ -89,9 +89,36 @@ router.post('/additem', function(req, res) {
     });
 });
 
+router.post('/additemApp', function(req, res) {
+    console.log(req.body.author);
+    console.log(req.body.title);
+    console.log(req.body.base64);
+
+    require("fs").writeFile("../public/assets/imgs/items/" + req.body.pic_id, req.body.base64, 'base64', function(err) {
+        if (err) throw err;
+        Item.create({
+            author: req.body.author,
+            title: req.body.title,
+            pic_id: req.body.pic_id
+        }, function(err, item){
+            if(err) {
+                res.send(err);
+            }else {
+                Item.find(function (err, item) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(item);
+                    }
+                });
+            }
+        });
+    });
+});
+
 router.get('/:id/comments', function(req, res) {
-    Comment.find({item: req.params.id}).sort({creation_date: -1}).populate('author', 'loginid photo_user').skip(parseInt(req.query.page)*10).limit(10).exec(function(err, comments) {
-        if(err) {
+    Comment.find({item: req.params.id}).sort({creation_date: -1}).populate('author', 'loginid photo_user').skip(parseInt(req.query.page) * 10).limit(10).exec(function (err, comments) {
+        if (err) {
             res.send(err);
         }
         res.json(comments);

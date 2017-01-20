@@ -13,7 +13,7 @@
       <button id="search-button1" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Mostrar todos</button>
     </ion-list>
     <div class="list animate-fade-slide-in-right">
-      <a class="item item-avatar item-icon-right" ng-repeat="user in users" href="#/tabsController/perfil/{{user.loginid}}">
+      <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">
         <img src={{user.photo_user||"img/logo_shopin.png"}}>
         <h2>{{user.loginid}}</h2>
         <p>{{user.name}} {{user.last_name}}</p>
@@ -21,7 +21,7 @@
       </a>
     </div>
     <div class="list animate-fade-slide-in-right" content scroll="false">
-      <a class="item item-avatar item-icon-right" href="#/tabsController/users/{{usuario.loginid}}">
+      <a class="item item-avatar item-icon-right" ng-click="verUsuario(usuario.loginid)">
         <img src="img/logo_shopin.png">
         <h2>{{usuario.loginid}}</h2>
         <p>{{usuario.name}} {{usuario.last_name}}</p>
