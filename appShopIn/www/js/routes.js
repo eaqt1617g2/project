@@ -122,6 +122,17 @@ angular.module('app.routes', [])
     }
   })
 
+    .state('tabsController.crearItem', {
+      url: '/crearItem',
+      views: {
+        'tab1': {
+          templateUrl: 'templates/crearItem.html',
+          controller: 'crearItemCtrl',
+          controllerAs: 'vm'
+        }
+      }
+    })
+
 
 
 $urlRouterProvider.otherwise('/login/access')

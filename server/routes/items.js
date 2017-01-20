@@ -59,6 +59,35 @@ router.post('/additem', function(req, res) {
     });
 });
 
+router.post('/additemApp', function(req, res) {
+    console.log(req.body.author);
+    console.log(req.body.title);
+    console.log(req.body.base64);
+
+    require("fs").writeFile("../public/assets/imgs/items/" + req.body.pic_id, req.body.base64, 'base64', function(err) {
+        if (err) throw err;
+        Item.create({
+            author: req.body.author,
+            title: req.body.title,
+            pic_id: req.body.pic_id
+        }, function(err, item){
+            if(err) {
+                res.send(err);
+            }else {
+                Item.find(function (err, item) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(item);
+                    }
+                });
+            }
+        });
+    });
+
+
+});
+
 router.post('/:id/comments', function(req, res) {
     //var o_id = new mongoose.Types.ObjectId(req.params.id);
     var comment = new Comment({

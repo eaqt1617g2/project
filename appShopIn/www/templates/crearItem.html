@@ -1,0 +1,18 @@
+<ion-view title="Creating item" id="page5">
+  <ion-content padding="true" class="has-header">
+    <div id="map" data-tap-disabled="true"></div>
+    <label class="item item-input">
+      <span class="input-label">Title</span>
+      <input ng-model="item.title" type="text">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Address</span>
+      <input ng-model="address" type="text">
+    </label>
+    <img ng-src="{{srcImage || 'img/images.png'}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"/><br/>
+    <button class="button button-full button-positive " ng-click="takeImage() ">Take Image</button><br/>
+    <button class="button button-full button-positive " ng-click="getImageSaveContact() ">Pick Image</button><br/>
+    <button class="button button-full button-positive " ng-click="uploadItem() ">Upload Item</button><br/>
+  </ion-content>
+</ion-view>
+
