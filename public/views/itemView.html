@@ -43,19 +43,25 @@
                                 <a ng-click="postComment()"><i class="fa fa-edit"></i></a>
                             </span>
                         </div>
-                        <ul class="comments-list">
-                            <li class="comment" ng-repeat="comment in item.comments">
+                        <ul class="comments-list" ng-init="getComments()">
+                            <li class="comment" ng-repeat="comment in comments">
                                 <a class="pull-left" href="#" >
-                                    <img class="comment-avatar" src="http://localhost:2709/assets/imgs/profiles/profileTestPic2.png" alt="Avatar">
+                                    <img class="comment-avatar" ng-src={{comment.author.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}} alt="Avatar">
                                 </a>
                                 <div class="comment-body">
                                     <div class="comment-heading">
-                                        <h4 class="user">{{comment.author_loginid}}</h4>
-                                        <h4 class="time">{{comment.creation_date}}</h4>
+                                        <h4 class="user">{{comment.author.loginid}}</h4>
+                                        <h4 class="time">{{comment.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
                                     </div>
                                     <p>{{comment.content}}</p>
                                 </div>
                             </li>
+                            <nav>
+                                <ul class="pager">
+                                    <li ng-class="{'disabled':currentCommentsPage <= 0}" class="previous"><a ng-click="olderComments()"><span>&larr;</span> Newer</a></li>
+                                    <li class="next"><a ng-click="newerComments()">Older <span>&rarr;</span></a></li>
+                                </ul>
+                            </nav>
                         </ul>
                     </div>
 

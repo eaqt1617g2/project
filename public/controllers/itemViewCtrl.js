@@ -7,6 +7,8 @@ mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $
 
     $scope.liked = false;
 
+    $scope.currentCommentsPage = 0;
+
     $http.get(serverAddr+"/items/"+$routeParams.id)
         .success(function(data) {
             $scope.item = data;
@@ -21,6 +23,33 @@ mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $
         .error(function(data) {
             console.log("Error: "+data);
         });
+
+    $scope.getComments = function() {
+        $http.get(serverAddr+'/items/'+$routeParams.id+'/comments', {
+                params: {page: $scope.currentCommentsPage}
+            }).success(function(data) {
+                $scope.comments = data;
+            })
+            .error(function(data) {
+                console.log("Error: "+data);
+            });
+    };
+
+    $scope.olderComments = function() {
+        if($scope.currentCommentsPage == 0) {
+          return;
+        }
+        $scope.currentCommentsPage--;
+        $scope.getComments();
+
+    };
+    $scope.newerComments = function() {
+        $scope.currentCommentsPage++;
+        $scope.getComments();
+    };
+
+
+
 
     /*
     $http.get(serverAddr+'/items/order').success(function(data) {
@@ -47,11 +76,11 @@ mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $
             return;
         }
 
-        $scope.newComment.author_loginid = $rootScope.user.loginid;
+        $scope.newComment.author = $rootScope.user._id;
         console.log("Postin comment: "+JSON.stringify($scope.newComment));
         $http.post(serverAddr+ '/items/'+$routeParams.id+'/comments', $scope.newComment)
             .success(function(data) {
-                $scope.item = data;
+                $scope.comments = data;
                 console.log("Comentario creado correctamente");
             })
             .error(function(data) {

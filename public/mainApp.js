@@ -5,6 +5,12 @@ mainApp.config(function($routeProvider) {
         .when("/", {
             templateUrl : "/views/homeScreen.html",
             controller: "homeScreenCtrl"
+        }).when("/discover", {
+            templateUrl : "/views/discover.html",
+            controller: "discoverCtrl"
+        }).when("/friends", {
+            templateUrl : "/views/friends.html",
+            controller: "friendsCtrl"
         }).when("/user/:loginid", {
             templateUrl : "/views/userProfile.html",
             controller: "userProfileCtrl"

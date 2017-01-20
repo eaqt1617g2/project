@@ -1,6 +1,7 @@
 mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootScope) {
     //console.log("homeScreenCtrl");
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
+    $rootScope.navIndex = 1;
 
     var currentItemsPage = 0;
     $scope.items = [];
@@ -49,6 +50,18 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootS
         currentItemsPage++;
         $scope.getItems();
     };
+
+    $scope.lastMinuteClick = function() {
+        $rootScope.navIndex = 1;
+    };
+    $scope.discoverClick = function() {
+        $rootScope.navIndex = 2;
+    };
+    $scope.friendsClick = function() {
+        $rootScope.navIndex = 3;
+    };
+
+
 
 
 

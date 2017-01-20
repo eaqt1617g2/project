@@ -35,9 +35,9 @@
           </div>
           <div class="collapse navbar-collapse navbar-main-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="navbar-li-selected"><a href="#/"><i class="fa fa-clock-o"></i> Last Minute</a></li>
-              <li><a href="#/"><i class="fa fa-globe"></i> Discover</a></li>
-              <li><a href="#/"><i class="fa fa-users"></i> Friends</a></li>
+              <li ng-class="{'navbar-li-selected':navIndex == 1}"><a href="#/"><i class="fa fa-clock-o"></i> Last Minute</a></li>
+              <li ng-class="{'navbar-li-selected':navIndex == 2}"><a href="#/discover"><i class="fa fa-globe"></i> Discover</a></li>
+              <li ng-class="{'navbar-li-selected':navIndex == 3}"><a href="#/friends"><i class="fa fa-users"></i> Friends</a></li>
               <li uib-dropdown>
                   <a href="" class="dropdown-toggle" uib-dropdown-toggle>
                       <i class="fa fa-gear fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -101,6 +101,8 @@
 <script type="text/javascript" src="../controllers/itemViewCtrl.js"></script>
 <script type="text/javascript" src="../controllers/itemAddCtrl.js"></script>
 <script type="text/javascript" src="../controllers/userConfCtrl.js"></script>
+<script type="text/javascript" src="../controllers/discoverCtrl.js"></script>
+<script type="text/javascript" src="../controllers/friendsCtrl.js"></script>
 
 </body>
 </html>
