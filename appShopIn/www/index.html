@@ -80,19 +80,6 @@
 <div>
   <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
     <ion-side-menu-content>
-      <ion-nav-bar class="bar-calm">
-        <ion-nav-back-button></ion-nav-back-button>
-        <ion-nav-buttons ng-controller="menuCtrl" side="left">
-          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-        </ion-nav-buttons>
-        <ion-nav-buttons ng-controller="menuCtrl" side="right">
-          <div class="col button-right">
-          <button class="button button-icon button-clear ion-android-search" ui-sref="tabsController.searchDefaultPage"></button>
-          <button class="button button-icon button-clear ion-gear-a" ui-sref="tabsController.herramientasDefaultPage"></button>
-          <button class="button button-icon button-clear ion-power" ui-sref="tabsController.herramientasDefaultPage"></button>
-        </ion-nav-buttons>
-      </div>
-      </ion-nav-bar>
       <ion-nav-view></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="left" id="side-menu21">
@@ -101,7 +88,9 @@
       </ion-header-bar>
       <ion-content ng-controller="menuCtrl" padding="false" class="side-menu-left has-header ">
         <a ui-sref="tabsController.lastMinuteDefaultPage" menu-close="" id="menu-button4" class="button button-calm button-large button-block icon-right ion-android-home" data-componentid="button4">Home</a>
-        <a ui-sref="tabsController.perfilDefaultPage" menu-close="" id="menu-button7" class="button button-calm button-large button-block icon-right ion-android-person" data-componentid="button7">Perfil</a>
+        <a ui-sref="tabsControllerNormal.perfilDefaultPage" menu-close="" id="menu-button7" class="button button-calm button-large button-block icon-right ion-android-person" data-componentid="button7">Perfil</a>
+        <a ui-sref="tabsControllerUser.searchDefaultPage" menu-close="" id="menu-button8" class="button button-calm button-large button-block icon-right ion-android-person" data-componentid="button4">Users</a>
+
       </ion-content>
     </ion-side-menu>
   </ion-side-menus>
