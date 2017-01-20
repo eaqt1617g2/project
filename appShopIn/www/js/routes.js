@@ -104,7 +104,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsControllerUser.detailDefaultPage', {
-    url: '/detail/:id',
+    url: '/detail/:loginid',
     views: {
       'tab8': {
         templateUrl: 'templates/detailDefaultPage.html',
@@ -113,7 +113,7 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('tabsControllerNormal.searchDefaultPage', {
+  .state('tabsControllerUser.searchDefaultPage', {
     url: '/search',
     views: {
       'tab5': {

@@ -279,7 +279,7 @@ angular.module('app.controllers', [])
       });
   }])
 
-  .controller('searchCtrl', ['$scope', '$http', '$ionicPopup', '$state', '$stateParams', function ($scope, $http, $ionicPopup, $state, $stateParams) {
+  .controller('searchCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
     $scope.filtro = {};
     $scope.users = {};
@@ -319,9 +319,16 @@ angular.module('app.controllers', [])
         });
     };
 
+    $scope.verUsuario = function(item) {
+      console.log(item)
+      $rootScope.usuarioID = {}
+      $rootScope.usuarioID = item;
+      $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
+    };
+
   }])
 
-  .controller('herramientasCtrl', ['$scope', '$http', '$ionicPopup', '$state','$stateParams','$rootScope', function ($scope, $http, $ionicPopup, $state, $stateParams, $rootScope) {
+  .controller('herramientasCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
     $scope.usuario = {};
     $scope.newUser = {};
@@ -343,9 +350,7 @@ angular.module('app.controllers', [])
     };
 
     $scope.logout = function () {
-      $scope.newItem = {};
-      var userLogin = JSON.parse(window.sessionStorage.getItem("user"));
-      console.log('Usuario: ' + userLogin);
+      $rootScope.userLogued = {};
       var addPopup = $ionicPopup.confirm({
         title: 'Seguro que quieres salir?',
         template: '',
@@ -356,9 +361,6 @@ angular.module('app.controllers', [])
             text: '<b>Si</b>',
             type: 'button-positive',
             onTap: function () {
-              window.sessionStorage.removeItem("user");
-              $scope.userlogged = null;
-              //$http.get(BASE_URL + "/api/logout");
               console.log("Ha salido correctamente.");
               $state.go('tabsControllerLogin.login', {}, {reload: true});
             }
@@ -378,7 +380,8 @@ angular.module('app.controllers', [])
       $http.put(BASE_URL + '/users/'+ $scope.usuario._id, postUser).success(function(data) {
         $scope.newUser = {}; // Borramos los datos del formulario
         $scope.usuario = {};
-        $scope.usuario = data;
+        $rootScope.userLogued = {};
+        $rootScope.userLogued = data;
         console.log($scope.usuario)
       })
         .error(function(data) {
@@ -419,7 +422,7 @@ angular.module('app.controllers', [])
 
   }])
 
-  .controller('friendsDefaultPageCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+  .controller('friendsDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
   }])
 
