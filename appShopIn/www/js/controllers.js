@@ -1,4 +1,4 @@
-var BASE_URL = "http://192.168.1.105:2709";
+var BASE_URL = "http://localhost:2709";
 
 angular.module('app.controllers', [])
   //angular google maps
