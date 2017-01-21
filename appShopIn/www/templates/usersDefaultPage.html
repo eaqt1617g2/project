@@ -7,17 +7,17 @@
       </div>
       <form id="perfilDefaultPage-form3" class="list">
         <ion-list id="perfilDefaultPage-list3">
-          <ion-item id="perfilDefaultPage-list-item5">{{usuario.name}} {{usuario.last_name}}</ion-item>
+          <ion-item id="perfilDefaultPage-list-item5">{{usuario.displayname}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item6">{{usuario.email}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item4">{{usuario.last_login_date | date:'dd/MM/yyyy HH:mm'}}</ion-item>
           <p></p>
-          <button class="button button-calm" ng-hide="followed" ng-click="follow(usuario)">Follow</button>
-          <button class="button button-assertive" ng-show="followed" ng-click="unfollow(usuario)">Unfollow</button>
+          <button class="button button-calm" ng-hide="followed" ng-click="follow(usuario._id)">Follow</button>
+          <button class="button button-assertive" ng-show="followed" ng-click="unfollow(usuario._id)">Unfollow</button>
           </ion-list>
         <div id="perfilDefaultPage-button-bar2" class="button-bar">
-          <button id="perfilDefaultPage-button17" ng-click="getItemsOrder()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
-          <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS {{userLogued.followers.length || 0}}</button>
-          <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING {{userLogued.following.length || 0}}</button>
+          <button id="perfilDefaultPage-button17" ng-click="getUserItems()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
+          <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS {{usuario.followers.length || 0}}</button>
+          <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING {{usuario.following.length || 0}}</button>
         </div>
         <div class="list animate-fade-slide-in-right">
           <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">
@@ -36,7 +36,7 @@
           <strong>{{item.title}}</strong></p>
           <div class=" item item-image" >
             <a style="display:block;" >
-              <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+              <img src="/img/{{item.pic_id}}" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
             </a>
           </div>
           <div class="item item-body" id="lastMinuteDefaultPage-list-item-container2" >
