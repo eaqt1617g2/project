@@ -6,6 +6,8 @@ var itemSchema = mongoose.Schema({
     creation_date: {type: Date, default: Date.now},
     likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     pic_id: String,
+    latitude: Number,
+    longitude: Number,
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 

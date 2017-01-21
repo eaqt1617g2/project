@@ -25,6 +25,10 @@
     "ionic-native": "^2.0.3",
     "angular-cookies": "^1.5.9",
     "angular-google-maps": "^2.4.0",
-    "ng-flow": "~2"
+    "ng-flow": "~2",
+    "angular-base64-upload": "^0.1.19"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }

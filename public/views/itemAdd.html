@@ -4,80 +4,36 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="item-view-module">
                     <div class="item-view-header">
-
                         <div class="pull-left">
-                            <h4 class="displayname">Add new Item by </h4>
-                            <h4 class="loginid">@{{user.loginid}}</h4>
-                        </div>
-                        <div class="pull-right">
-                            <h5 class="time">{{date | date:'dd/MM/yyyy HH:mm'}}</h5>
+                            <h4 class="displayname">Add new Item</h4>
                         </div>
                     </div>
-
-                    <div class="item-view-title"></div>
-                    <form action="/additem" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Title"  name="title">
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="author" value="{{user._id}}">
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-box">
-                                <input type="file" id="file" class="input-text" ngf-change="onChange($files)" ngf-select ng-model="picFile" name="pic_id" accept="image/png, image/jpeg, image/jpg" />
-                                <img ng-show="isImage(fileExt)" ngf-src="picFile[0]" class="thumb">
+                    <div class="item-view-content">
+                        <form ng-submit="addItem()">
+                            <div class="form-group">
+                                <label for="title">Title </label>
+                                <input type="text" class="form-control" placeholder="Title"  id="title" ng-model="item.title" required>
                             </div>
-                        </div>
 
-                        <div flow-init="{target: '../assets/imgs/items'}"
-                             flow-files-submitted="$flow.upload()"
-                             flow-file-success="$file.msg = $message"
-                             flow-name="obj.flow">
-
-                            <input type="file" flow-btn/>
-
-                            <table>
-                                <tr ng-repeat="file in $flow.files">
-                                    <td>{{$index+1}}</td>
-                                    <td>{{file.name}}</td>
-                                    <td>{{file.msg}}</td>
-                                </tr>
-                            </table>
-
-                            <img flow-img="$flow.files[0]" />
-
-                            Tienes subidos estos ficheros: #{{obj.flow.files.length}}
-
-                        </div>
-
-                        <br>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Address"  name="address">
-                        </div>
-
-                        <div class="form-group">
-                            <ui-gmap-google-map center="map.center" zoom="map.zoom">
-                                <ui-gmap-markers models="markers" coords="self" modelsbyref="false"/>
-                            </ui-gmap-google-map>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <input type="submit" name="item-submit" id="item-submit" tabindex="4" class="form-control btn btn-register" value="Save">
+                            <div class="form-group">
+                                <input type='file' ng-model='image' base-sixty-four-input required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <ui-gmap-google-map center="map.center"  events="map.events" draggable="true" zoom="map.zoom">
+                                    <ui-gmap-markers models="markerList" coords="'self'" icon="'icon'" modelsbyref="false"/>
+                                </ui-gmap-google-map>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input type="submit" name="item-submit" id="item-submit" tabindex="4" class="form-control btn btn-register" value="Save">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
-
-
-
-
+                    </div>
                 </div>
             </div>
         </div>

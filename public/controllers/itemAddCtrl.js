@@ -1,9 +1,11 @@
-mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $http) {
+mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $http, $rootScope) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
     $scope.date = new Date();
     $scope.mapVisible = false;
     $scope.mapButtonLabel = "Show";
+    $scope.item = "";
+
 
     $http.get(serverAddr+"/users/"+$routeParams.loginid)
         .success(function(data) {
@@ -19,41 +21,68 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
         }
     }
 
-    $scope.map = {center: {latitude: 41.3850639, longitude: 2.1734034999999494}, zoom: 18};
-    var marker1 = {id: 1, latitude: 41.3850639, longitude: 2.1734034999999494};
-    $scope.markers = [];
-    $scope.markers[0] = marker1;
+    $scope.addItem = function() {
+        if($scope.item.longitude == undefined) {
+            console.log("No has seleccionado posición");
+            return;
+        }
+        console.log(JSON.stringify($scope.item));
+        var data = {
+            author: $rootScope.user._id,
+            title: $scope.item.title,
+            base64: $scope.image.base64,
+            pic_id: makeid()+".jpg",
+            latitude: $scope.item.latitude,
+            longitude: $scope.item.longitude
+        }
+        $http.post(serverAddr + '/items/additem', data)
+            .success(function(data) {
+                console.log("Item añadido");
+                console.log(JSON.stringify(data));
+        })
+            .error(function(data) {
+                console.log("Additem error");
+        });
+    }
 
-    /*$scope.map = {
+    function makeid()
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 25; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+
+    $scope.markerList = [];
+    $scope.map = {
         center: {
             latitude: 41.3850639,
             longitude: 2.1734034999999494
         },
-        zoom: 16,
+        zoom: 18,
+        showOverlay: true,
         events: {
-            click: function(mapModel, eventName, originalEventArgs,ok) {
+            "click": function (mapModel, eventName, originalEventArgs) {
                 var e = originalEventArgs[0];
-
-                var geocoder = new google.maps.Geocoder();
-                var latlng = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
-
-                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[1]) {
-
-                            console.log(results[1].formatted_address); // details address
-                        } else {
-                            console.log('Location not found');
-                        }
-                    } else {
-                        console.log('Geocoder failed due to: ' + status);
-                    }
-                });
-
-
+                var lat = e.latLng.lat()
+                var lon = e.latLng.lng();
+                $scope.item.latitude = lat;
+                $scope.item.longitude = lon;
+                $scope.markerList[0] = {id:1, latitude: lat, longitude: lon};
             }
+        },
+        options: {
+            streetViewControl: false,
+            panControl: false,
+            maxZoom: 20,
+            minZoom: 1,
+
         }
-     };*/
+    }
+
 
     $scope.processImages = function(images){
 

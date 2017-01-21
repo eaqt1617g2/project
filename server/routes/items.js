@@ -69,22 +69,27 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/additem', function(req, res) {
-    console.log(req.body.author);
-    console.log(req.body.title);
-    console.log(req.body.pic_id);
-    Item.create({
-        author: req.body.author,
-        title: req.body.title,
-        pic_id: req.body.pic_id
-    }, function(err, item){
-        if(err) {
-            res.send(err);
-        }
-        Item.find(function(err, item) {
-            if(err){
+
+    require("fs").writeFile("../public/assets/imgs/items/" + req.body.pic_id, req.body.base64, 'base64', function(err) {
+        if (err) throw err;
+        Item.create({
+            author: req.body.author,
+            title: req.body.title,
+            pic_id: req.body.pic_id,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude
+        }, function(err, item){
+            if(err) {
                 res.send(err);
+            }else {
+                Item.find(function (err, item) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(item);
+                    }
+                });
             }
-            res.json(item);
         });
     });
 });

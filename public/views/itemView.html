@@ -25,15 +25,17 @@
 
 
                     </div>
-
-
                     <div class="item-view-map-wrapper" >
                         <div class="row">
                             <a ng-click="mapButton()" class="btn btn-default show-map-button col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
                                 <i class="fa fa-lg fa-map-marker"></i>{{mapButtonLabel}} map
                             </a>
                         </div>
-                        <ui-gmap-google-map center="map.center" zoom="map.zoom" ng-show="mapVisible"></ui-gmap-google-map>
+                        <div  ng-if="mapVisible">
+                            <ui-gmap-google-map center="map.center" zoom="map.zoom">
+                                <ui-gmap-markers models="markerList" coords="'self'" icon="'icon'"/>
+                            </ui-gmap-google-map>
+                        </div>
 
                     </div>
                     <div class="item-view-comments">
