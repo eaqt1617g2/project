@@ -91,6 +91,76 @@ router.put('/:id', function(req, res) {
         });
 });
 
+//La id es el loginid
+router.put('/:id/edit/displayname', function(req, res) {
+    User.update(
+        {
+            loginid: req.params.id
+        },
+        {
+            displayname: req.body.displayname
+        },
+        function(err, user){
+            if(err) {
+                res.send(err);
+            }
+            User.find(function(err, users) {
+                if(err){
+                    res.send(err);
+                }
+                res.json(users);
+            });
+        });
+});
+
+router.put('/:id/edit/password', function(req, res) {
+    User.update(
+        {
+            loginid: req.params.id
+        },
+        {
+            password: req.body.displayname
+        },
+        function(err, user){
+            if(err) {
+                res.send(err);
+            }
+            User.find(function(err, users) {
+                if(err){
+                    res.send(err);
+                }
+                res.json(users);
+            });
+        });
+});
+
+router.put('/:id/edit/photo', function(req, res) {
+
+    require("fs").writeFile("../public/assets/imgs/profiles/" + req.body.photo_id, req.body.base64, 'base64', function(err) {
+        if (err) throw err;
+        User.update(
+            {
+                loginid: req.params.id
+            },
+            {
+                photo_id: req.body.photo_id
+            },
+            function(err, user){
+                if(err) {
+                    res.send(err);
+                }
+                User.find(function(err, users) {
+                    if(err){
+                        res.send(err);
+                    }
+                    res.json(users);
+                });
+            });
+    });
+
+
+});
+
 
 router.delete('/:id', function(req, res) {
     var o_id = new mongoose.Types.ObjectId(req.params.id);

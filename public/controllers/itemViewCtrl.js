@@ -1,5 +1,6 @@
 mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $http, $rootScope) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
+    $scope.markerList = [];
     $scope.map = {center: {latitude: 41.2833, longitude: 1.9667}, zoom: 8};
     $scope.date = new Date();
     $scope.mapVisible = false;
@@ -12,6 +13,7 @@ mainApp.controller("itemViewCtrl", function(SERVER_INFO, $scope, $routeParams, $
     $http.get(serverAddr+"/items/"+$routeParams.id)
         .success(function(data) {
             $scope.item = data;
+            $scope.markerList[0] = {id:1, latitude: data.latitude, longitude: data.longitude};
             for(var i = 0; i < $scope.item.likes.length; i++)
             {
                 if($scope.item.likes[i] == $rootScope.user._id)

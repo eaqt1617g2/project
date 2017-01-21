@@ -1,4 +1,4 @@
-var mainApp = angular.module("mainApp", ['ngRoute', 'ui.bootstrap', 'app.config', 'ngCookies', 'uiGmapgoogle-maps','flow']);
+var mainApp = angular.module("mainApp", ['ngRoute', 'ui.bootstrap', 'app.config', 'ngCookies', 'uiGmapgoogle-maps', 'flow', 'naif.base64']);
 
 mainApp.config(function($routeProvider) {
     $routeProvider
@@ -23,7 +23,7 @@ mainApp.config(function($routeProvider) {
         }).when("/config", {
             templateUrl: "/views/userConfiguration.html",
             controller: "userConfCtrl"
-        }).when("/additem/:loginid", {
+        }).when("/additem", {
             templateUrl: "/views/itemAdd.html",
             controller: "itemAddCtrl"
         }).when("/item/:id", {

@@ -266,6 +266,7 @@ html, body {
 	height: 75px;
 	border-radius: 50%;
 	margin: 10px;
+	overflow:hidden;
 }
 #profile-pre-header h3 {
 	color: black;
@@ -481,6 +482,9 @@ html, body {
 	font-weight: bold;
 	font-size: 10px;
 }
+.item-view-content {
+	padding: 15px;
+}
 .item-view-map-wrapper {
 	padding: 15px;
 }
@@ -489,8 +493,6 @@ html, body {
 	border-top: 1px solid #ebeef2;
 	padding: 10px 0px;
 	background-color: #f7f9fa;
-
-
 }
 .item-view-title {
 	font-size: 25px;

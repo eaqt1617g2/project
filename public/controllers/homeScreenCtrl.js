@@ -10,6 +10,9 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootS
         .success(function(data) {
            // console.log(JSON.stringify(data));
             $rootScope.user = data;
+            if(data.photo_id != undefined) {
+                $rootScope.user.photo_user = serverAddr+"/assets/imgs/profiles/"+$rootScope.user.photo_id;
+            }
         })
         .error(function(data) {
             console.log('Error: ' + data);
@@ -50,37 +53,5 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootS
         currentItemsPage++;
         $scope.getItems();
     };
-
-    $scope.lastMinuteClick = function() {
-        $rootScope.navIndex = 1;
-    };
-    $scope.discoverClick = function() {
-        $rootScope.navIndex = 2;
-    };
-    $scope.friendsClick = function() {
-        $rootScope.navIndex = 3;
-    };
-
-
-
-
-
-    /*
-    $scope.user = {
-        loginid: "Scarlet88",
-        name: "Scarlett",
-        last_name: "Johansson",
-        email: "scarlet.johansson@gmail.com",
-        creation_date: "2016-10-07T17:40:11.071Z",
-        last_login_date: "2016-10-07T17:40:11.071Z",
-        followers: "65",
-        following: "54",
-        items: "6",
-        profile_pic_url: "../assets/imgs/profileTestPic3.png"
-    };
-    */
-
-
-
 
 });
