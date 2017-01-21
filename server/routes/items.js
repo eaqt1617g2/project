@@ -2,6 +2,7 @@ var app = require('express');
 var router = app.Router();
 
 var Item = require('../models/item');
+var User = require('../models/user');
 var Comment = require('../models/comment');
 var mongoose = require('mongoose');
 
@@ -36,14 +37,18 @@ router.get('/discover', function(req, res) {
 
 //pendiente
 router.get('/friends', function(req, res) {
-    console.log(req.query.page);
-    Item.find({
-
-    }).populate('author', 'loginid').sort('likes.length', 'descending').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
-        if(err) {
+    User.findOne({_id: req.query.id}).exec(function(err, user) {
+        if (err) {
             res.send(err);
         }
-        res.json(items);
+        console.log(user.displayname);
+        console.log(JSON.stringify(user.following));
+        Item.find({author: {$in: user.following}}).populate('author', 'loginid').skip(parseInt(req.query.page) * 6).limit(6).exec(function (err, items) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(items);
+        });
     });
 });
 
