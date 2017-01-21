@@ -1,7 +1,7 @@
-var BASE_URL = "http://192.168.1.105:2709";
+var BASE_URL = "http://localhost:2709";
 
 angular.module('app.controllers', [])
-//angular google maps
+  //angular google maps
   .controller('menuCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
 
   }])
@@ -11,11 +11,11 @@ angular.module('app.controllers', [])
     $scope.usuario = $rootScope.userLogued;
     console.log('logueado', $scope.usuario );
     $http.get(BASE_URL + '/items').success(function (data) {
-      $scope.items = {};
-      $scope.users = {};
-      $scope.items = data;
-      console.log("Items", $scope.items);
-    })
+        $scope.items = {};
+        $scope.users = {};
+        $scope.items = data;
+        console.log("Items", $scope.items);
+      })
       .error(function (data) {
         console.log('Error: ' + data);
         var alertPopup = $ionicPopup.alert({
@@ -50,10 +50,10 @@ angular.module('app.controllers', [])
     $scope.usuario = {};
 
     $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
-      $scope.users = {};
-      $scope.usuario = data;
-      console.log("Usuario", $scope.usuario);
-    })
+        $scope.users = {};
+        $scope.usuario = data;
+        console.log("Usuario", $scope.usuario);
+      })
       .error(function (data) {
         console.log('Error: ' + data);
         var alertPopup = $ionicPopup.alert({
@@ -78,13 +78,13 @@ angular.module('app.controllers', [])
 
     $scope.follow = function(user, usuario) {
       $http.post(BASE_URL + '/users/'+ usuario.loginid+'/follow',{"_id": user._id}).success(function(data) {
-        console.log("Usuario", usuario);
-        console.log("User", user);
-        $scope.usuario = {};
-        $scope.users = {};
-        $scope.usuario = data;
-        $rootScope.following = true;
-      })
+          console.log("Usuario", usuario);
+          console.log("User", user);
+          $scope.usuario = {};
+          $scope.users = {};
+          $scope.usuario = data;
+          $rootScope.following = true;
+        })
         .error(function(data) {
           console.log("Follow error");
         });
@@ -92,11 +92,11 @@ angular.module('app.controllers', [])
 
     $scope.unfollow = function(user, usuario) {
       $http.post(BASE_URL+ '/users/'+usuario.loginid +'/unfollow',{"_id": user._id}).success(function(data) {
-        console.log("Usuario", $scope.usuario);
-        console.log("User", $scope.user);
-        $scope.usuario = data;
-        $rootScope.following = false;
-      })
+          console.log("Usuario", $scope.usuario);
+          console.log("User", $scope.user);
+          $scope.usuario = data;
+          $rootScope.following = false;
+        })
         .error(function(data) {
           console.log("Unfollow error");
         });
@@ -112,11 +112,11 @@ angular.module('app.controllers', [])
     console.log('logueado', $scope.usuario );
 
     $http.get(BASE_URL + '/users/'+$scope.usuario).success(function(data) {
-      $scope.users = {};
-      $scope.items = {};
-      $scope.usuario = data;
-      console.log("Usuario", $scope.usuario);
-    })
+        $scope.users = {};
+        $scope.items = {};
+        $scope.usuario = data;
+        console.log("Usuario", $scope.usuario);
+      })
       .error(function (data) {
         console.log('Error: ' + data);
         var alertPopup = $ionicPopup.alert({
@@ -143,9 +143,9 @@ angular.module('app.controllers', [])
       $scope.items = {};
       $scope.users = {};
       $http.get(BASE_URL + '/users').success(function (data) {
-        $scope.users = data;
-        console.log("Usuarios", $scope.users);
-      })
+          $scope.users = data;
+          console.log("Usuarios", $scope.users);
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -159,10 +159,10 @@ angular.module('app.controllers', [])
       $scope.items = {};
       $scope.users = {};
       $http.get(BASE_URL + '/users/order').success(function(data) {
-        $scope.users = {};
-        $scope.users = data;
-        console.log("Usuarios", $scope.users);
-      })
+          $scope.users = {};
+          $scope.users = data;
+          console.log("Usuarios", $scope.users);
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -174,10 +174,10 @@ angular.module('app.controllers', [])
 
     $scope.selectUser = function(user){
       $http.get(BASE_URL + '/users/'+user._id).success(function(data) {
-        $scope.usuario = user;
-        $scope.users = {};
-        console.log("Usuario", $scope.usuario);
-      })
+          $scope.usuario = user;
+          $scope.users = {};
+          console.log("Usuario", $scope.usuario);
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -227,11 +227,11 @@ angular.module('app.controllers', [])
     $scope.getItems = function(){
       console.log("Loginid", $scope.usuario.loginid);
       $http.get(BASE_URL + '/users/'+$scope.usuario.loginid+'/items').success(function (data) {
-        $scope.items = {};
-        $scope.users = {};
-        $scope.items = data;
-        console.log("Items", $scope.items);
-      })
+          $scope.items = {};
+          $scope.users = {};
+          $scope.items = data;
+          console.log("Items", $scope.items);
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -243,11 +243,11 @@ angular.module('app.controllers', [])
 
     $scope.getItemsOrder = function(){
       $http.get(BASE_URL + '/items/order').success(function (data) {
-        $scope.items = {};
-        $scope.users = {};
-        $scope.items = data;
-        console.log("Items", $scope.items);
-      })
+          $scope.items = {};
+          $scope.users = {};
+          $scope.items = data;
+          console.log("Items", $scope.items);
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -268,9 +268,9 @@ angular.module('app.controllers', [])
     console.log("Usuario", $scope.ItemID);
     $scope.item = {};
     $http.get(BASE_URL + '/items/'+$scope.ItemID).success(function(data) {
-      $scope.item = data;
-      console.log("Item", $scope.item);
-    })
+        $scope.item = data;
+        console.log("Item", $scope.item);
+      })
       .error(function (data) {
         console.log('Error: ' + data);
         var alertPopup = $ionicPopup.alert({
@@ -288,11 +288,11 @@ angular.module('app.controllers', [])
 
     $scope.getUsersOrder = function() {
       $http.get(BASE_URL + '/users/order').success(function(data) {
-        $scope.users = {};
-        $scope.usuario = {};
-        $scope.users = data;
-        console.log("Usuarios", $scope.users);
-      })
+          $scope.users = {};
+          $scope.usuario = {};
+          $scope.users = data;
+          console.log("Usuarios", $scope.users);
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -378,12 +378,12 @@ angular.module('app.controllers', [])
       };
       console.log('PostUser: ' + postUser);
       $http.put(BASE_URL + '/users/'+ $scope.usuario._id, postUser).success(function(data) {
-        $scope.newUser = {}; // Borramos los datos del formulario
-        $scope.usuario = {};
-        $rootScope.userLogued = {};
-        $rootScope.userLogued = data;
-        console.log($scope.usuario)
-      })
+          $scope.newUser = {}; // Borramos los datos del formulario
+          $scope.usuario = {};
+          $rootScope.userLogued = {};
+          $rootScope.userLogued = data;
+          console.log($scope.usuario)
+        })
         .error(function(data) {
           console.log('Error: ' + data);
         });
@@ -407,11 +407,11 @@ angular.module('app.controllers', [])
     $scope.usuario = $rootScope.userLogued;
     console.log('logueado', $scope.usuario );
     $http.get(BASE_URL + '/items').success(function (data) {
-      $scope.items = {};
-      $scope.users = {};
-      $scope.items = data;
-      console.log("Items", $scope.items);
-    })
+        $scope.items = {};
+        $scope.users = {};
+        $scope.items = data;
+        console.log("Items", $scope.items);
+      })
       .error(function (data) {
         console.log('Error: ' + data);
         var alertPopup = $ionicPopup.alert({
@@ -437,10 +437,10 @@ angular.module('app.controllers', [])
         password : $scope.User.password
       };
       $http.post(BASE_URL + '/login', userLogin).success(function (data) {
-        console.log("User Logged", data);
-        $rootScope.userLogued = data;
-        $state.go('tabsController.lastMinute', {}, {reload: true});
-      })
+          console.log("User Logged", data);
+          $rootScope.userLogued = data;
+          $state.go('tabsController.lastMinute', {}, {reload: true});
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -451,10 +451,10 @@ angular.module('app.controllers', [])
     }
     $scope.loginFacebook = function(){
       $http.post(BASE_URL + '/auth/facebook').success(function (data) {
-        console.log("User Logged", data);
-        $rootScope.userLogued = data;
-        $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
-      })
+          console.log("User Logged", data);
+          $rootScope.userLogued = data;
+          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -466,10 +466,10 @@ angular.module('app.controllers', [])
 
     $scope.loginTwitter = function(){
       $http.post(BASE_URL + '/auth/twitter').success(function (data) {
-        console.log("User Logged", data);
-        $rootScope.userLogued = data;
-        $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
-      })
+          console.log("User Logged", data);
+          $rootScope.userLogued = data;
+          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -480,10 +480,10 @@ angular.module('app.controllers', [])
     }
     $scope.loginGoogle = function(){
       $http.post(BASE_URL + '/auth/google').success(function (data) {
-        console.log("User Logged", data);
-        $rootScope.userLogued = data;
-        $state.go('tabsControllerNormal.lastMinuteDefaultPage', {}, {reload: true});
-      })
+          console.log("User Logged", data);
+          $rootScope.userLogued = data;
+          $state.go('tabsControllerNormal.lastMinuteDefaultPage', {}, {reload: true});
+        })
         .error(function (data) {
           console.log('Error: ' + data);
           var alertPopup = $ionicPopup.alert({
@@ -523,15 +523,15 @@ angular.module('app.controllers', [])
           email: $scope.newUser.email
         };
         $http.post(BASE_URL + '/users/android', postUser).success(function (data) {
-          console.log('Registrado correctamente');
-          var alertPopup = $ionicPopup.alert({
-            title: 'Información',
-            template: 'Se ha registrado correctamente, le enseñaremos su página de perfil.'
-          });
-          console.log($scope.newUser.loginid)
-          $rootScope.userLogued = $scope.newUser;
-          console.log($scope.newUser)
-          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+            console.log('Registrado correctamente');
+            var alertPopup = $ionicPopup.alert({
+              title: 'Información',
+              template: 'Se ha registrado correctamente, le enseñaremos su página de perfil.'
+            });
+            console.log($scope.newUser.loginid)
+            $rootScope.userLogued = $scope.newUser;
+            console.log($scope.newUser)
+            $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
           })
           .error(function (data) {
             console.log('Error: ' + data);
@@ -557,7 +557,7 @@ angular.module('app.controllers', [])
   }])
   .controller('crearItemCtrl', ['$scope', '$ionicLoading', '$ionicPlatform', '$http', '$cordovaCamera', '$cordovaFile', '$cordovaImagePicker', '$state', function ($scope, $ionicLoading, $ionicPlatform, $http, $cordovaCamera, $cordovaFile, $cordovaImagePicker, $state) {
     var vm = this;
-var base64;
+    var base64;
     var position = {
       "latitud": 41.4,
       "longitud": 2.2
@@ -577,7 +577,7 @@ var base64;
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
-          marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
           draggable:true,
           position: {
             lat: position.latitud,
@@ -615,7 +615,7 @@ var base64;
           });
         });
         $scope.map = map;
-    })
+      })
       .error(function(data) {
         console.log("error: " + data);
         var myLatlng = new google.maps.LatLng(position.latitud, position.longitud);
@@ -654,7 +654,7 @@ var base64;
             console.log(error)
           }
         )
-          $scope.srcImage = "data:image/jpeg;base64," + imageData;
+        $scope.srcImage = "data:image/jpeg;base64," + imageData;
         resolveLocalFileSystemURL('cdvfile://localhost/cache-external/new_pic.jpg', function(entry) {
           var nativePath = entry.toURL();
           console.log('Native URI: ' + nativePath);
@@ -709,12 +709,12 @@ var base64;
       }
       $http.post(BASE_URL + '/items/additemApp',data).success(function(data) {
 
-        $scope.usuario = {};
-        $scope.users = {};
-        $scope.usuario = data;
-        //$rootScope.following = true;
-        $state.go('tabsController.lastMinuteDefaultPage');
-      })
+          $scope.usuario = {};
+          $scope.users = {};
+          $scope.usuario = data;
+          //$rootScope.following = true;
+          $state.go('tabsController.lastMinuteDefaultPage');
+        })
         .error(function(data) {
           console.log("Follow error");
         });

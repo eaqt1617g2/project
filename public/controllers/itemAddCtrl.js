@@ -55,7 +55,6 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
 
         return text;
     }
-
     $scope.markerList = [];
     $scope.map = {
         center: {
@@ -82,7 +81,6 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
 
         }
     }
-
 
     $scope.processImages = function(images){
 

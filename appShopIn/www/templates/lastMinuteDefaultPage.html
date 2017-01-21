@@ -1,5 +1,23 @@
 <ion-view title="Last Minute Default Page" id="page5">
   <ion-content padding="true" class="has-header">
+<<<<<<< HEAD
+    <div class="list animate-fade-slide-in-right">
+      <a class="item item-avatar item-icon-right" ng-repeat="user in users" href="#/tabsController/perfil/{{user.loginid}}">
+        <img src={{user.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+        <h2>{{user.loginid}}</h2>
+        <p>{{user.name}} {{user.last_name}}</p>
+        <i class="icon ion-chatbubble muted"></i>
+      </a>
+    </div>
+    <div class="list card" id="lastMinuteDefaultPage-card21" ng-repeat="item in items" href="#/tabsController/detail/{{item._id}}">
+      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ui-sref="tabsController.perfilDefaultPage">
+        <img src={{user.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+        <h2>{{user.loginid}}</h2>
+      </ion-item>
+      <div class=" item item-image">
+        <a style="display:block;" href="#/tabsController/detail/{{item._id}}">
+          <img src="img/fz74BLExTOSO3JMDGBtf_fondo.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+=======
     <div class="list card" id="lastMinuteDefaultPage-card21" ng-repeat="item in items">
       <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(item.author.loginid)">
         <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} >
@@ -10,6 +28,7 @@
       <div class=" item item-image" >
         <a style="display:block;" >
           <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+>>>>>>> 3d749308ef024aacfcc4702baf31de973df3b65f
         </a>
       </div>
       <div class="item item-body" id="lastMinuteDefaultPage-list-item-container2" >

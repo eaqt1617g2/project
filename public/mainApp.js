@@ -34,7 +34,11 @@ mainApp.config(function($routeProvider) {
             controller: "userSearchCtrl"
     });
 
+
+
     mainApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
-         flowFactoryProvider.factory = fustyFlowFactory;
+            flowFactoryProvider.factory = fustyFlowFactory;
         }]);
-}); 
+    
+});
+
