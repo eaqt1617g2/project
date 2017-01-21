@@ -1,4 +1,16 @@
-<ion-view title="Tabs Controller" id="page4">
+<ion-view title="Items" id="page4">
+  <ion-nav-bar class="bar-calm">
+    <ion-nav-back-button></ion-nav-back-button>
+    <ion-nav-buttons ng-controller="menuCtrl" side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons ng-controller="menuCtrl" side="right">
+      <div class="col button-right">
+        <button class="button button-icon button-clear ion-android-search" ui-sref="tabsControllerUser.searchDefaultPage"></button>
+        <button class="button button-icon button-clear ion-gear-a" ui-sref="tabsControllerNormal.herramientasDefaultPage"></button>
+      </div>
+    </ion-nav-buttons>
+  </ion-nav-bar>
   <ion-tabs class="tabs-calm tabs-icon-left" id="tabsController-tabs1">
     <ion-tab title="Last Minute" icon="ion-ios-timer-outline" href="#/tabsController/lastminute" id="tabsController-tab1">
       <ion-nav-view name="tab1"></ion-nav-view>

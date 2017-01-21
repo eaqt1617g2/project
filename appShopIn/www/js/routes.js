@@ -41,6 +41,17 @@ angular.module('app.routes', [])
       templateUrl: 'templates/tabsController.html',
       abstract:true
   })
+  .state('tabsControllerNormal', {
+    url: '/tabsControllerNormal',
+    templateUrl: 'templates/tabsControllerNormal.html',
+    abstract:true
+  })
+
+  .state('tabsControllerUser', {
+    url: '/tabsControllerUser',
+    templateUrl: 'templates/tabsControllerUser.html',
+    abstract:true
+  })
 
   .state('tabsController.lastMinuteDefaultPage', {
     url: '/lastMinute',
@@ -72,56 +83,66 @@ angular.module('app.routes', [])
       }
   })
 
-  .state('tabsController.usersDefaultPage', {
+  .state('tabsControllerUser.usersDefaultPage', {
       url: '/users/:loginid',
       views: {
-        'tab1': {
+        'tab7': {
           templateUrl: 'templates/usersDefaultPage.html',
           controller: 'usersDefaultPageCtrl'
         }
       }
   })
 
-  .state('tabsController.perfilDefaultPage', {
+  .state('tabsControllerNormal.perfilDefaultPage', {
     url: '/perfil/:loginid',
     views: {
-      'tab1': {
+      'tab4': {
         templateUrl: 'templates/perfilDefaultPage.html',
         controller: 'perfilDefaultPageCtrl'
       }
     }
   })
 
-  .state('tabsController.detailDefaultPage', {
-    url: '/detail',
+  .state('tabsControllerUser.detailDefaultPage', {
+    url: '/detail/:loginid',
     views: {
-      'tab1': {
+      'tab8': {
         templateUrl: 'templates/detailDefaultPage.html',
         controller: 'detailDefaultPageCtrl'
       }
     }
   })
 
-  .state('tabsController.searchDefaultPage', {
+  .state('tabsControllerUser.searchDefaultPage', {
     url: '/search',
     views: {
-      'tab1': {
+      'tab5': {
         templateUrl: 'templates/search.html',
         controller: 'searchCtrl'
       }
     }
   })
 
-  .state('tabsController.herramientasDefaultPage', {
+  .state('tabsControllerNormal.herramientasDefaultPage', {
     url: '/herramientas',
     views: {
-      'tab1': {
+      'tab6': {
         templateUrl: 'templates/herramientas.html',
         controller: 'herramientasCtrl'
       }
     }
   })
 
+    .state('tabsController.crearItem', {
+      url: '/crearItem',
+      views: {
+        'tab1': {
+          templateUrl: 'templates/crearItem.html',
+          controller: 'crearItemCtrl',
+          controllerAs: 'vm'
+        }
+      }
+    })
 
 
 $urlRouterProvider.otherwise('/login/access')

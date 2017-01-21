@@ -3,6 +3,7 @@ var router = app.Router();
 
 var User = require('../models/user');
 var Item = require('../models/item');
+var Comment = require('../models/comment');
 var mongoose = require('mongoose');
 
 
@@ -26,13 +27,21 @@ function isLoggedIn(req, res, next) {
 
 router.get('/', function(req, res) {
 
-    User.find(function(err, todos) {
+    User.find(function(err, users) {
         if(err) {
             res.send(err);
         }
-        res.json(todos);
+        res.json(users);
     });
 
+});
+
+router.get('/filter', function(req, res) {
+   User.find({'loginid': new RegExp(req.query.loginid, 'i')}, function(err, users) {
+       if(err)
+           res.send(err);
+       res.json(users);
+   });
 });
 
 router.get('/order', function (req, res){
@@ -115,13 +124,27 @@ router.post('/', function(req, res) {
         if(err) {
             res.send(err);
         }
-
         User.find(function(err, users) {
             if(err){
                 res.send(err);
             }
             res.json(users);
         });
+    });
+
+});
+
+router.post('/android', function(req, res) {
+    User.create({
+        loginid: req.body.loginid,
+        password: req.body.password,
+        name: req.body.name,
+        last_name: req.body.last_name,
+        email: req.body.email
+    }, function(err, user){
+        if(err) {
+            res.send(err);
+        }
     });
 
 });

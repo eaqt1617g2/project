@@ -1,0 +1,33 @@
+<div id="content-wrapper">
+    <div id="main-content" class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="user-conf-module">
+                    <div class="user-conf-module-header">
+                        <h4>Search user</h4>
+                    </div>
+                    <div class="user-conf-module-content">
+                        <form ng-submit="searchUsers()">
+                            <div class="form-group">
+                                <label for="loginid">Loginid filter: </label>
+                                <input type="text" class="form-control" id="loginid" ng-model="loginid" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary ">Find</button>
+                        </form>
+                    </div>
+                    <div class="user-conf-module-content" style="min-height: 120px;"  ng-repeat="user in result_users">
+                        <ul>
+                            <li class="search-user">
+                                <a class="pull-left" ng-href="#/user/{{user.loginid}}" >
+                                    <img class="search-user-list-avatar" ng-src={{user.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}} alt="Avatar">
+                                </a>
+                                <h3>{{user.displayname}}</h3>
+                                <h4>@{{user.loginid}}</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

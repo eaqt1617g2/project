@@ -4,7 +4,7 @@
             <div class="col-md-3">
                 <div id="profile-preview" class="module">
                     <div id="profile-pre-header">
-                        <a href="#/user/{{user.loginid}}"><img src={{user.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}}></a>
+                        <a href="#/user/{{user.loginid}}"><img ng-src={{user.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}}></a>
                         <h3>{{user.displayname}}</h3>
                         <h4>@{{user.loginid}}</h4>
                     </div>
@@ -22,12 +22,14 @@
                     </div>
                     <a class="btn add-item-button" ng-href="#/additem/{{user.loginid}}">Add new item</a>
                 </div>
+                <!--
                 <div id="filters" class="module">
                     <div class="module-header">
                         <h2><i class="fa fa-filter fa-2x"></i> Filters</h2>
                     </div>
                     <p><br>No implementado</p>
                 </div>
+                -->
             </div>
             <div class="col-md-9">
                 <div id="main-module">
@@ -37,12 +39,12 @@
                         <div class="col-md-4" >
                             <div class="item-wrapper">
                                 <div class="item-pre-pic-wrapper">
-                                    <a href="#/item/{{item._id}}"><img class="item-pre-pic" src="http://localhost:2709/assets/imgs/items/{{item.pic_id}}"></a>
+                                    <a href="#/item/{{item._id}}"><img class="item-pre-pic" ng-src="http://localhost:2709/assets/imgs/items/{{item.pic_id}}"></a>
                                 </div>
                                 <div class="item-pre-info">
                                     <h2>{{item.title}}</h2>
                                     <div class="item-pre-stats">
-                                        <p><i class="fa fa-heart"></i> {{item.likes}} <i class="fa fa-comments-o"></i> {{item.comments.length}}</p>
+                                        <p><i class="fa fa-heart"></i> {{item.likes.length}} <i class="fa fa-comments-o"></i> {{item.comments.length}}</p>
                                     </div>
                                 </div>
                                 <div class="item-pre-footer">

@@ -6,14 +6,18 @@
                     <div class="item-view-header">
                         <div class="pull-left">
                             <h4 class="displayname">{{item.author.displayname}}</h4>
-                            <h4 class="loginid">@{{item.author.loginid}}</h4>
+                            <a href="#/user/{{item.author.loginid}}"><h4 class="loginid">@{{item.author.loginid}}</h4></a>
                             <h5 class="time">- {{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5>
                         </div>
                         <div class="pull-right">
-                            {{item.likes}} <i class="fa fa-heart"></i>
+                            {{item.likes.length}} <i class="fa fa-lg fa-heart"></i>
                         </div>
                     </div>
-                    <div class="item-view-title">{{item.title}}</div>
+                    <div class="item-view-title">
+                        {{item.title}}
+                        <a ng-hide="liked" ng-click="like()" class="btn btn-primary pull-right">Like</a>
+                        <a ng-show="liked" ng-click="dislike()" class="btn btn-danger pull-right">Dislike</a>
+                    </div>
                     <div class="item-view-pic-wrapper text-center">
 
                             <!--<img  src="http://localhost:2709/assets/imgs/items/{{item.pic_id}}">-->
@@ -39,32 +43,26 @@
                                 <a ng-click="postComment()"><i class="fa fa-edit"></i></a>
                             </span>
                         </div>
-                        <ul class="comments-list">
-                            <li class="comment">
+                        <ul class="comments-list" ng-init="getComments()">
+                            <li class="comment" ng-repeat="comment in comments">
                                 <a class="pull-left" href="#" >
-                                    <img class="comment-avatar" src="http://localhost:2709/assets/imgs/profiles/profileTestPic2.png" alt="Avatar">
+                                    <img class="comment-avatar" ng-src={{comment.author.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}} alt="Avatar">
                                 </a>
                                 <div class="comment-body">
                                     <div class="comment-heading">
-                                        <h4 class="user">Carlos Santiago</h4>
-                                        <h4 class="time">3 minutes ago</h4>
+                                        <h4 class="user">{{comment.author.loginid}}</h4>
+                                        <h4 class="time">{{comment.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
                                     </div>
-                                    <p>Comentario</p>
-                                </div>
-                            </li>
-                            <li class="comment">
-                                <a class="pull-left" href="#" >
-                                    <img class="comment-avatar" src="http://localhost:2709/assets/imgs/profiles/profileTestPic2.png">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Carlos Santiago</h4>
-                                        <h4 class="time">4 minutes ago</h4>
-                                    </div>
-                                    <p>Comentario 2</p>
+                                    <p>{{comment.content}}</p>
                                 </div>
                             </li>
                         </ul>
+                        <nav>
+                            <ul class="pager">
+                                <li ng-class="{'disabled':currentCommentsPage <= 0}" class="previous"><a ng-click="olderComments()"><span>&larr;</span> Newer</a></li>
+                                <li class="next"><a ng-click="newerComments()">Older <span>&rarr;</span></a></li>
+                            </ul>
+                        </nav>
                     </div>
 
                 </div>

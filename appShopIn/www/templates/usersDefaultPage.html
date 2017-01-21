@@ -1,6 +1,6 @@
 <ion-view title="Perfil Default Page" id="/user/:loginid">
   <ion-content padding="true" class="has-header">
-    <div id="perfilDefaultPage-container2">
+    <div id="userDefaultPage-container2">
       <h4 id="perfilDefaultPage-heading2" style="color:#000000;">{{usuario.loginid}}</h4>
       <div>
         <img class="item-avatar" src={{usuario.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="50%" height="" style="display: block; margin-left: auto; margin-right: auto;">
@@ -9,23 +9,43 @@
         <ion-list id="perfilDefaultPage-list3">
           <ion-item id="perfilDefaultPage-list-item5">{{usuario.name}} {{usuario.last_name}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item6">{{usuario.email}}</ion-item>
-          <ion-item id="perfilDefaultPage-list-item4">{{usuario.last_login_date}}</ion-item>
-          <button id="perfilDefaultPage-button21" ng-click="follow(usuario)" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Follow</button>
-          <button id="perfilDefaultPage-button22" ng-click="unfollow(usuario)" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Unfollow</button>
-        </ion-list>
+          <ion-item id="perfilDefaultPage-list-item4">{{usuario.last_login_date | date:'dd/MM/yyyy HH:mm'}}</ion-item>
+          <p></p>
+          <button class="button button-calm" ng-hide="followed" ng-click="follow(usuario)">Follow</button>
+          <button class="button button-assertive" ng-show="followed" ng-click="unfollow(usuario)">Unfollow</button>
+          </ion-list>
         <div id="perfilDefaultPage-button-bar2" class="button-bar">
           <button id="perfilDefaultPage-button17" ng-click="getItemsOrder()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
-          <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS</button>
-          <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING</button>
-          </div>
-
-        <ion-item class="item-remove-animate item-icon-right" ng-repeat="user in users">
-        <button class="button icon ion-android-person" ng-click="selectUser(user)"></button>
-          <h2>Nombre: {{user.name}}</h2>
+          <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS {{userLogued.followers.length || 0}}</button>
+          <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING {{userLogued.following.length || 0}}</button>
+        </div>
+        <div class="list animate-fade-slide-in-right">
+          <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">
+            <img src={{user.photo_user||"img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+            <h2>{{user.loginid}}</h2>
+            <p>{{user.name}} {{user.last_name}}</p>
+            <i class="icon ion-chatbubble muted"></i>
+          </a>
+        </div>
+        <div class="list card" id="lastMinuteDefaultPage-card21" ng-repeat="item in items">
+          <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9">
+            <img src={{user.photo_user||"img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} >
+            <h2>{{user.loginid}}</h2>
+            <h4>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
           </ion-item>
-        <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items">
-          <h2>Nombre: {{item.title}}, Autor: {{item.author}}, Likes: {{item.likes}}</h2>
-        </ion-item>
+          <strong>{{item.title}}</strong></p>
+          <div class=" item item-image" >
+            <a style="display:block;" >
+              <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+            </a>
+          </div>
+          <div class="item item-body" id="lastMinuteDefaultPage-list-item-container2" >
+            <div id="lastMinuteDefaultPage-markdown5" class="show-list-numbers-and-dots" side="left">
+              <p style="margin-top:0px;color:#000000;"><i class="icon ion-heart"></i>{{item.likes.length}}<i class="icon ion-chatboxes"></i>{{item.comments.length}}</p>
+            </div>
+            <button class="button button-stable  button-block" ng-click="verDetalle(item._id)">Ver</button>
+          </div>
+        </div>
       </form>
     </div>
   </ion-content>

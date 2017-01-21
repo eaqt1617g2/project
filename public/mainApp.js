@@ -5,6 +5,12 @@ mainApp.config(function($routeProvider) {
         .when("/", {
             templateUrl : "/views/homeScreen.html",
             controller: "homeScreenCtrl"
+        }).when("/discover", {
+            templateUrl : "/views/discover.html",
+            controller: "discoverCtrl"
+        }).when("/friends", {
+            templateUrl : "/views/friends.html",
+            controller: "friendsCtrl"
         }).when("/user/:loginid", {
             templateUrl : "/views/userProfile.html",
             controller: "userProfileCtrl"
@@ -23,7 +29,11 @@ mainApp.config(function($routeProvider) {
         }).when("/item/:id", {
             templateUrl: "/views/itemView.html",
             controller: "itemViewCtrl"
+        }).when("/searchuser", {
+            templateUrl: "/views/userSearch.html",
+            controller: "userSearchCtrl"
     });
+
 
 
     mainApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
@@ -31,3 +41,4 @@ mainApp.config(function($routeProvider) {
         }]);
     
 });
+
