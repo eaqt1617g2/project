@@ -10,6 +10,9 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootS
         .success(function(data) {
            // console.log(JSON.stringify(data));
             $rootScope.user = data;
+            if(data.photo_id != undefined) {
+                $rootScope.user.photo_user = serverAddr+"/assets/imgs/profiles/"+$rootScope.user.photo_id;
+            }
         })
         .error(function(data) {
             console.log('Error: ' + data);

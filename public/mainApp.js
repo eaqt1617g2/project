@@ -23,7 +23,7 @@ mainApp.config(function($routeProvider) {
         }).when("/config", {
             templateUrl: "/views/userConfiguration.html",
             controller: "userConfCtrl"
-        }).when("/additem/:loginid", {
+        }).when("/additem", {
             templateUrl: "/views/itemAdd.html",
             controller: "itemAddCtrl"
         }).when("/item/:id", {

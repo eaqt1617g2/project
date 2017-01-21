@@ -266,6 +266,7 @@ html, body {
 	height: 75px;
 	border-radius: 50%;
 	margin: 10px;
+	overflow:hidden;
 }
 #profile-pre-header h3 {
 	color: black;
