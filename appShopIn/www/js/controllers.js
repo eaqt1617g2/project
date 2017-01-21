@@ -426,7 +426,7 @@ angular.module('app.controllers', [])
 
   }])
 
-  .controller('loginCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
+  .controller('loginCtrl', ['$cordovaOauth','$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($cordovaOauth, $scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
 
     $scope.User = {};
 
@@ -449,6 +449,7 @@ angular.module('app.controllers', [])
           });
         });
     }
+    /*
     $scope.loginFacebook = function(){
       $http.post(BASE_URL + '/auth/facebook').success(function (data) {
           console.log("User Logged", data);
@@ -462,49 +463,63 @@ angular.module('app.controllers', [])
             template: 'Introduce bien los datos!'
           });
         });
+    }*/
+
+    $scope.loginFacebook = function(){
+      console.log("clicked");
+      $cordovaOauth.facebook("343051082715858", ["email"]).then(function(result) {
+        alert("Auth Success..!!"+result);
+      }, function(error) {
+        alert("Auth Failed..!!"+error);
+      });
     }
 
-    $scope.loginTwitter = function(){
-      $http.post(BASE_URL + '/auth/twitter').success(function (data) {
-          console.log("User Logged", data);
-          $rootScope.userLogued = data;
-          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
-        })
-        .error(function (data) {
-          console.log('Error: ' + data);
-          var alertPopup = $ionicPopup.alert({
-            title: 'No se ha logueado correctamente!',
-            template: 'Introduce bien los datos!'
-          });
-        });
+    $scope.loginTwitter = function() {
+      $cordovaOauth.twitter("n97MUo0VUGuKqOP0tcw3Faz4b","nOmFm4p2yRnqyOTl6iUd7ESZ6kPDSNXXLtY1bV5a3U8maSVVjH", {redirect_uri: "http://localhost:2709/auth/twitter/callback"}).then(function(result){
+        alert('success');
+      },  function(error){
+        alert('error!!!!');
+      });
     }
-    $scope.loginGoogle = function(){
-      $http.post(BASE_URL + '/auth/google').success(function (data) {
-          console.log("User Logged", data);
-          $rootScope.userLogued = data;
-          $state.go('tabsControllerNormal.lastMinuteDefaultPage', {}, {reload: true});
-        })
-        .error(function (data) {
-          console.log('Error: ' + data);
-          var alertPopup = $ionicPopup.alert({
-            title: 'No se ha logueado correctamente!',
-            template: 'Introduce bien los datos!'
-          });
-        });
+
+    $scope.loginGoogle2 = function() {
+      $cordovaOauth.google("1063612097703-4grhbrh1kl316idhctspnf356uk0hl17.apps.googleusercontent.com", ["https://localhost/auth/google"]).then(function(result) {
+        console.log(JSON.stringify(result));
+      }, function(error) {
+        console.log(error);
+      });
     }
-    $scope.loginGoogle2 = function(){
-      console.log($scope.User.email)
-      $http.get(BASE_URL + '/users/'+ $scope.User.email)
-        .success(function(data) {
-          $rootScope.userLogued = data;
+
+
+    /*
+        $scope.loginGoogle = function(){
+          $http.post(BASE_URL + '/auth/google').success(function (data) {
+              console.log("User Logged", data);
+              $rootScope.userLogued = data;
+              $state.go('tabsControllerNormal.lastMinuteDefaultPage', {}, {reload: true});
+            })
+            .error(function (data) {
+              console.log('Error: ' + data);
+              var alertPopup = $ionicPopup.alert({
+                title: 'No se ha logueado correctamente!',
+                template: 'Introduce bien los datos!'
+              });
+            });
+        }
+        $scope.loginGoogle2 = function(){
           console.log($scope.User.email)
-          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
-        })
-        .error(function(data) {
-          console.log($scope.User)
-          console.log('Error: ' + data);
-        });
-    }
+          $http.get(BASE_URL + '/users/'+ $scope.User.email)
+            .success(function(data) {
+              $rootScope.userLogued = data;
+              console.log($scope.User.email)
+              $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+            })
+            .error(function(data) {
+              console.log($scope.User)
+              console.log('Error: ' + data);
+            });
+        }
+     */
   }])
 
   .controller('registerCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
@@ -520,9 +535,11 @@ angular.module('app.controllers', [])
           name: $scope.newUser.name,
           last_name: $scope.newUser.last_name,
           password: $scope.newUser.password,
-          email: $scope.newUser.email
+          email: $scope.newUser.email,
+          displayname:  $scope.newUser.name + ' ' + $scope.newUser.last_name,
+          provider: 'local'
         };
-        $http.post(BASE_URL + '/users/android', postUser).success(function (data) {
+        $http.post(BASE_URL + '/signup', postUser).success(function (data) {
             console.log('Registrado correctamente');
             var alertPopup = $ionicPopup.alert({
               title: 'Información',

@@ -113,13 +113,15 @@ router.delete('/:id', function(req, res) {
 
 
 router.post('/', function(req, res) {
-
+    console.log('el usuario que llega es: ' + req.body.loginid);
     User.create({
         loginid: req.body.loginid,
         password: req.body.password,
         name: req.body.name,
         last_name: req.body.last_name,
-        email: req.body.email
+        email: req.body.email,
+        displayname: req.body.name + ' ' + req.body.last_name,
+        provider: 'local'
     }, function(err, user){
         if(err) {
             res.send(err);

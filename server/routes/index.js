@@ -36,6 +36,14 @@ router.post('/login', passport.authenticate('local-login', {
   failureFlash: true,
 }));
 
+router.post('/login2', passport.authenticate('local-login',
+    function (req, res) {
+      // do something with req.user
+      res.send(req.user? 200 : 401);
+
+}));
+
+
 // Facebook routes
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
