@@ -126,7 +126,7 @@ router.post('/additemApp', function(req, res) {
 });
 
 router.get('/:id/comments', function(req, res) {
-    Comment.find({item: req.params.id}).sort({creation_date: -1}).populate('author', 'loginid photo_user').skip(parseInt(req.query.page) * 10).limit(10).exec(function (err, comments) {
+    Comment.find({item: req.params.id}).sort({creation_date: -1}).populate('author', 'loginid photo_user photo_id').skip(parseInt(req.query.page) * 10).limit(10).exec(function (err, comments) {
         if (err) {
             res.send(err);
         }
@@ -153,7 +153,7 @@ router.post('/:id/comments', function(req, res) {
                     res.send(err);
                     return;
                 }
-                Comment.find({item: req.params.id}).sort({creation_date: -1}).populate('author', 'loginid photo_user').skip(parseInt(req.query.page)*10).limit(10).exec(function(err, comments) {
+                Comment.find({item: req.params.id}).sort({creation_date: -1}).populate('author', 'loginid photo_user photo_id').skip(parseInt(req.query.page)*10).limit(10).exec(function(err, comments) {
                     if(err) {
                         res.send(err);
                     }
