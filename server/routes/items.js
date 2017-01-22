@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 
 router.get('/', function(req, res) {
     console.log(req.query.page);
-    Item.find().populate('author', 'loginid').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
+    Item.find().populate('author', 'loginid').sort({creation_date: -1}).skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
         if(err) {
             res.send(err);
         }
@@ -42,7 +42,7 @@ router.get('/friends', function(req, res) {
         }
         console.log(user.displayname);
         console.log(JSON.stringify(user.following));
-        Item.find({author: {$in: user.following}}).populate('author', 'loginid').skip(parseInt(req.query.page) * 6).limit(6).exec(function (err, items) {
+        Item.find({author: {$in: user.following}}).populate('author', 'loginid').sort({creation_date: -1}).skip(parseInt(req.query.page) * 6).limit(6).exec(function (err, items) {
             if (err) {
                 res.send(err);
             }

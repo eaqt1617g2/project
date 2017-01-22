@@ -119,7 +119,7 @@ router.put('/:id/edit/password', function(req, res) {
             loginid: req.params.id
         },
         {
-            password: req.body.displayname
+            password: (new User).generateHash(req.body.password)
         },
         function(err, user){
             if(err) {

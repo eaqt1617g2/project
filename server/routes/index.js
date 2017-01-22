@@ -30,11 +30,13 @@ router.post('/signup', passport.authenticate('local-signup', {
   failureFlash: true,
 }));
 
+
 router.post('/login', passport.authenticate('local-login', {
   successRedirect: '/',
-  failureRedirect: '/access',
+  failureRedirect: '/access?badlogin=true',
   failureFlash: true,
 }));
+
 
 router.post('/login2', passport.authenticate('local-login',
     function (req, res) {

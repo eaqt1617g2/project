@@ -1,9 +1,7 @@
 loginApp.controller("loginRegisterCtrl", function(SERVER_INFO, $scope, $http, $location, $routeParams, $uibModal) {
 
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
-    console.log("Server: "+serverAddr);
-
-
+    console.log($location.search());
     $scope.login = function() {
         console.log('Login function');
         window.location.href = serverAddr+"/";

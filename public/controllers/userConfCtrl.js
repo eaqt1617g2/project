@@ -48,6 +48,8 @@ mainApp.controller("userConfCtrl", function(SERVER_INFO, $scope, $http, $routePa
     $scope.changePassword = function() {
         if($scope.password != $scope.confirm_password) {
             console.log("Contraseñas no coinciden");
+            $rootScope.openErrorModal();
+            return;
         }
         var user = {
             password: $scope.password

@@ -4,10 +4,11 @@ loginApp.config(function($routeProvider) {
     /*Route provider*/
     $routeProvider
         .when("/", {
-            templateUrl : "/views/loginForm.html",
+            templateUrl : "/views/loginForm.html"
         })
         .when("/register", {
-            templateUrl : "/views/registerForm.html",
+            templateUrl: "/views/registerForm.html"
+
     });
 
 });
