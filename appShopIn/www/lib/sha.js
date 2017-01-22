@@ -42,7 +42,7 @@
     
     <meta name="pjax-timeout" content="1000">
     
-    <meta name="request-id" content="0C0E:755C:120FB02:1D8306F:58834ADF" data-pjax-transient>
+    <meta name="request-id" content="08D2:755C:20924AC:35818F2:5884E6A8" data-pjax-transient>
 
     <meta name="msapplication-TileImage" content="/windows-tile.png">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -52,7 +52,7 @@
 <meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
     <meta name="google-analytics" content="UA-3769691-2">
 
-<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="0C0E:755C:120FB02:1D8306F:58834ADF" name="octolytics-dimension-request_id" />
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="08D2:755C:20924AC:35818F2:5884E6A8" name="octolytics-dimension-request_id" />
 <meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
 
 
@@ -65,13 +65,13 @@
     <meta name="user-login" content="">
 
         <meta name="expected-hostname" content="github.com">
-      <meta name="js-proxy-site-detection-payload" content="Zjg3YzIyOWY5M2VjZDQzNGZlZDM2NTRiY2ZhM2QyYmUyNzgxZDRiMGFkOTU2OWVjNTQyMTUzMWRjOWNjZTQ5Mnx7InJlbW90ZV9hZGRyZXNzIjoiMTQ3LjgzLjIwMS4xMDciLCJyZXF1ZXN0X2lkIjoiMEMwRTo3NTVDOjEyMEZCMDI6MUQ4MzA2Rjo1ODgzNEFERiIsInRpbWVzdGFtcCI6MTQ4NDk5OTM5MSwiaG9zdCI6ImdpdGh1Yi5jb20ifQ==">
+      <meta name="js-proxy-site-detection-payload" content="ZTFkNTMzZmFhNjUxZmFiMDBmZWFkMTQ4NDA4MjMxOGJmMjc3MTY5OGVjZGE5YjRjMmE4ZWU1YzlmNGIzZGE3MHx7InJlbW90ZV9hZGRyZXNzIjoiMTQ3LjgzLjIwMS4xMDciLCJyZXF1ZXN0X2lkIjoiMDhEMjo3NTVDOjIwOTI0QUM6MzU4MThGMjo1ODg0RTZBOCIsInRpbWVzdGFtcCI6MTQ4NTEwNDgxMSwiaG9zdCI6ImdpdGh1Yi5jb20ifQ==">
 
 
       <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
       <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
 
-    <meta name="html-safe-nonce" content="f962ccf555f99327c2dcc075ac749f746f003eb4">
+    <meta name="html-safe-nonce" content="861b6b84bde67961adfd9f8b7eec75fa0b5df25d">
 
     <meta http-equiv="x-pjax-version" content="94a9cc48ead92329faac49833ac14041">
     
@@ -193,8 +193,8 @@
   </a>
 
     <a class="social-count js-social-count" href="/Caligatio/jsSHA/stargazers"
-      aria-label="1113 users starred this repository">
-      1,113
+      aria-label="1115 users starred this repository">
+      1,115
     </a>
 
   </li>
@@ -863,7 +863,7 @@
       <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
 </a>
     <ul class="site-footer-links">
-      <li>&copy; 2017 <span title="0.06500s from github-fe141-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+      <li>&copy; 2017 <span title="0.05862s from github-fe139-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
         <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
         <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
         <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>

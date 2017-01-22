@@ -1,4 +1,5 @@
-var BASE_URL = "http://localhost:2709";
+var BASE_URL = "http://10.193.187.178:2709";
+/* 10.193.187.178 */
 
 angular.module('app.controllers', [])
   //angular google maps
@@ -436,22 +437,7 @@ angular.module('app.controllers', [])
         email : $scope.User.email,
         password : $scope.User.password
       };
-      $http.post(BASE_URL + '/login', userLogin).success(function (data) {
-          console.log("User Logged", data);
-          $rootScope.userLogued = data;
-          $state.go('tabsController.lastMinute', {}, {reload: true});
-        })
-        .error(function (data) {
-          console.log('Error: ' + data);
-          var alertPopup = $ionicPopup.alert({
-            title: 'No se ha logueado correctamente!',
-            template: 'Introduce bien los datos!'
-          });
-        });
-    }
-    /*
-    $scope.loginFacebook = function(){
-      $http.post(BASE_URL + '/auth/facebook').success(function (data) {
+      $http.post(BASE_URL + '/login2', userLogin).success(function (data) {
           console.log("User Logged", data);
           $rootScope.userLogued = data;
           $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
@@ -463,25 +449,79 @@ angular.module('app.controllers', [])
             template: 'Introduce bien los datos!'
           });
         });
-    }*/
+    }
 
-    $scope.loginFacebook = function(){
-      console.log("clicked");
-      $cordovaOauth.facebook("343051082715858", ["email"]).then(function(result) {
-        alert("Auth Success..!!"+result);
+
+    $scope.loginFacebook = function () {
+      $cordovaOauth.facebook("343051082715858", ["email","user_website"], {"auth_type": "rerequest"}).then(function(result) {
+        console.log(JSON.stringify(result));
+        var token = result.access_token;
+        console.log(token);
+        // we get the user info with the login token
+        $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: token, fields: "id,name,picture", format: "json" }}).then(function(result) {
+          console.log(result.data);
+          console.log(result.data.id);
+          console.log(result.data.name);
+          console.log(result.data.picture.data.url);
+          var user = {
+            id: result.data.id,
+            name: result.data.name,
+            picture: result.data.picture.data.url
+          };
+          //Make a call to our api and make the final login procees
+          $http.post(BASE_URL + '/auth/app/facebook', user)
+            .success(function (response) {
+              console.log(response);
+              console.log('success log!');
+             // $rootScope.UserID = response._id;
+              $rootScope.userLogued = response;
+              //window.localStorage.setItem("facebook", user.id);
+              $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+            })
+            .error(function (err) {
+              console.log('error log!');
+              $ionicPopup.alert({
+                title: 'Error',
+                template: 'User or password wrong'
+              });
+              console.log('Error: '+err);
+            });
+
+        }, function(error) {
+          alert("Error!");
+          console.log(error);
+        });
       }, function(error) {
-        alert("Auth Failed..!!"+error);
+        console.log(JSON.stringify(error));
       });
-    }
+    };
 
-    $scope.loginTwitter = function() {
-      $cordovaOauth.twitter("n97MUo0VUGuKqOP0tcw3Faz4b","nOmFm4p2yRnqyOTl6iUd7ESZ6kPDSNXXLtY1bV5a3U8maSVVjH", {redirect_uri: "http://localhost:2709/auth/twitter/callback"}).then(function(result){
-        alert('success');
-      },  function(error){
-        alert('error!!!!');
+    $scope.loginTwitter = function () {
+      $cordovaOauth.twitter("n97MUo0VUGuKqOP0tcw3Faz4b", "nOmFm4p2yRnqyOTl6iUd7ESZ6kPDSNXXLtY1bV5a3U8maSVVjH").then(function(result) {
+        console.log(JSON.stringify(result));
+
+        $http.post(BASE_URL + '/auth/app/twitter', result)
+          .success(function (response) {
+            console.log(response);
+            $rootScope.UserID = response._id;
+            $rootScope.User = response;
+            window.localStorage.setItem("twitter", result.user_id);
+            $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+          })
+          .error(function (err) {
+            $ionicPopup.alert({
+              title: 'Error',
+              template: 'User or password wrong'
+            });
+            console.log('Error: '+err);
+          });
+
+      }, function(error) {
+        alert("Error!");
+        console.log(error);
       });
-    }
-
+    };
+/*
     $scope.loginGoogle2 = function() {
       $cordovaOauth.google("1063612097703-4grhbrh1kl316idhctspnf356uk0hl17.apps.googleusercontent.com", ["https://localhost/auth/google"]).then(function(result) {
         console.log(JSON.stringify(result));
@@ -489,7 +529,7 @@ angular.module('app.controllers', [])
         console.log(error);
       });
     }
-
+*/
 
     /*
         $scope.loginGoogle = function(){
@@ -506,6 +546,7 @@ angular.module('app.controllers', [])
               });
             });
         }
+     */
         $scope.loginGoogle2 = function(){
           console.log($scope.User.email)
           $http.get(BASE_URL + '/users/'+ $scope.User.email)
@@ -519,7 +560,7 @@ angular.module('app.controllers', [])
               console.log('Error: ' + data);
             });
         }
-     */
+
   }])
 
   .controller('registerCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
