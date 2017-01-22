@@ -2,7 +2,7 @@
   <ion-content padding="true" class="has-header">
     <div id="detailDefaultPage-container4">
       <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(itemDetail.author.loginid)">
-        <img src={{itemDetail.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+        <img ng-src="{{serverAddr}}/assets/imgs/profiles/{{itemDetail.author.photo_id}}">
         <h4>{{itemDetail.author.displayname}}  <h5>{{itemDetail.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5></h4>{{itemDetail.likes.length}} <i class="icon ion-heart"></i>
       </ion-item>
       <p></p>

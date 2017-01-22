@@ -9,6 +9,7 @@ angular.module('app.controllers', [])
   .controller('lastMinuteDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
     $scope.usuario = $rootScope.userLogued;
+    $rootScope.serverAdr = "http://localhost:2709";
     console.log('logueado', $scope.usuario );
     $http.get(BASE_URL + '/items').success(function (data) {
         $scope.items = {};
@@ -28,6 +29,7 @@ angular.module('app.controllers', [])
       console.log(item)
       $http.get(BASE_URL + '/users/'+ item).success(function(data) {
         $scope.users = {};
+        $rootScope.itemsUsers = {}
         $rootScope.userFriend = data;
         console.log("Usuario", $rootScope.userFriend);
         for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
@@ -77,6 +79,7 @@ angular.module('app.controllers', [])
     console.log("Usuario", $scope.UserID);
     $scope.users = {};
     $scope.items = {};
+    $rootScope.itemsUsers = {}
     $scope.usuario = {};
 
     $http.get(BASE_URL + '/users/'+ $scope.UserID).success(function(data) {
@@ -106,6 +109,7 @@ angular.module('app.controllers', [])
       console.log(item)
       $http.get(BASE_URL + '/users/'+ item).success(function(data) {
         $scope.users = {};
+        $rootScope.itemsUsers = {}
         $rootScope.userFriend = data;
         console.log("Usuario", $rootScope.userFriend);
         for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
@@ -176,8 +180,8 @@ angular.module('app.controllers', [])
       })
         .success(function(data) {
           console.log(JSON.stringify(data));
-          $scope.items = {};
-          $scope.items = data;
+          $rootScope.itemsUsers = {};
+          $rootScope.itemsUsers = data;
         })
         .error(function(err) {
           console.log('Error: ' + err);
@@ -192,6 +196,7 @@ angular.module('app.controllers', [])
     var currentItemsPage = 0;
     $scope.users = {};
     $scope.items = {};
+    $rootScope.itemsUsers = {}
     $scope.usuario = $rootScope.userLogued;
     console.log('logueado', $scope.usuario );
 
@@ -200,6 +205,7 @@ angular.module('app.controllers', [])
       console.log(item)
       $http.get(BASE_URL + '/users/'+ item).success(function(data) {
         $scope.users = {};
+        $rootScope.itemsUsers = {}
         $rootScope.userFriend = data;
         console.log("Usuario", $rootScope.userFriend);
         for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
@@ -327,10 +333,11 @@ angular.module('app.controllers', [])
     $scope.getItems = function(){
       console.log("Loginid", $scope.usuario.loginid);
       $http.get(BASE_URL + '/users/'+$scope.usuario.loginid+'/items').success(function (data) {
-          $scope.items = {};
+
+          $rootScope.itemsUsers = {}
           $scope.users = {};
-          $scope.items = data;
-          console.log("Items", $scope.items);
+          $rootScope.itemsUsers = data;
+          console.log("Items", $rootScope.itemsUsers);
         })
         .error(function (data) {
           console.log('Error: ' + data);
@@ -347,8 +354,8 @@ angular.module('app.controllers', [])
       })
         .success(function(data) {
           console.log(JSON.stringify(data));
-          $scope.items = {};
-          $scope.items = data;
+          $rootScope.itemsUsers = {};
+          $rootScope.itemsUsers = data;
         })
         .error(function(err) {
           console.log('Error: ' + err);
@@ -382,6 +389,7 @@ angular.module('app.controllers', [])
       console.log(item)
       $http.get(BASE_URL + '/users/'+ item).success(function(data) {
         $scope.users = {};
+        $rootScope.itemsUsers = {}
         $rootScope.userFriend = data;
         console.log("Usuario", $rootScope.userFriend);
         for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
@@ -504,6 +512,7 @@ angular.module('app.controllers', [])
       console.log(item)
       $http.get(BASE_URL + '/users/'+ item).success(function(data) {
         $scope.users = {};
+        $rootScope.itemsUsers = {}
         $rootScope.userFriend = data;
         console.log("Usuario", $rootScope.userFriend);
         for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
