@@ -26,6 +26,25 @@ angular.module('app.controllers', [])
 
     $scope.verUsuario = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/users/'+ item).success(function(data) {
+        $scope.users = {};
+        $rootScope.userFriend = data;
+        console.log("Usuario", $rootScope.userFriend);
+        for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
+        {
+          if($rootScope.userFriend.followers[i]._id == $rootScope.userLogued._id)
+            $rootScope.followed = true;
+          else
+            $rootScope.followed = false;
+        }
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes a usuarios!',
+            template: 'Introduce bien los datos!'
+          });
+        });
       $rootScope.usuarioID = {}
       $rootScope.usuarioID = item;
       $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
@@ -33,6 +52,16 @@ angular.module('app.controllers', [])
 
     $scope.verDetalle = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/items/'+ item).success(function(data) {
+        $rootScope.itemDetail = data;
+        console.log("Item", $rootScope.itemDetail);
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes al item!',
+          });
+        });
       $rootScope.itemID = {}
       $rootScope.itemID = item;
       $state.go('tabsControllerUser.detailDefaultPage', {}, {reload: true});
@@ -50,19 +79,21 @@ angular.module('app.controllers', [])
     $scope.items = {};
     $scope.usuario = {};
 
-    $http.get(BASE_URL + '/users/'+$scope.UserID).success(function(data) {
-        $scope.users = {};
-        $scope.usuario = {};
-        $scope.usuario = data;
-        console.log("Usuario", $scope.usuario);
-        for(var i = 0; i < $scope.usuario.followers.length; i++)
-        {
-          if($scope.usuario.followers[i]._id == $rootScope.userLogued._id)
-            $rootScope.followed = true;
-          else
-            $rootScope.followed = false;
-        }
-      })
+    $http.get(BASE_URL + '/users/'+ $scope.UserID).success(function(data) {
+      $scope.users = {};
+      $rootScope.userFriend = data;
+      $scope.usuario = $rootScope.userFriend;
+      console.log("Usuario", $rootScope.userFriend);
+      console.log("Usuario", $scope.usuario);
+
+      for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
+      {
+        if($rootScope.userFriend.followers[i]._id == $rootScope.userLogued._id)
+          $rootScope.followed = true;
+        else
+          $rootScope.followed = false;
+      }
+    })
       .error(function (data) {
         console.log('Error: ' + data);
         var alertPopup = $ionicPopup.alert({
@@ -73,6 +104,25 @@ angular.module('app.controllers', [])
 
     $scope.verUsuario = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/users/'+ item).success(function(data) {
+        $scope.users = {};
+        $rootScope.userFriend = data;
+        console.log("Usuario", $rootScope.userFriend);
+        for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
+        {
+          if($rootScope.userFriend.followers[i]._id == $rootScope.userLogued._id)
+            $rootScope.followed = true;
+          else
+            $rootScope.followed = false;
+        }
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes a usuarios!',
+            template: 'Introduce bien los datos!'
+          });
+        });
       $rootScope.usuarioID = {}
       $rootScope.usuarioID = item;
       $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
@@ -80,7 +130,18 @@ angular.module('app.controllers', [])
 
     $scope.verDetalle = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/items/'+ item).success(function(data) {
+        $rootScope.itemDetail = data;
+        console.log("Item", $rootScope.itemDetail);
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes al item!',
+          });
+        });
       $rootScope.itemID = {}
+      $rootScope.usuarioID = {}
       $rootScope.itemID = item;
       $state.go('tabsControllerUser.detailDefaultPage', {}, {reload: true});
     };
@@ -89,7 +150,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/users/'+ $rootScope.userLogued.loginid+'/follow',{"_id": usuario}).success(function(data) {
           console.log("Usuario", usuario);
           $scope.usuario = {};
-          $scope.usuario = data;
+          $rootScope.userFriend = data;
           $rootScope.followed = true;
         })
         .error(function(data) {
@@ -101,8 +162,7 @@ angular.module('app.controllers', [])
       console.log("Usuario", usuario);
       $http.post(BASE_URL + '/users/'+ $rootScope.userLogued.loginid +'/unfollow',{"_id": usuario}).success(function(data) {
           console.log("Usuario", usuario);
-          $scope.usuario = {};
-          $scope.usuario = data;
+          $rootScope.userFriend = data;
           $rootScope.followed = false;
         })
         .error(function(data) {
@@ -111,13 +171,13 @@ angular.module('app.controllers', [])
     };
 
     $scope.getUserItems = function() {
-      $http.get(BASE_URL+'/users/'+ $scope.usuario.loginid +'/items', {
+      $http.get(BASE_URL+'/users/'+ $rootScope.userFriend.loginid +'/items', {
         params: {page: currentItemsPage}
       })
         .success(function(data) {
           console.log(JSON.stringify(data));
           $scope.items = {};
-          $scope.items = $scope.items.concat(data);
+          $scope.items = data;
         })
         .error(function(err) {
           console.log('Error: ' + err);
@@ -135,22 +195,28 @@ angular.module('app.controllers', [])
     $scope.usuario = $rootScope.userLogued;
     console.log('logueado', $scope.usuario );
 
-    $http.get(BASE_URL + '/users/'+$scope.usuario).success(function(data) {
-        $scope.users = {};
-        $scope.items = {};
-        $scope.usuario = data;
-        console.log("Usuario", $scope.usuario);
-      })
-      .error(function (data) {
-        console.log('Error: ' + data);
-        var alertPopup = $ionicPopup.alert({
-          title: 'No accedes a usuarios!',
-          template: 'Introduce bien los datos!'
-        });
-      });
 
     $scope.verUsuario = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/users/'+ item).success(function(data) {
+        $scope.users = {};
+        $rootScope.userFriend = data;
+        console.log("Usuario", $rootScope.userFriend);
+        for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
+        {
+          if($rootScope.userFriend.followers[i]._id == $rootScope.userLogued._id)
+            $rootScope.followed = true;
+          else
+            $rootScope.followed = false;
+        }
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes a usuarios!',
+            template: 'Introduce bien los datos!'
+          });
+        });
       $rootScope.usuarioID = {}
       $rootScope.usuarioID = item;
       $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
@@ -158,6 +224,16 @@ angular.module('app.controllers', [])
 
     $scope.verDetalle = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/items/'+ item).success(function(data) {
+        $rootScope.itemDetail = data;
+        console.log("Item", $rootScope.itemDetail);
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes al item!',
+          });
+        });
       $rootScope.itemID = {}
       $rootScope.itemID = item;
       $state.go('tabsControllerUser.detailDefaultPage', {}, {reload: true});
@@ -272,7 +348,7 @@ angular.module('app.controllers', [])
         .success(function(data) {
           console.log(JSON.stringify(data));
           $scope.items = {};
-          $scope.items = $scope.items.concat(data);
+          $scope.items = data;
         })
         .error(function(err) {
           console.log('Error: ' + err);
@@ -288,10 +364,12 @@ angular.module('app.controllers', [])
 
     $scope.ItemID = $rootScope.itemID; //Obtenemos ID de la URI
     console.log("Usuario", $scope.ItemID);
-    $scope.item = {};
+    $scope.item = {}
+    $rootScope.itemDetail = {};
+
     $http.get(BASE_URL + '/items/'+$scope.ItemID).success(function(data) {
-        $scope.item = data;
-        console.log("Item", $scope.item);
+        $rootScope.itemDetail = data;
+        console.log("Item", $rootScope.itemDetail);
       })
       .error(function (data) {
         console.log('Error: ' + data);
@@ -302,6 +380,25 @@ angular.module('app.controllers', [])
 
     $scope.verUsuario = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/users/'+ item).success(function(data) {
+        $scope.users = {};
+        $rootScope.userFriend = data;
+        console.log("Usuario", $rootScope.userFriend);
+        for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
+        {
+          if($rootScope.userFriend.followers[i]._id == $rootScope.userLogued._id)
+            $rootScope.followed = true;
+          else
+            $rootScope.followed = false;
+        }
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes a usuarios!',
+            template: 'Introduce bien los datos!'
+          });
+        });
       $rootScope.usuarioID = {}
       $rootScope.usuarioID = item;
       $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
@@ -311,7 +408,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/users/'+ $rootScope.userLogued.loginid+'/follow',{"_id": usuario}).success(function(data) {
         console.log("Usuario", usuario);
         $scope.usuario = {};
-        $scope.usuario = data;
+        $rootScope.userFriend = data;
         $rootScope.followed = true;
       })
         .error(function(data) {
@@ -324,7 +421,7 @@ angular.module('app.controllers', [])
       $http.post(BASE_URL + '/users/'+ $rootScope.userLogued.loginid +'/unfollow',{"_id": usuario}).success(function(data) {
         console.log("Usuario", usuario);
         $scope.usuario = {};
-        $scope.usuario = data;
+        $rootScope.userFriend = data;
         $rootScope.followed = false;
       })
         .error(function(data) {
@@ -367,6 +464,7 @@ angular.module('app.controllers', [])
     $scope.users = {};
     $scope.usuario = {};
     $scope.usuarios = {};
+    $rootScope.searchUser = false;
 
     $scope.getUsersOrder = function() {
       $http.get(BASE_URL + '/users/order').success(function(data) {
@@ -393,6 +491,7 @@ angular.module('app.controllers', [])
           $scope.usuario = {};
           $scope.users = {};
           $scope.usuario = data;
+          $rootScope.searchUser = true;
 
         })
         .error(function(data) {
@@ -403,6 +502,25 @@ angular.module('app.controllers', [])
 
     $scope.verUsuario = function(item) {
       console.log(item)
+      $http.get(BASE_URL + '/users/'+ item).success(function(data) {
+        $scope.users = {};
+        $rootScope.userFriend = data;
+        console.log("Usuario", $rootScope.userFriend);
+        for(var i = 0; i < $rootScope.userFriend.followers.length; i++)
+        {
+          if($rootScope.userFriend.followers[i]._id == $rootScope.userLogued._id)
+            $rootScope.followed = true;
+          else
+            $rootScope.followed = false;
+        }
+      })
+        .error(function (data) {
+          console.log('Error: ' + data);
+          var alertPopup = $ionicPopup.alert({
+            title: 'No accedes a usuarios!',
+            template: 'Introduce bien los datos!'
+          });
+        });
       $rootScope.usuarioID = {}
       $rootScope.usuarioID = item;
       $state.go('tabsControllerUser.usersDefaultPage', {}, {reload: true});
