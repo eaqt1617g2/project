@@ -1,4 +1,4 @@
-mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $http, $rootScope) {
+mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $http, $rootScope, $uibModal) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
     $scope.date = new Date();
@@ -24,6 +24,7 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
     $scope.addItem = function() {
         if($scope.item.longitude == undefined) {
             console.log("No has seleccionado posición");
+            $scope.openNeedCoordsModal();
             return;
         }
         console.log(JSON.stringify($scope.item));
@@ -39,9 +40,12 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
             .success(function(data) {
                 console.log("Item añadido");
                 console.log(JSON.stringify(data));
+                $rootScope.openItemSuccessModal();
+
         })
             .error(function(data) {
                 console.log("Additem error");
+                $rootScope.openErrorModal();
         });
     }
 
@@ -136,6 +140,24 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
                     });
             });
 
+    };
+    $scope.openNeedCoordsModal = function() {
+        var modalInstance = $uibModal.open({
+            templateUrl: '/views/modals/needCoordsModal.html',
+            controller: function($scope, $uibModalInstance) {
+
+                $scope.close = function()                {
+                    $uibModalInstance.dismiss();
+                }
+            }
+        });
+
+        modalInstance.result.then(
+            function () {
+                console.log("Modal dismiss - Si");
+            }, function () {
+                console.log("Modal cerrado - No");
+            });
     };
 
 });

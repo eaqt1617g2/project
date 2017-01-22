@@ -56,7 +56,7 @@ router.get('/order', function (req, res){
 
 
 router.get('/:loginid', function(req, res,next) {
-    User.findOne({loginid: req.params.loginid}).populate('followers', 'loginid displayname photo_user').populate('following', 'loginid displayname photo_user').exec(function(err, user) {
+    User.findOne({loginid: req.params.loginid}).populate('followers', 'loginid displayname photo_user photo_id').populate('following', 'loginid displayname photo_user photo_id').exec(function(err, user) {
         if(err) {
             res.send(err);
         }
@@ -276,7 +276,7 @@ router.post('/:loginid/follow', function(req, res) {
                    if(err) {
                        res.send(err);
                    }
-                   User.findOne({_id: req.body._id}).populate('followers', 'loginid displayname photo_user').populate('following', 'loginid displayname photo_user').exec(function(err, user) {
+                   User.findOne({_id: req.body._id}).populate('followers', 'loginid displayname photo_user photo_id').populate('following', 'loginid displayname photo_user photo_id').exec(function(err, user) {
                        if(err) {
                            res.send(err);
                        }
@@ -310,7 +310,7 @@ router.post('/:loginid/unfollow', function(req, res) {
                     if(err) {
                         res.send(err);
                     }
-                    User.findOne({_id: req.body._id}).populate('followers', 'loginid displayname photo_user').populate('following', 'loginid displayname photo_user').exec(function(err, user) {
+                    User.findOne({_id: req.body._id}).populate('followers', 'loginid displayname photo_user photo_id').populate('following', 'loginid displayname photo_user photo_id').exec(function(err, user) {
                         if(err) {
                             res.send(err);
                         }

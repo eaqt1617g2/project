@@ -4,6 +4,28 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/user');
 var configAuth = require('./auth');
+var fs = require('fs');
+var request = require('request');
+
+var download = function(uri, filename, callback){
+    request.head(uri, function(err, res, body){
+        console.log('content-type:', res.headers['content-type']);
+        console.log('content-length:', res.headers['content-length']);
+
+        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+    });
+};
+
+var makeid = function()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 25; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+};
 
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
@@ -110,6 +132,10 @@ module.exports = function(passport) {
                         });
                     } else {
                         var newUser = new User();
+                        var photo_id = makeid();
+                        download(profile.photos[0].value, "../public/assets/imgs/profiles/"+photo_id, function(){
+                            console.log('Foto de facebook descargada');
+                        });
                         newUser.provider_id = profile.id;
                         newUser.provider = profile.provider;
                         newUser.token = token;
@@ -119,6 +145,7 @@ module.exports = function(passport) {
                         newUser.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.loginid	= newUser.email.substr(0,newUser.email.indexOf("@"));
                         newUser.photo_user = profile.photos[0].value;
+                        newUser.photo_id = photo_id;
 
                         newUser.save(function(err) {
                             if (err)
@@ -150,6 +177,10 @@ module.exports = function(passport) {
                         });
                     } else {
                         var newUser = new User();
+                        var photo_id = makeid();
+                        download(profile.photos[0].value.replace("_normal",""), "../public/assets/imgs/profiles/"+photo_id, function(){
+                            console.log('Foto de twitter descargada');
+                        });
                         newUser.provider_id          = profile.id;
                         newUser.provider = profile.provider;
                         newUser.token       = token;
@@ -158,6 +189,7 @@ module.exports = function(passport) {
                         newUser.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.loginid	= profile.username;
                         newUser.photo_user = profile.photos[0].value.replace("_normal","");
+                        newUser.photo_id = photo_id;
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
@@ -187,6 +219,10 @@ module.exports = function(passport) {
                         });
                     } else {
                         var newUser = new User();
+                        var photo_id = makeid();
+                        download(profile.photos[0].value, "../public/assets/imgs/profiles/"+photo_id, function(){
+                            console.log('Foto de google descargada');
+                        });
                         newUser.provider_id = profile.id;
                         newUser.provider = profile.provider;
                         newUser.token = token;
@@ -196,8 +232,7 @@ module.exports = function(passport) {
                         newUser.photo_user = profile.photos[0].value;
                         newUser.name = profile.name.givenName;
                         newUser.last_name = profile.name.familyName;
-
-
+                        newUser.photo_id = photo_id;
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
