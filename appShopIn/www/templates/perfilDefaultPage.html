@@ -3,11 +3,7 @@
     <div id="perfilDefaultPage-container2">
       <h4 id="perfilDefaultPage-heading2" style="color:#000000;">{{userLogued.loginid}}</h4>
       <div>
-<<<<<<< HEAD
-        <img class="item-avatar" src={{usuario.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="50%" height="" style="display: block; margin-left: auto; margin-right: auto;">
-=======
         <img class="item-avatar" src={{userLogued.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="50%" height="" style="display: block; margin-left: auto; margin-right: auto;">
->>>>>>> 3d749308ef024aacfcc4702baf31de973df3b65f
       </div>
       <form id="perfilDefaultPage-form3" class="list">
         <ion-list id="perfilDefaultPage-list3">
@@ -17,7 +13,7 @@
           <button id="perfilDefaultPage-button20" ui-sref="tabsController.crearItem" href="#/tabsController/crearItem" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Crear Item</button>
         </ion-list>
         <div id="perfilDefaultPage-button-bar2" class="button-bar">
-          <button id="perfilDefaultPage-button17" ng-click="getItemsOrder()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
+          <button id="perfilDefaultPage-button17" ng-click="getUserItems()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
           <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS {{userLogued.followers.length || 0}}</button>
           <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING {{userLogued.following.length || 0}}</button>
         </div>
@@ -38,7 +34,7 @@
           <strong>{{item.title}}</strong></p>
           <div class=" item item-image" >
             <a style="display:block;" >
-              <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+              <img src="/img/{{item.pic_id}}" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
             </a>
           </div>
           <div class="item item-body" id="lastMinuteDefaultPage-list-item-container2" >

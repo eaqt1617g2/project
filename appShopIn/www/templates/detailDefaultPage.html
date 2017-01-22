@@ -1,7 +1,7 @@
 <ion-view title="Detail Default Page" id="/detail/:loginid">
   <ion-content padding="true" class="has-header">
     <div id="detailDefaultPage-container4">
-      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ui-sref="tabsControllerUser.usersDefaultPage">
+      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(item.author.loginid)">
         <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
         <h4>{{item.author.displayname}}  <h5>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5></h4>{{item.likes.length}} <i class="icon ion-heart"></i>
       </ion-item>
@@ -12,7 +12,7 @@
       </div>
       <div class=" item item-image" >
         <a style="display:block;" >
-          <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+          <img src="/img/{{item.pic_id}}" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
         </a>
       </div>
       <p></p>

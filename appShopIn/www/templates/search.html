@@ -13,26 +13,16 @@
       <button id="search-button1" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Mostrar todos</button>
     </ion-list>
     <div class="list animate-fade-slide-in-right">
-<<<<<<< HEAD
-      <a class="item item-avatar item-icon-right" ng-repeat="user in users" href="#/tabsController/perfil/{{user.loginid}}">
-        <img src={{user.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
-=======
       <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">
         <img src={{user.photo_user||"img/logo_shopin.png"}}>
->>>>>>> 3d749308ef024aacfcc4702baf31de973df3b65f
         <h2>{{user.loginid}}</h2>
         <p>{{user.name}} {{user.last_name}}</p>
         <i class="icon ion-chatbubble muted"></i>
       </a>
     </div>
     <div class="list animate-fade-slide-in-right" content scroll="false">
-<<<<<<< HEAD
-      <a class="item item-avatar item-icon-right" href="#/tabsController/users/{{usuario.loginid}}">
-        <img src={{usuario.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
-=======
       <a class="item item-avatar item-icon-right" ng-click="verUsuario(usuario.loginid)">
         <img src="img/logo_shopin.png">
->>>>>>> 3d749308ef024aacfcc4702baf31de973df3b65f
         <h2>{{usuario.loginid}}</h2>
         <p>{{usuario.name}} {{usuario.last_name}}</p>
         <p>{{usuario.creation_date}}</p>
