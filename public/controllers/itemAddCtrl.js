@@ -39,9 +39,12 @@ mainApp.controller("itemAddCtrl", function(SERVER_INFO, $scope, $routeParams, $h
             .success(function(data) {
                 console.log("Item añadido");
                 console.log(JSON.stringify(data));
+                $rootScope.openItemSuccessModal();
+
         })
             .error(function(data) {
                 console.log("Additem error");
+                $rootScope.openErrorModal();
         });
     }
 

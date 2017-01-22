@@ -4,7 +4,7 @@
         <!-- Foto + titulo -->
         <div class="row" id="profile-content">
             <div class="col-md-3" id="profile-avatar-wrapper">
-                <a href="#/user/{{profile_user.loginid}}"><img src={{profile_user.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}}></a>
+                <a href="#/user/{{profile_user.loginid}}"><img ng-src="../assets/imgs/profiles/{{profile_user.photo_id}}"></a>
             </div>
 
             <div class="col-md-9" id="profile-info-wrapper">
@@ -47,9 +47,9 @@
             <div class="col-md-3">
                 <div class="module">
                     <ul class="user-info-list">
-                        <li><i class="fa fa-clock-o"></i> Registrado el {{user.creation_date | date:'dd/MM/yyyy'}}</li>
-                        <li><i class="fa fa-sign-in"></i> Último acceso el {{user.last_login_date| date:'dd/MM/yyyy'}}</li>
-                        <li><i class="fa fa-envelope-o"></i> {{user.email}}</li>
+                        <li><i class="fa fa-clock-o"></i> Registrado el {{profile_user.creation_date | date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-sign-in"></i> Último acceso el {{profile_user.last_login_date| date:'dd/MM/yyyy'}}</li>
+                        <li><i class="fa fa-envelope-o"></i> {{profile_user.email}}</li>
                     </ul>
                 </div>
             </div>
@@ -59,9 +59,9 @@
                         <div ng-repeat="follower in profile_user.followers">
                             <!-- <div class="clearfix" ng-if="$index % 3 == 0"></div> -->
                             <div class="col-md-3" >
-                                <div class="user-list-item" ng-href="">
-                                    <a href="">
-                                        <img src={{follower.photo_user||"http://localhost:2709/assets/imgs/profiles/profileTestPic2.png"}}>
+                                <div class="user-list-item">
+                                    <a href="#/user/{{follower.loginid}}">
+                                        <img ng-src="../assets/imgs/profiles/{{follower.photo_id}}">
                                     </a>
                                     <div class="user-list-item-info">
                                         <h3>{{follower.displayname}}</h3>
