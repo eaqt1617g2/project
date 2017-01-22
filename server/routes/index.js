@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var User = require('../models/user');
 
 router.get('/', function(req, res, next) {
   res.render('index.html', { title: 'patata' });
@@ -36,10 +37,10 @@ router.post('/login', passport.authenticate('local-login', {
   failureFlash: true,
 }));
 
-router.post('/login2', passport.authenticate('local-login',
-    function (req, res) {
-      // do something with req.user
-      res.send(req.user? 200 : 401);
+router.post('/login2', passport.authenticate('local-login',{
+    successRedirect: 'http://localhost:8100/#/tabsController/lastMinute',
+    failureRedirect: '/login/access',
+    failureFlash: true,
 
 }));
 
@@ -92,6 +93,61 @@ router.post('/additem', function(req, res) {
     });*/
   });
 });
+
+// App login facebook
+
+//Login with facebook in the mobile app
+router.post('/auth/app/facebook', function(req, res){
+  User.findOne({'provider_id': req.body.id }, function(err, checkUser) {
+    if (checkUser) {
+      res.send(checkUser)
+    }
+    else {
+      console.log('Fuser');
+      var Fuser = new User({
+          provider_id : req.body.id,
+          token : req.body.token,
+          name : req.body.name,
+          last_name : req.body.last_name,
+          displayname : (req.body.name + ' ' + req.body.last_name),
+          email : (req.body.emails[0].value || '').toLowerCase(),
+          loginid	: Fuser.email.substr(0,Fuser.email.indexOf("@")),
+          photo_user : req.body.photos[0].value
+      });
+      console.log(Fuser);
+      Fuser.save(function(err,user) {
+        if(err) throw err;
+        res.send(user);
+      });
+    }
+    if(err){
+      res.status(400).send('Error!!')
+    }
+  });
+});
+
+router.post('/auth/app/twitter', function(req, res){
+  User.findOne({provider_id: req.body.user_id}, function(err, existingUser) {
+    if (existingUser) {
+      res.send(existingUser);
+    }
+    else {
+      // Al igual que antes, si el usuario ya existe lo devuelve
+      var Tuser = new User({
+        provider_id	         : req.body.user_id,
+        name				 : req.body.screen_name
+      });
+      Tuser.save(function(err,user) {
+        if(err) throw err;
+        res.send(user);
+      });
+    }
+    if(err){
+      res.status(400).send('Error!t')
+    }
+  });
+});
+
 
 
 
