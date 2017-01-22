@@ -630,7 +630,7 @@ angular.module('app.controllers', [])
   .controller('loginCtrl', ['$cordovaOauth','$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($cordovaOauth, $scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
 
     $scope.User = {};
-
+    /*
     $scope.loginNormal = function(){
       console.log('user', $scope.User );
       var userLogin = {
@@ -650,6 +650,34 @@ angular.module('app.controllers', [])
           });
         });
     }
+
+*/
+
+    $scope.loginNormal = function (user) {
+      console.log(user);
+      $http.post(BASE_URL + '/auth/app/login', $scope.User)
+        .success(function (response) {
+          console.log(response);
+          //$rootScope.UserID = response._id;
+          $rootScope.userLogued = response;
+         // console.log($scope.user.username);
+         // window.localStorage.setItem("userid", response._id);
+          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+        })
+        .error(function (err) {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'User or password wrong'
+          });
+          console.log('Error: '+err);
+        });
+    };
+    $scope.Register = function () {
+      $state.go('tabsControllerLogin.register', {}, {reload: true});
+    };
+    $scope.main = function () {
+      $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
+    };
 
 
     $scope.loginFacebook = function () {
