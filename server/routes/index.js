@@ -126,6 +126,7 @@ router.post('/auth/app/facebook', function(req, res){
   });
 });
 
+//Login with Twitter in the movil App
 router.post('/auth/app/twitter', function(req, res){
   User.findOne({provider_id: req.body.user_id}, function(err, existingUser) {
     if (existingUser) {
@@ -148,6 +149,20 @@ router.post('/auth/app/twitter', function(req, res){
   });
 });
 
+//Login with locale user for movile App
+//Login silly for the mobile app without passport more efficient way
+router.post('/auth/app/login', function(req, res){
+  console.log(req.body);
+  User.findOne({email: req.body.email}, function(err, existingUser) {
+    if (existingUser) {
+      res.send(existingUser)
+    }
+    if(err){
+      res.status(400).send('Error!')
+    }
+  });
+
+});
 
 
 
