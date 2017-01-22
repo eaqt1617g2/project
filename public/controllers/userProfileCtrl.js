@@ -13,6 +13,9 @@ mainApp.controller("userProfileCtrl", function(SERVER_INFO, $scope, $http, $rout
             .success(function(data) {
                 console.log("Get user OK")
                 $rootScope.profile_user = data;
+                if(data.photo_id != undefined) {
+                    $rootScope.profile_user.photo_user = serverAddr+"/assets/imgs/profiles/"+$rootScope.profile_user.photo_id;
+                }
                 for(var i = 0; i < $rootScope.profile_user.followers.length; i++)
                 {
                     if($rootScope.profile_user.followers[i]._id == $rootScope.user._id)

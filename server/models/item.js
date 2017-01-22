@@ -5,6 +5,7 @@ var itemSchema = mongoose.Schema({
     author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     creation_date: {type: Date, default: Date.now},
     likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    likes_count: {type: Number, default: 0},
     pic_id: String,
     latitude: Number,
     longitude: Number,

@@ -1,9 +1,9 @@
 <ion-view title="Detail Default Page" id="/detail/:loginid">
   <ion-content padding="true" class="has-header">
     <div id="detailDefaultPage-container4">
-      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ui-sref="tabsControllerUser.usersDefaultPage">
-        <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
-        <h4>{{item.author.displayname}}  <h5>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5></h4>{{item.likes.length}} <i class="icon ion-heart"></i>
+      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(itemDetail.author.loginid)">
+        <img src={{itemDetail.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+        <h4>{{itemDetail.author.displayname}}  <h5>{{itemDetail.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5></h4>{{itemDetail.likes.length}} <i class="icon ion-heart"></i>
       </ion-item>
       <p></p>
       <div class="row">
@@ -12,12 +12,12 @@
       </div>
       <div class=" item item-image" >
         <a style="display:block;" >
-          <img src={{item.pic_id||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+          <img src="/img/{{itemDetail.pic_id}}" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
         </a>
       </div>
       <p></p>
       <div class="list animate-fade-slide-in-right">
-        <h4>{{item.comments.length}} Comentarios</h4>
+        <h4>{{itemDetail.comments.length}} Comentarios</h4>
         <a class="item item-avatar item-icon-right" ng-repeat="comment in item.comments">
           <img src={{user.photo_user||"img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
           <h2>{{comment.author_loginid}}{{comment.creation_date}}</h2>

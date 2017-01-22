@@ -51,6 +51,5 @@
   <allow-navigation href="https://*/*"/>
   <allow-navigation href="data:*"/>
   <allow-navigation href="*"/>
-  <allow-navigation href="http://10.193.187.178:8100"/>
   <allow-intent href="*"/>
 </widget>

@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
 	provider: String,
 	provider_id: {type: String, unique: true},
 	photo_user: String,
-	photo_id: String,
+	photo_id: {type: String, default: "profileTestPic.png"},
 	photo_background: String,
 	creation_date: {type: Date, default: Date.now},
 	email: {type: String, unique: true},

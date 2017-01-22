@@ -1,6 +1,6 @@
-mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootScope) {
+mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootScope, $uibModal) {
     //console.log("homeScreenCtrl");
-    var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
+    serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
     $rootScope.navIndex = 1;
 
     var currentItemsPage = 0;
@@ -52,6 +52,67 @@ mainApp.controller("homeScreenCtrl", function(SERVER_INFO, $scope, $http, $rootS
     $scope.loadMore = function() {
         currentItemsPage++;
         $scope.getItems();
+    };
+
+    $rootScope.openSuccessModal = function() {
+        var modalInstance = $uibModal.open({
+            templateUrl: '/views/modals/successModal.html',
+            controller: function($scope, $uibModalInstance) {
+
+                $scope.close = function()
+                {
+                    $uibModalInstance.dismiss();
+                }
+            }
+        });
+
+        modalInstance.result.then(
+            function () {
+                console.log("Modal dismiss - Si");
+            }, function () {
+                console.log("Modal cerrado - No");
+            });
+    };
+    $rootScope.openErrorModal = function() {
+        var modalInstance = $uibModal.open({
+            templateUrl: '/views/modals/errorModal.html',
+            controller: function($scope, $uibModalInstance) {
+
+                $scope.close = function()
+                {
+                    $uibModalInstance.dismiss();
+                }
+            }
+        });
+
+        modalInstance.result.then(
+            function () {
+                console.log("Modal dismiss - Si");
+            }, function () {
+                console.log("Modal cerrado - No");
+            });
+    };
+    $rootScope.openItemSuccessModal = function() {
+        var modalInstance = $uibModal.open({
+            templateUrl: '/views/modals/successModal.html',
+            controller: function($scope, $uibModalInstance) {
+
+                $scope.close = function()
+                {
+                    $uibModalInstance.dismiss();
+                    window.location = serverAddr;
+                }
+            }
+        });
+
+        modalInstance.result.then(
+            function () {
+                console.log("Modal dismiss - Si");
+                window.location = serverAddr;
+            }, function () {
+                console.log("Modal cerrado - No");
+                window.location = serverAddr;
+            });
     };
 
 });

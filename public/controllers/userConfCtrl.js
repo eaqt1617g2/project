@@ -1,4 +1,4 @@
-mainApp.controller("userConfCtrl", function(SERVER_INFO, $scope, $http, $routeParams, $rootScope) {
+mainApp.controller("userConfCtrl", function(SERVER_INFO, $scope, $http, $routeParams, $rootScope, $uibModal) {
     var serverAddr = "http://"+SERVER_INFO.IP+":"+SERVER_INFO.PORT;
 
     function makeid()
@@ -22,9 +22,11 @@ mainApp.controller("userConfCtrl", function(SERVER_INFO, $scope, $http, $routePa
                 console.log("Imagen cambiada");
                 $rootScope.user = user;
                 $rootScope.user.photo_user = serverAddr+"/asstes/imgs/profiles/"+user.photo_id;
+                $rootScope.openSuccessModal();
             })
             .error(function(data) {
                 console.log("Error en cambiar imagen");
+                $rootScope.openErrorModal();
         });
     }
 
@@ -35,9 +37,11 @@ mainApp.controller("userConfCtrl", function(SERVER_INFO, $scope, $http, $routePa
         $http.put(serverAddr+ '/users/'+ $rootScope.user.loginid + '/edit/displayname', user)
             .success(function(user) {
                 $rootScope.user = user;
+                $rootScope.openSuccessModal();
             })
             .error(function(data) {
                 console.log("Error");
+                $rootScope.openErrorModal();
         });
     }
 
@@ -53,10 +57,14 @@ mainApp.controller("userConfCtrl", function(SERVER_INFO, $scope, $http, $routePa
             .success(function(user) {
                 console.log("Contraseña cambiada")
                 $rootScope.user = user;
+                $rootScope.openSuccessModal();
             })
             .error(function(data) {
                 console.log("Error");
+                $rootScope.openErrorModal();
         });
 
     }
+
+
 });

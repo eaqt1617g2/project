@@ -21,13 +21,12 @@ router.get('/', function(req, res) {
 // sin testear
 router.get('/discover', function(req, res) {
     var to = new Date();
-    var from = new Date(to.getFullYear()+','+to.getMonth()+','+to.getDay()-1);
+    var from = new Date('2017,01,20');
     console.log("from: "+from.toString());
     console.log("to: "+to.toString());
-    console.log(req.query.page);
     Item.find({
-        creation_date:{$gt: to, $lt: from}
-    }).populate('author', 'loginid').sort('likes.length').skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
+        creation_date:{$gt: from}
+    }).populate('author', 'loginid').sort({likes_count: -1}).skip(parseInt(req.query.page)*6).limit(6).exec(function(err, items) {
         if(err) {
             res.send(err);
         }
@@ -172,7 +171,7 @@ router.post('/:id/like', function(req, res) {
     }
     Item.findOneAndUpdate(
         {_id: req.params.id},
-        {$addToSet : {"likes": req.body._id}},
+        {$addToSet : {"likes": req.body._id}, $inc: { likes_count: 1 }},
         {},
         function(err, user) {
             if(err) {
@@ -196,7 +195,7 @@ router.post('/:id/dislike', function(req, res) {
     }
     Item.findOneAndUpdate(
         {_id: req.params.id},
-        {$pull : {"likes": req.body._id}},
+        {$pull : {"likes": req.body._id}, $inc: { likes_count: -1 }},
         {},
         function(err, user) {
             if(err) {
