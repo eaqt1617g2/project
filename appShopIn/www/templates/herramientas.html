@@ -10,22 +10,24 @@
       <ion-list id="register-list2">
         <label class="item item-input" id="signup-input4">
           <span class="input-label">Name</span>
-          <input type="text" placeholder="" ng-model="newUser.name">
+          <input type="text" placeholder="{{userLogued.name}}" ng-model="newUser.name" required>
         </label>
         <label class="item item-input" id="signup-input5">
           <span class="input-label">Lastname</span>
-          <input type="text" placeholder="" ng-model="newUser.last_name">
-        </label>
-        <label class="item item-input" id="signup-input6">
-          <span class="input-label">Password</span>
-          <input type="password" placeholder="" ng-model="newUser.password">
-        </label>
-        <label class="item item-input" id="signup-input8">
-          <span class="input-label">Email address</span>
-          <input type="text" placeholder="" ng-model="newUser.email">
+          <input type="text" placeholder="{{userLogued.last_name}}" ng-model="newUser.last_name" required>
         </label>
       </ion-list>
-      <button id="register-button3" ng-click="modificarUser()" class="button button-stable  button-block">Accept</button>
+      <button id="register-button3" ng-click="modificarName()" class="button button-stable  button-block">Modificar</button>
+        <label class="item item-input" id="signup-input6">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="" ng-model="newUser.password" required>
+        </label>
+        <label class="item item-input" id="signup-input7">
+          <span class="input-label">Confirm Password</span>
+          <input type="password" placeholder="" ng-model="newUser.confirm_password" required>
+        </label>
+      </ion-list>
+      <button id="register-button4" ng-click="modificarPassword()" class="button button-stable  button-block">Modificar Contraseña</button>
     </form>
   </ion-content>
 </ion-view>

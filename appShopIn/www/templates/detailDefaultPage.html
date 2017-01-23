@@ -2,13 +2,13 @@
   <ion-content padding="true" class="has-header">
     <div id="detailDefaultPage-container4">
       <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(itemDetail.author.loginid)">
-        <img ng-src="{{serverAddr}}/assets/imgs/profiles/{{itemDetail.author.photo_id}}">
+        <img src={{itemDetail.author.photo_user||"img/usuario_sin_foto.png"}}>
         <h4>{{itemDetail.author.displayname}}  <h5>{{itemDetail.creation_date | date:'dd/MM/yyyy HH:mm'}}</h5></h4>{{itemDetail.likes.length}} <i class="icon ion-heart"></i>
       </ion-item>
       <p></p>
       <div class="row">
+        <div class="col col-75">{{itemDetail.title}}</div>
         <div class="col"><button class="button icon ion-heart" ng-hide="liked" ng-click="like()"></button><button class="button icon ion-heart-broken" ng-show="liked" ng-click="dislike()"></button></div>
-        <div class="col col-75">{{item.title}}</div>
       </div>
       <div class=" item item-image" >
         <a style="display:block;" >
@@ -17,20 +17,20 @@
       </div>
       <p></p>
       <div class="list animate-fade-slide-in-right">
-        <h4>{{itemDetail.comments.length}} Comentarios</h4>
-        <a class="item item-avatar item-icon-right" ng-repeat="comment in item.comments">
+        <h4>{{itemDetail.comments.length}} Comentarios <button class="button icon ion-chatbubble muted" ng-click="getComments()"></button></h4>
+        <a class="item item-avatar item-icon-right" ng-repeat="comment in comments">
           <img src={{user.photo_user||"img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
-          <h2>{{comment.author_loginid}}{{comment.creation_date}}</h2>
+          <h2>{{comment.author.loginid}}</h2><h4>{{comment.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
           <p>{{comment.content}}</p>
           <i class="icon ion-chatbubble muted"></i>
         </a>
       </div>
       <p></p>
       <label class="item item-input" id="signup-input8">
-        <input type="text" placeholder="Haz un comentario" ng-model="newComment.">
+        <input type="text" placeholder="Haz un comentario" ng-model="newComment.content">
       </label>
       <p></p>
-      <button id="button30" ng-click="createComment()" class="button button-stable  button-block">Comentar</button>
+      <button id="button30" ng-click="postComment()" class="button button-stable  button-block">Comentar</button>
     </div>
   </ion-content>
 </ion-view>

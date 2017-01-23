@@ -1,6 +1,24 @@
 <ion-view title="Friends Default Page" id="page7">
   <ion-content padding="true" class="has-header">
+    <div class="list card" id="friendsDefaultPage-card21" ng-repeat="item in itemsFriends">
+      <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(item.author.loginid)">
+        <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} >
+        <h2>{{item.author.loginid}}</h2>
+        <h4>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
+      </ion-item>
+      <strong>{{item.title}}</strong></p>
+      <div class=" item item-image" >
+        <a style="display:block;" >
+          <img src="/img/{{item.pic_id}}"  width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
 
-
+        </a>
+      </div>
+      <div class="item item-body" id="lastMinuteDefaultPage-list-item-container2" >
+        <div id="lastMinuteDefaultPage-markdown5" class="show-list-numbers-and-dots" side="left">
+          <p style="margin-top:0px;color:#000000;"><i class="icon ion-heart"></i>{{item.likes.length}}<i class="icon ion-chatboxes"></i>{{item.comments.length}}</p>
+        </div>
+        <button class="button button-stable  button-block" ng-click="verDetalle(item._id)">Ver</button>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

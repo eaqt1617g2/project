@@ -14,7 +14,7 @@
     </ion-list>
     <div class="list animate-fade-slide-in-right">
       <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">
-        <img src={{user.photo_user||"img/logo_shopin.png"}}>
+        <img src={{user.photo_user||"img/usuario_sin_foto.png"}}>
         <h2>{{user.loginid}}</h2>
         <p>{{user.name}} {{user.last_name}}</p>
         <i class="icon ion-chatbubble muted"></i>
@@ -22,10 +22,10 @@
     </div>
     <div class="list animate-fade-slide-in-right" ng-show="searchUser" content scroll="false">
       <a class="item item-avatar item-icon-right" ng-click="verUsuario(usuario.loginid)">
-        <img src="img/logo_shopin.png">
+        <img src={{usuario.photo_user||"img/usuario_sin_foto.png"}}>
         <h2>{{usuario.loginid}}</h2>
         <p>{{usuario.name}} {{usuario.last_name}}</p>
-        <p>{{usuario.creation_date}}</p>
+        <p>{{usuario.creation_date | date:'dd/MM/yyyy HH:mm'}}</p>
         <i class="icon ion-chatbubble muted"></i>
       </a>
     </div>

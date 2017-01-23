@@ -3,7 +3,7 @@
 
     <div class="list card" id="lastMinuteDefaultPage-card21" ng-repeat="item in items">
       <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9" ng-click="verUsuario(item.author.loginid)">
-        <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} >
+        <img src={{item.author.photo_user||"img/usuario_sin_foto.png"}} >
         <h2>{{item.author.loginid}}</h2>
         <h4>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
       </ion-item>

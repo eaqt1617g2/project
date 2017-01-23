@@ -3,11 +3,12 @@
     <div id="perfilDefaultPage-container2">
       <h4 id="perfilDefaultPage-heading2" style="color:#000000;">{{userLogued.loginid}}</h4>
       <div>
-        <img class="item-avatar" src={{userLogued.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} width="50%" height="" style="display: block; margin-left: auto; margin-right: auto;">
+        <img class="item-avatar" src={{userLogued.photo_user||"img/usuario_sin_foto.png"}} width="50%" height="" style="display: block; margin-left: auto; margin-right: auto;">
       </div>
+      <p></p>
       <form id="perfilDefaultPage-form3" class="list">
         <ion-list id="perfilDefaultPage-list3">
-          <ion-item id="perfilDefaultPage-list-item5">{{userLogued.name}} {{usuario.last_name}}</ion-item>
+          <ion-item id="perfilDefaultPage-list-item5">{{userLogued.displayname}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item6">{{userLogued.email}}</ion-item>
           <ion-item id="perfilDefaultPage-list-item4">{{userLogued.last_login_date | date:'dd/MM/yyyy HH:mm'}}</ion-item>
           <button id="perfilDefaultPage-button20" ui-sref="tabsController.crearItem" href="#/tabsController/crearItem" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">Crear Item</button>
@@ -19,7 +20,7 @@
         </div>
         <div class="list animate-fade-slide-in-right">
           <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">
-            <img src={{user.photo_user||"img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}}>
+            <img src={{user.photo_user||"img/usuario_sin_foto.png"}}>
             <h2>{{user.loginid}}</h2>
             <p>{{user.name}} {{user.last_name}}</p>
             <i class="icon ion-chatbubble muted"></i>
@@ -27,13 +28,14 @@
         </div>
         <div class="list card" id="lastMinuteDefaultPage-card21" ng-repeat="item in itemsUsers">
           <ion-item class="item-avatar" id="lastMinuteDefaultPage-list-item9">
-            <img src={{item.author.photo_user||"/img/qK2w8Ne5QRyJIcQP5S5J_profileTestPic3.png"}} >
+            <img ng-src="{{serverAdr}}/assets/imgs/profiles/{{itemDetail.author.photo_id}}">
             <h2>{{item.author.loginid}}</h2>
             <h4>{{item.creation_date | date:'dd/MM/yyyy HH:mm'}}</h4>
           </ion-item>
           <strong>{{item.title}}</strong></p>
           <div class=" item item-image" >
             <a style="display:block;" >
+              <!--<img src="{{serverAdr}}/assets/imgs/items/{{itemDetail.pic_id}}"-->
               <img src="/img/{{item.pic_id}}" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
             </a>
           </div>
