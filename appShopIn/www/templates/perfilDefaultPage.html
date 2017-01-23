@@ -15,8 +15,8 @@
         </ion-list>
         <div id="perfilDefaultPage-button-bar2" class="button-bar">
           <button id="perfilDefaultPage-button17" ng-click="getUserItems()"style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">ITEMS</button>
-          <button id="perfilDefaultPage-button18" ng-click="getUsers()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS {{userLogued.followers.length || 0}}</button>
-          <button id="perfilDefaultPage-button19" ng-click="getUsersOrder()" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING {{userLogued.following.length || 0}}</button>
+          <button id="perfilDefaultPage-button18" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWERS {{userLogued.followers.length || 0}}</button>
+          <button id="perfilDefaultPage-button19" style="color:#2E9FFF; font-weight:400; font-size: small;" class="button button-stable  button-block">FOLLOWING {{userLogued.following.length || 0}}</button>
         </div>
         <div class="list animate-fade-slide-in-right">
           <a class="item item-avatar item-icon-right" ng-repeat="user in users" ng-click="verUsuario(user.loginid)">

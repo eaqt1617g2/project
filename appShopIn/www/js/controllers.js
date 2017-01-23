@@ -397,7 +397,7 @@ angular.module('app.controllers', [])
     $rootScope.comments = {}
     $rootScope.itemDetail = {}
     $scope.newComment = {}
-    $scope.currentCommentsPage = 10;
+    $scope.currentCommentsPage = 0;
 
     $http.get(BASE_URL + '/items/'+$scope.ItemID).success(function(data) {
         $rootScope.itemDetail = data;
@@ -687,8 +687,7 @@ angular.module('app.controllers', [])
 
   .controller('discoverDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
-    $rootScope.navIndex = 2;
-    var currentItemsPage = 10;
+    var currentItemsPage = 0;
     $scope.item = {}
     $rootScope.itemsDiscover = {}
     $http.get(BASE_URL+'/items/discover', {params: {page: currentItemsPage}}).success(function(data) {
@@ -756,8 +755,7 @@ angular.module('app.controllers', [])
 
   .controller('friendsDefaultPageCtrl', ['$scope','$rootScope', '$http', '$ionicPopup', '$state', function ($scope, $rootScope, $http, $ionicPopup, $state) {
 
-    $rootScope.navIndex = 3;
-    var currentItemsPage = 10;
+    var currentItemsPage = 0;
     $scope.item = {}
     $rootScope.itemsFriends = {}
     $http.get(BASE_URL+'/items/friends', {params: {page: currentItemsPage, id: $rootScope.userLogued._id}}).success(function(data) {
