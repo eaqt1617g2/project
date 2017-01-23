@@ -825,28 +825,6 @@ angular.module('app.controllers', [])
   .controller('loginCtrl', ['$cordovaOauth','$scope','$rootScope', '$http', '$ionicPopup', '$stateParams','$state', function ($cordovaOauth, $scope, $rootScope, $http, $ionicPopup, $stateParams, $state) {
 
     $scope.User = {};
-    /*
-    $scope.loginNormal = function(){
-      console.log('user', $scope.User );
-      var userLogin = {
-        email : $scope.User.email,
-        password : $scope.User.password
-      };
-      $http.post(BASE_URL + '/login2', userLogin).success(function (data) {
-          console.log("User Logged", data);
-          $rootScope.userLogued = data;
-          $state.go('tabsController.lastMinuteDefaultPage', {}, {reload: true});
-        })
-        .error(function (data) {
-          console.log('Error: ' + data);
-          var alertPopup = $ionicPopup.alert({
-            title: 'No se ha logueado correctamente!',
-            template: 'Introduce bien los datos!'
-          });
-        });
-    }
-
-*/
 
     $scope.loginNormal = function (user) {
       console.log(user);
