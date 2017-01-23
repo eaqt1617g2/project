@@ -656,16 +656,14 @@ angular.module('app.controllers', [])
     };
 
     $scope.modificarName = function() {
-      $scope.displayname =  $scope.newUser.name + " " + $scope.newUser.last_name
-      console.log($scope.displayname)
+      $rootScope.userLogued.displayname = $scope.newUser.displayname;
       var postUser = {
-        displayname: $scope.displayname
+        displayname: $scope.newUser.displayname
       };
       console.log('PostUser: ' + postUser);
       $http.put(BASE_URL + '/users/' + $rootScope.userLogued.loginid+"/edit/displayname", postUser).success(function (data) {
         $scope.newUser = {}; // Borramos los datos del formulario
-        $scope.usuario = {};
-        $rootScope.userLogued = data;
+        console.log($rootScope.userLogued)
       })
         .error(function (data) {
           console.log('Error: ' + data);

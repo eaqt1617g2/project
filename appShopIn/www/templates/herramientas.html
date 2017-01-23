@@ -10,12 +10,9 @@
       <ion-list id="register-list2">
         <label class="item item-input" id="signup-input4">
           <span class="input-label">Name</span>
-          <input type="text" placeholder="{{userLogued.name}}" ng-model="newUser.name" required>
+          <input type="text" placeholder="{{userLogued.displayname}}" ng-model="newUser.displayname" required>
         </label>
-        <label class="item item-input" id="signup-input5">
-          <span class="input-label">Lastname</span>
-          <input type="text" placeholder="{{userLogued.last_name}}" ng-model="newUser.last_name" required>
-        </label>
+
       </ion-list>
       <button id="register-button3" ng-click="modificarName()" class="button button-stable  button-block">Modificar</button>
         <label class="item item-input" id="signup-input6">
